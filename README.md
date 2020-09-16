@@ -19,17 +19,17 @@
 - **open**
 - **read**
 - **close**
-- **fork** = [Creates a child process](https://www.geeksforgeeks.org/fork-system-call)
-- **wait** = [Stops the parent process until the child process exit](https://www.geeksforgeeks.org/wait-system-call-c/)
-- **waitpid** = [The waitpid() function shall be equivalent to wait() if the pid argument is (pid_t)-1 and the options argument is 0. Otherwise, its behavior shall be modified by the values of the pid and options arguments](https://linux.die.net/man/3/waitpid)
-- **wait3, wait4** = [Obsolete](https://linux.die.net/man/2/wait3)
-- **signal** = [Sets a function to handle a signal](https://www.tutorialspoint.com/c_standard_library/c_function_signal.htm)
-- **kill** = [Sends a signal to a process or a group of processes](https://linux.die.net/man/3/kill)
-- **exit** = [Terminates a process immediately, special handle for child processes](https://www.tutorialspoint.com/c_standard_library/c_function_exit.htm)
-- **getcwd** = [Saves the pathname of your current working directory in a string](https://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html)
-- **chdir** = [Changes your current working directory](https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/)
-- **stat, lstat, fstat** = [Returns information about a file](https://man7.org/linux/man-pages/man2/stat.2.html)
-  - stat = Standar
-  - lstat = For symbolic links
-  - fstat = Gets the file from a file descriptor
-- **execve** = [Executes a program referred by a variable](https://man7.org/linux/man-pages/man2/execve.2.html) ([Extra information](https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/))
+- **fork** = [Creates a child process.](https://www.geeksforgeeks.org/fork-system-call)
+- **wait** = [Stops the parent process until the child process exit.](https://www.geeksforgeeks.org/wait-system-call-c/)
+- **waitpid** = [The waitpid() function shall be equivalent to wait() if the pid argument is (pid_t)-1 and the options argument is 0. Otherwise, its behavior shall be modified by the values of the pid and options arguments.](https://linux.die.net/man/3/waitpid)
+- **wait3, wait4** = [Obsolete.](https://linux.die.net/man/2/wait3)
+- **signal** = [Sets a function to handle a signal.](https://www.tutorialspoint.com/c_standard_library/c_function_signal.htm)
+- **kill** = [Sends a signal to a process or a group of processes.](https://linux.die.net/man/3/kill)
+- **exit** = [Terminates a process immediately, special handle for child processes.](https://www.tutorialspoint.com/c_standard_library/c_function_exit.htm)
+- **getcwd** = [Saves the pathname of your current working directory in a string.](https://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html)
+- **chdir** = [Changes your current working directory.](https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/)
+- **stat, lstat, fstat** = [Returns information about a file.](https://man7.org/linux/man-pages/man2/stat.2.html)
+  - stat = Standar.
+  - lstat = For symbolic links.
+  - fstat = Gets the file from a file descriptor.
+- **execve** = [Executes a program referred by a variable.](https://man7.org/linux/man-pages/man2/execve.2.html) ([Extra information.](https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/)).
