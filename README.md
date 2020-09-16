@@ -18,5 +18,5 @@
 - open
 - read
 - close
-- fork (create child process) https://www.geeksforgeeks.org/fork-system-call/https://www.geeksforgeeks.org/fork-system-call/
-- 
+- fork (create child process) https://www.geeksforgeeks.org/fork-system-call
+- wait (stop parent process until child process exit) https://www.geeksforgeeks.org/wait-system-call-c/
