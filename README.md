@@ -27,8 +27,9 @@
 - **kill** ([Sends a signal to a process or a group of processes](https://linux.die.net/man/3/kill))
 - **exit** ([Terminates a process immediately, special handle for child processes](https://www.tutorialspoint.com/c_standard_library/c_function_exit.htm))
 - **getcwd** ([Saves the pathname of your current working directory in a string](https://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html))
-- **chdir** ([Changes your current working directory](https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/))
-- **stat, lstat, fstat** ([Returns information about a file](https://man7.org/linux/man-pages/man2/stat.2.html))
+- **chdir** = [Changes your current working directory](https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/)
+- **stat, lstat, fstat** = [Returns information about a file](https://man7.org/linux/man-pages/man2/stat.2.html)
   - stat = Standar
   - lstat = For symbolic links
   - fstat = Gets the file from a file descriptor
+- **execve** = [Executes a program referred by a variable](https://man7.org/linux/man-pages/man2/execve.2.html) ([Extra information](https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/))
