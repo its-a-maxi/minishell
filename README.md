@@ -11,4 +11,12 @@
 2. Idear arquitectura **LPEE** que no nos haga _espaguetificar_ el asunto.
 3. ???
 4. Profit
-
+## Funciones a utilizar
+- malloc
+- free
+- write
+- open
+- read
+- close
+- fork (create child process) https://www.geeksforgeeks.org/fork-system-call/https://www.geeksforgeeks.org/fork-system-call/
+- 
