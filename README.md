@@ -26,4 +26,4 @@
 - **signal** ([Sets a function to handle a signal](https://www.tutorialspoint.com/c_standard_library/c_function_signal.htm))
 - **kill** ([Send a signal to a process or a group of processes](https://linux.die.net/man/3/kill))
 - **exit** ([Terminates a process immediately, special handle for child processes](https://www.tutorialspoint.com/c_standard_library/c_function_exit.htm))
-- **getcwd** ([gets the pathname of your current working directory in a string](https://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html))
+- **getcwd** ([save the pathname of your current working directory in a string](https://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html))
