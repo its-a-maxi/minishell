@@ -32,4 +32,4 @@
   - stat = Standar.
   - lstat = For symbolic links.
   - fstat = Gets the file from a file descriptor.
-- **execve** = [Executes a program referred by a variable.](https://man7.org/linux/man-pages/man2/execve.2.html) ([Extra information.](https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/)).
+- **execve** = [Executes a program referred by a variable.](https://man7.org/linux/man-pages/man2/execve.2.html) ([How to use](https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/))
