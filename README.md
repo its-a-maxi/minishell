@@ -24,3 +24,4 @@
 - **waitpid** ([The waitpid() function shall be equivalent to wait() if the pid argument is (pid_t)-1 and the options argument is 0. Otherwise, its behavior shall be modified by the values of the pid and options arguments](https://linux.die.net/man/3/waitpid))
 - **wait3, wait4** ([Obsolete](https://linux.die.net/man/2/wait3))
 - **signal** ([Sets a function to handle a signal](https://www.tutorialspoint.com/c_standard_library/c_function_signal.htm))
+- **kill** ([Send a signal to a process or a group of processes](https://linux.die.net/man/3/kill))
