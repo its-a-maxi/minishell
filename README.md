@@ -3,6 +3,7 @@
 - Please make sure to do a `lexer` -> `parser` -> `expander` -> `executor` to make your life easier. [Here](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) is a solid start.
 - Make sure that you understand the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 - [Making your own shell](https://www.geeksforgeeks.org/making-linux-shell-c/)
+- [Reference](https://github.com/pankratdodo/minishell-42)
 ## Partes del Proyecto
 - [ ] Lexer: tokenizes input
 - [ ] Parser: builds Command Table from tokens
