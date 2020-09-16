@@ -29,6 +29,6 @@
 - **getcwd** ([Saves the pathname of your current working directory in a string](https://pubs.opengroup.org/onlinepubs/009695399/functions/getcwd.html))
 - **chdir** ([Changes your current working directory](https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/))
 - **stat, lstat, fstat** ([Returns information about a file](https://man7.org/linux/man-pages/man2/stat.2.html))
-  stat = Standar
-  lstat = For symbolic links
-  fstat = Gets the file from a file descriptor
+  - stat = Standar
+  - lstat = For symbolic links
+  - fstat = Gets the file from a file descriptor
