@@ -25,3 +25,4 @@
 - **wait3, wait4** ([Obsolete](https://linux.die.net/man/2/wait3))
 - **signal** ([Sets a function to handle a signal](https://www.tutorialspoint.com/c_standard_library/c_function_signal.htm))
 - **kill** ([Send a signal to a process or a group of processes](https://linux.die.net/man/3/kill))
+- **exit** ([Terminates a process immediately, special handle for child processes](https://www.tutorialspoint.com/c_standard_library/c_function_exit.htm))
