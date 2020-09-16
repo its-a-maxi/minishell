@@ -12,12 +12,12 @@
 3. ???
 4. Profit
 ## Funciones a utilizar
-- malloc
-- free
-- write
-- open
-- read
-- close
-- fork (Create child process.) https://www.geeksforgeeks.org/fork-system-call
-- wait (Stop parent process until child process exit.) https://www.geeksforgeeks.org/wait-system-call-c/
-- waitpid (The waitpid() function shall be equivalent to wait() if the pid argument is (pid_t)-1 and the options argument is 0. Otherwise, its behavior shall be modified by the values of the pid and options arguments.)
+- **malloc**
+- **free**
+- **write**
+- **open**
+- **read**
+- **close**
+- **fork** (Create child process.) https://www.geeksforgeeks.org/fork-system-call
+- **wait** (Stop parent process until child process exit.) https://www.geeksforgeeks.org/wait-system-call-c/
+- **waitpid** (The waitpid() function shall be equivalent to wait() if the pid argument is (pid_t)-1 and the options argument is 0. Otherwise, its behavior shall be modified by the values of the pid and options arguments.)
