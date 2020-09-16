@@ -4,6 +4,7 @@
 - Make sure that you understand the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 - [Making your own shell](https://www.geeksforgeeks.org/making-linux-shell-c/)
 - [Reference](https://github.com/pankratdodo/minishell-42)
+- [Otro](https://github.com/R4meau/minishell) minishell que tiene buena pinta.
 ## Partes del Proyecto
 - [ ] Lexer: tokenizes input
 - [ ] Parser: builds Command Table from tokens
