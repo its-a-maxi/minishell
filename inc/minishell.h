@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/16 09:24:28 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/17 13:22:10 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <fctnl.h>
+# include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
 # include <sys/stat.h>
@@ -23,5 +23,6 @@
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
+# include "../libft/inc/libft.h"
 
 #endif

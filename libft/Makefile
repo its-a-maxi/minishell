@@ -2,7 +2,7 @@ SRCS	= src/*.c
 
 OBJS	= $(SRCS:.c=.o)
 
-INCLUDE = include/
+INCLUDE = inc/
 
 FLAGS	= -Werror -Wall -Wextra -I $(INCLUDE)
 
