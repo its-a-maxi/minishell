@@ -3,6 +3,7 @@
 - Please make sure to do a `lexer` -> `parser` -> `expander` -> `executor` to make your life easier. [Here](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) is a solid start.
 - Make sure that you understand the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 - [Making your own shell](https://www.geeksforgeeks.org/making-linux-shell-c/)
+- [Subject](https://cdn.intra.42.fr/pdf/pdf/10992/en.subject.pdf)
 - [Reference](https://github.com/pankratdodo/minishell-42)
 - [Otro](https://github.com/R4meau/minishell) minishell que tiene buena pinta.
 ## Partes del Proyecto
@@ -35,5 +36,6 @@
   - lstat = For symbolic links.
   - fstat = Gets the file from a file descriptor.
 - **execve** = [Executes a program referred by a variable.](https://man7.org/linux/man-pages/man2/execve.2.html) ([How to use](https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/))
-- **dup** = [Creates a copy of a file descriptor using the lowest numbereded unused descriptor](https://www.geeksforgeeks.org/dup-dup2-linux-system-call/)
-- **dup2** = [Creates a copy of a file descriptor using the descriptor number given by the user](https://www.geeksforgeeks.org/dup-dup2-linux-system-call/)
+- **dup** = [Creates a copy of a file descriptor using the lowest numbereded unused descriptor.](https://www.geeksforgeeks.org/dup-dup2-linux-system-call/)
+- **dup2** = [Creates a copy of a file descriptor using the descriptor number given by the user.](https://www.geeksforgeeks.org/dup-dup2-linux-system-call/)
+- **pipe** = [It's used to create inter-process communication.](https://www.geeksforgeeks.org/pipe-system-call/) Interface in minishell?
