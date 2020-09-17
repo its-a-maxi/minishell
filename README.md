@@ -44,3 +44,4 @@
 - **closedir** = [Closes the directory stream.](https://linux.die.net/man/3/closedir)
   - opendir, readdir, closedir example [here](https://www.u-cursos.cl/usuario/a735117f257858200f6460e7d8673d7b/mi_blog/r/readdir.pdf)
 - **strerror** = [Returns an error message.](https://www.tutorialspoint.com/c_standard_library/c_function_strerror.htm)
+- **errno** = Number of last error, its a variable.
