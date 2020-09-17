@@ -39,3 +39,8 @@
 - **dup** = [Creates a copy of a file descriptor using the lowest numbereded unused descriptor.](https://www.geeksforgeeks.org/dup-dup2-linux-system-call/)
 - **dup2** = [Creates a copy of a file descriptor using the descriptor number given by the user.](https://www.geeksforgeeks.org/dup-dup2-linux-system-call/)
 - **pipe** = [It's used to create inter-process communication.](https://www.geeksforgeeks.org/pipe-system-call/) Interface in minishell?
+- **opendir** = [Opens a directory stream.](https://pubs.opengroup.org/onlinepubs/009695399/functions/opendir.html)
+- **readdir** = [Returns a pointer to a dirent structure representing the next directory entry in the directory stream.](https://www.man7.org/linux/man-pages/man3/readdir.3.html)
+- **closedir** = [Closes the directory stream.](https://linux.die.net/man/3/closedir)
+  - opendir, readdir, closedir example [here](https://www.u-cursos.cl/usuario/a735117f257858200f6460e7d8673d7b/mi_blog/r/readdir.pdf)
+- **strerror** = [Returns an error message.](https://www.tutorialspoint.com/c_standard_library/c_function_strerror.htm)
