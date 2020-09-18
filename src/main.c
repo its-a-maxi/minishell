@@ -19,9 +19,17 @@ void		show_prompt(void)
 	dir_str[4096] = '\0';
 	getcwd(dir_str, 4096);
 	write(1, dir_str, ft_strlen(dir_str));
-	write(1, "\u263A", 1);
 }
 
+void		signal_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		show_prompt();
+		signal(SIGINT, signal_handler);
+	}
+}	
 
 /*
 ** Initializes minishell
@@ -37,7 +45,7 @@ int		main()
 	while (1)
 	{
 		show_prompt();
-		//signal
+		signal(SIGINT, signal_handler);
 		//get_input
 		//caso de str vacia
 		//split de los commands por ;
