@@ -7,6 +7,7 @@
 - [Reference](https://github.com/pankratdodo/minishell-42)
 - [Otro](https://github.com/R4meau/minishell) minishell que tiene buena pinta.
 - [Uso de arg ****envp** en el main](https://www.quora.com/What-is-the-3rd-parameter-in-the-main-function-char-envp#:~:text=The%20non%2Dportable%2Dbut%2D,As%20always%2C%20I%20recommend%20experimenting.)
+- [Algoritmo](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) pipes para A|B|C|D > outfile < infile 
 ## Partes del Proyecto
 - [ ] Lexer: tokenizes input
 - [ ] Parser: builds Command Table from tokens
