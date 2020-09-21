@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+/*
+** Reads shell's stdin input one byte at a time until a '\n' is found
+** If ctrl-D (EOF) is invoked, the shell is terminated.
+*/
+
 void		read_input(char *input)
 {
 	char	buff[1];
