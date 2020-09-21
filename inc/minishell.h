@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 11:31:21 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 12:49:53 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct			s_simple_command
 {
 	char				*command_name;
 	char				**arguments;
+	int					arguments_num;
 }						t_simple_command;
 
 /*
@@ -51,9 +52,10 @@ typedef struct			s_simple_command
 typedef struct			s_command_table
 {
 	t_simple_command	*commands;
-	char				*input_fd;
-	char				*output_fd;
-	char				*append_fd;
+	int					simple_commands_num;
+	char				*input_file;
+	char				*output_file;
+	char				*append_file;
 }						t_command_table;
 
 /*
@@ -65,12 +67,16 @@ char					**g_env;
 ** parser_utils.c
 */
 char					*ft_add_char(char *str, char c);
+void					read_input(char *input);
 
 /*
 ** parser.c
 */
-void					read_input(char *input);
-
+struct s_command_table	tokenize(char **command_lines, int table_num);
+/*
+** executor.c
+*/
+void					executor(t_command_table *table, int table_num);
 /*
 ** env_handler.c
 */

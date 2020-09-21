@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 11:54:40 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 12:52:54 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			main()
 		//caso de str vacia?
 		commands = ft_split(input, ';');
 		command_table_num = ft_arrlen(commands);
-		command_table = tokenize(commands, command_table_num);
+		command_table = tokenize(commands, command_table_num - 1);
 		executor(command_table, command_table_num);
 		//Ver si returnearon error
 	}
