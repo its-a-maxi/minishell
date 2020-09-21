@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 09:11:48 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 09:22:23 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		show_prompt(void)
 
 void		signal_handler(int sig)
 {
-	if (sig == SIGINT)
+	if ((sig == SIGINT) || (sig == SIGQUIT))
 	{
 		write(1, "\n", 1);
 		show_prompt();
@@ -98,6 +98,7 @@ int			main()
 			return(0);
 		show_prompt();
 		signal(SIGINT, signal_handler);
+		signal(SIGQUIT, signal_handler);
 		read_input(input);
 		//caso de str vacia
 		//split de los commands por ;
