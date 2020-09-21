@@ -12,3 +12,19 @@
 
 #include "minishell.h"
 
+void		read_input(char *input)
+{
+	char	buff[1];
+	int		bytes_read;
+
+	while ((bytes_read = read(0, buff, 1)) && buff[0] != '\n')
+		input = ft_add_char(input, buff[0]);
+	input = ft_add_char(input, '\0');
+	if (!bytes_read)
+	{
+		free(input);
+		write(1, "\n", 1);
+		exit(0);
+	}
+}
+

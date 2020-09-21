@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/17 13:22:10 by alejandro        ###   ########.fr       */
+/*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/09/21 09:22:23 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <dirent.h>
-# include <string.h>
-# include <errno.h>
-# include "../libft/inc/libft.h"
+char		*ft_add_char(char *str, char c)
+{
+	char	*rst;
+	int		len;
+	int		i;
 
-char		*ft_add_char(char *str, char c);
-void		read_input(char *input);
+	i = 0;
+	len = ft_strlen(str);
+	rst = ft_calloc(len + 2, sizeof(char));
+	while (i < len)
+	{
+		rst[i] = str[i];
+		i++;
+	}
+	rst[i] = c;
+	free(str);
+	return (rst);
+}
 
-#endif
