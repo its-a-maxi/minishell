@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 11:35:51 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:54:40 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		signal_handler(int sig)
 		write(1, "\n", 1);
 		show_prompt();
 	}
-}	
+}
 
 /*
 ** Initializes minishell
@@ -52,26 +52,20 @@ int			main()
 	char				*input;
 	t_command_table		*command_table;
 	int					command_table_num;
-	int					i;
 
 	while (1)
 	{
 		if (!(input = ft_calloc(1, sizeof(char))))
-			return(0);
+			return (0);
 		show_prompt();
 		signal(SIGINT, signal_handler);
 		signal(SIGQUIT, signal_handler);
 		read_input(input);
-		//caso de str vacia
-		//split de los commands por ;
+		//caso de str vacia?
 		commands = ft_split(input, ';');
 		command_table_num = ft_arrlen(commands);
 		command_table = tokenize(commands, command_table_num);
-		//ejecutar los commands	
-		i = command_table_num - 1;
-		while (++i < command_table_num);
-		//Liberar cosas
-		free(commands);
+		executor(command_table, command_table_num);
 		//Ver si returnearon error
 	}
 	//Liberar entorno
