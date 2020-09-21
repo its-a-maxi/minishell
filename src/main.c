@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
+/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 12:33:23 by alejandro         #+#    #+#             */
-/*   Updated: 2020/09/17 12:52:03 by alejandro        ###   ########.fr       */
+/*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/09/21 09:11:48 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void		show_prompt(void)
 }
 
 /*
-** "control + c" signal doesn't exit the minishell
+** "control + c" signal doesn't exit the shell, but rather,
+** it should exit the current child process or simply clean stdin
+** before reading.
 */
 
 void		signal_handler(int sig)
@@ -32,15 +34,14 @@ void		signal_handler(int sig)
 	{
 		write(1, "\n", 1);
 		show_prompt();
-		signal(SIGINT, signal_handler);
 	}
 }	
 
 static char	*ft_add_char(char *str, char c)
 {
 	char	*rst;
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 
 	i = 0;
 	len = ft_strlen(str);
@@ -55,31 +56,43 @@ static char	*ft_add_char(char *str, char c)
 	return (rst);
 }
 
-void		read_input(char *input)
+/*
+** Reads shell's stdin input one byte at a time until a '\n' is found
+** If ctrl-D (EOF) is invoked, the shell is terminated.
+*/
+
+
+static void	read_input(char *input)
 {
 	char	buff[1];
-	int	ret;
+	int		bytes_read;
 	
-	while ((ret = read(0, buff, 1)) && buff[0] != '\n')
+	while ((bytes_read = read(0, buff, 1)) && buff[0] != '\n')
 		input = ft_add_char(input, buff[0]);
 	input = ft_add_char(input, '\0');
-	if (!ret)
+	if (!bytes_read)
+	{
 		free(input);
+		write(1, "\n", 1);
+		exit(0);
+	}
 }
 
 /*
 ** Initializes minishell
 **
 ** return:	0 on completion
+**
 ** param #1:	argc	argument count
 ** param #2:	argv	argument variables
 ** param #3:	envv	environment variables
 */
 
-int		main()
+int			main()
 {
 	char	*input;
-	while(1)
+
+	while (1)
 	{
 		if (!(input = ft_calloc(1, sizeof(char))))
 			return(0);
