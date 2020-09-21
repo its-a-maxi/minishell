@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 09:48:37 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:35:51 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void		signal_handler(int sig)
 
 int			main()
 {
-	char	*input;
-	char	**commands;
+	char				*input;
+	t_command_table		*command_table;
+	int					command_table_num;
+	int					i;
 
 	while (1)
 	{
@@ -63,9 +65,13 @@ int			main()
 		//caso de str vacia
 		//split de los commands por ;
 		commands = ft_split(input, ';');
+		command_table_num = ft_arrlen(commands);
+		command_table = tokenize(commands, command_table_num);
 		//ejecutar los commands	
+		i = command_table_num - 1;
+		while (++i < command_table_num);
 		//Liberar cosas
-		full_free((void **)commands, ft_arrlen(commands));
+		free(commands);
 		//Ver si returnearon error
 	}
 	//Liberar entorno
