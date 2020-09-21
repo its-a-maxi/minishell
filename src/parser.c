@@ -6,24 +6,23 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 11:38:57 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:56:18 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** Reads shell's stdin input one byte at a time until a '\n' is found
-** If ctrl-D (EOF) is invoked, the shell is terminated.
-*/
-
 static void		find_simple_commands(t_command_table *table, char *command)
 {
 }
 
-static void 	set_redirections(t_command_table *table, char *command)
+static void		set_redirections(t_command_table *table, char *command)
 {
 }
+
+/*
+** Parses the input command line into several command tables, one for each ';'.
+*/
 
 t_command_table	*tokenize(char **commands, int command_table_num)
 {
@@ -31,7 +30,7 @@ t_command_table	*tokenize(char **commands, int command_table_num)
 	t_command_table		*command_table;
 
 	if (!(command_table = malloc(sizeof(struct s_command_table)
-		* command_table_num)));
+		* command_table_num)))
 	{
 		//Aqui habria que poner despues exit errors bien con strerror y demas
 		exit(1);
@@ -42,8 +41,14 @@ t_command_table	*tokenize(char **commands, int command_table_num)
 		find_simple_commands(command_table[i], commands[i]);
 		set_redirections(command_table[i], commands[i]);
 	}
+	free(commands);
 	return (command_table);
 }
+
+/*
+** Reads shell's stdin input one byte at a time until a '\n' is found
+** If ctrl-D (EOF) is invoked, the shell is terminated.
+*/
 
 void			read_input(char *input)
 {
@@ -60,4 +65,3 @@ void			read_input(char *input)
 		exit(0);
 	}
 }
-
