@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 09:22:23 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/21 09:48:37 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void	read_input(char *input)
 int			main()
 {
 	char	*input;
+	char	**commands;
 
 	while (1)
 	{
@@ -102,8 +103,10 @@ int			main()
 		read_input(input);
 		//caso de str vacia
 		//split de los commands por ;
-		//ejecutar los commands
+		commands = ft_split(input, ';');
+		//ejecutar los commands	
 		//Liberar cosas
+		full_free((void **)commands, ft_arrlen(commands));
 		//Ver si returnearon error
 	}
 	//Liberar entorno
