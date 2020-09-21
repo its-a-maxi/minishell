@@ -47,12 +47,13 @@ void		signal_handler(int sig)
 ** param #3:	envv	environment variables
 */
 
-int			main()
+int			main(int argc, char **argv, char **envp)
 {
 	char				*input;
 	t_command_table		*command_table;
 	int					command_table_num;
 
+	save_env(argc, argv, envp);
 	while (1)
 	{
 		if (!(input = ft_calloc(1, sizeof(char))))
