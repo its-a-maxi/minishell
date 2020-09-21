@@ -56,7 +56,23 @@ typedef struct			s_command_table
 	char				*append_fd;
 }						t_command_table;
 
+/*
+** General Env variables
+*/
+char					**g_env;
+
+/*
+** parser_utils.c
+*/
 char					*ft_add_char(char *str, char c);
+
+/*
+** parser.c
+*/
 void					read_input(char *input);
 
+/*
+** env_handler.c
+*/
+void					save_env(int argc, char **argv, char **envp);
 #endif
