@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 08:47:15 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 12:35:16 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,17 @@
 
 void		executor(t_command_table *table, int table_num)
 {
-	int		i;
+	int		h = -1;
 
-	i = table_num - 1;
-	while (++i < table_num)
+	while (++h < table_num)
 	{
-		//Ejecutar cada tabla de commandos
-		ft_printf("table %d:", i);
-		int j = -1;
-		while (++j < table[i].simple_commands_num)
+		int i = -1;
+		while (++i < table->simple_commands_num)
 		{
-			ft_printf("command %d: %s", j,
-			table[i].commands[j].commands_name);
-			int k = -1;
-			while (++k < arguments_num)
-			{
-				ft_printf("arg %d: %s", k,
-					table[i].commands[j].arguments[k]);
-			}
+			int j = -1;
+			while (table->simple_commands[i][++j])
+				printf("%s\n", table->simple_commands[i][j]);
 		}
-		ft_printf(";\n");
 	}
 	free(command_table);
 }

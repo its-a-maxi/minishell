@@ -6,25 +6,35 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 11:46:23 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/22 12:17:23 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			set_input_redirection(t_command_table *table, char *ptr)
+void			set_redirect(t_command_table *table, char *ptr, char *type)
 {
 	int			i;
+	int			j;
 	char		*temp;
 
-	i = -1;
+	i = 0;
+	while ((ft_isspace_not_nl(ptr[++i])))
+		;
+	j = i;
+	i--;
 	while ((ptr[++i]) && !(ft_isspace_not_nl(ptr[i]))
-			&& ((ft_isalnum(ptr[i])) || (ptr[i] == '.')))
-			;
-		*temp = ptr[i];
-		ptr[i] = '\0';
-		table->input_file = ft_strdup(ptr);
-		ptr[i] = *temp;
+		&& ((ft_isalnum(ptr[i])) || (ptr[i] == '.')))
+		;
+	*tmp = ptr[i];
+	ptr[i] = '\0';
+	if (ft_strcmp(type, "input"))
+		table->input_file = ft_strdup(ptr + j);
+	else if (ft_strcmp(type, "output"))
+		table->output_file = ft_strdup(ptr + j);
+	else if (ft_strcmp(type, "append"))
+		table->append_file = ft_strdup(ptr + j);
+	ptr[i] = *tmp;
 }
 
 char			*ft_add_char(char *str, char c)

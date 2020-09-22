@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 11:58:18 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 12:10:37 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ char					**g_env;
 */
 char					*ft_add_char(char *str, char c);
 void					read_input(char *input);
-void					set_input_redirection(t_command_table *t, char *line);
-void					set_output_redirection(t_command_table *t, char *line);
-void					set_append_redirection(t_command_table *t, char *line);
+void					set_redirect(t_command_table *t, char *str, char *type);
 /*
 ** parser.c
 */
