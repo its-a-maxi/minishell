@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 12:49:53 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 10:04:57 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ char					**g_env;
 */
 char					*ft_add_char(char *str, char c);
 void					read_input(char *input);
-
+void					set_input_redirection(t_command_table *t, char *line);
+void					set_output_redirection(t_command_table *t, char *line);
+void					set_append_redirection(t_command_table *t, char *line);
 /*
 ** parser.c
 */

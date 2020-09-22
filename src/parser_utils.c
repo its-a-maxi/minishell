@@ -6,11 +6,26 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 12:18:56 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 10:03:09 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void			set_input_redirection(t_command_table *table, char *ptr)
+{
+	int			i;
+	char		*temp;
+
+	i = -1;
+	while ((ptr[++i]) && !(ft_isspace_not_nl(ptr[i]))
+			&& ((ft_isalnum(ptr[i])) || (ptr[i] == '.')))
+			;
+		*temp = ptr[i];
+		ptr[i] = '\0';
+		table->input_file = ft_strdup(ptr);
+		ptr[i] = *temp;
+}
 
 char			*ft_add_char(char *str, char c)
 {
