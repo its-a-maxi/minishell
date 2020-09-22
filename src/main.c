@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/21 12:52:54 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 11:23:04 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		signal_handler(int sig)
 int			main(int argc, char **argv, char **envp)
 {
 	char				*input;
+	char				**commands;
 	t_command_table		*command_table;
 	int					command_table_num;
 

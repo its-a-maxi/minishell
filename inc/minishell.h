@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 10:04:57 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 11:26:35 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,6 @@
 # include "../libft/inc/libft.h"
 
 /*
-** The t_simple_commands struct contains the name and arguments of
-** an input command:
-**
-** command_name arguments[1] ... arguments[n]
-*/
-
-typedef struct			s_simple_command
-{
-	char				*command_name;
-	char				**arguments;
-	int					arguments_num;
-}						t_simple_command;
-
-/*
 ** The t_command_table struct contains the information of a set of
 ** input commands, i.e, some input line of the form:
 **
@@ -47,11 +33,15 @@ typedef struct			s_simple_command
 **
 ** which we will use to stablish the correct pipe and redirection relations
 ** between commands.
+** The simple_commands contain the name and arguments of
+** an input command:
+**
+** simple_command[][] = {name, argument #1, ... argument #n, NULL}
 */
 
 typedef struct			s_command_table
 {
-	t_simple_command	*commands;
+	char				***simple_commands;
 	int					simple_commands_num;
 	char				*input_file;
 	char				*output_file;

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 10:08:38 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 11:55:46 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,61 +21,43 @@
 **		.
 **		... ;
 ** 		cmd args | cmd args ... | ... > outfile < infile >> appendfile;
-** into a command table for each ';'-terminated sentence,
-** and each command table into its simple command constituyents (cmd args).
+** into a command table for each ';'-terminated sentence.
 */
 
 
 /*
-** Finds the next simple command name in the command table line, and sets
-** its arguments.
-** If there are pipes, (simple_commands_num > 1), it moves the line pointer to
-** the position after the pipe.
+** Finds and sets the simple commands in the command table.
 **
 ** returns: void
 **
 ** parameter #1:		t_command_table		the command table
-** parameter #2:		int					number of simple commands in table
 ** parameter #3:		char *				the ';'-terminated line of the table
 */
 
-static void		find_next_simple_command(t_command_table *tab, int n, char *str)
+static void		find_next_simple_command(t_command_table *tab, char *str)
 {
 	int		i;
-	int		j;
+	char	*tmp;
 
 	i = -1;
-	while (str[++i] == ' ')
-		;
-	j = i;
-	str[j] = '\0';
-	table->commands[n].command_name = ft_strdup(str);
-	if (tab->simple_commands_num > 1)
+	tmp = str;
+	while ((tmp = ft_strchr(str, '|')))
 	{
-		while (str[++i] != '|')
-			;
-		str[i] = '\0';
-		//Mejorar esto despues xq split puede dar strings vacias
-		//en el caso echo' '' 'hola -> args serian:
-		//args[0] = null; args[1] = hola; y daria args_num = 2 en vez de 1
-		tab->commands[n].arguments = ft_split(str + j + 1, ' ');
-		str += i + 1;
+		*tmp = '\0';
+		tab->simple_commands[++i] = ft_split(str, ' ');
+		str = tmp + 1;
+	}
+	if ((tab->input_file) || (tab->output_file) || (tab->append_file))
+	{
+		//encontrar menor de strchr(<), strchr(>), strchr(>>)
 	}
 	else
-	{
-		while ((str[++i] != '<') && (str[i] != '>') && (str[i]))
-			;
-		str[i] = '\0';
-		//Mismo asunto
-		tab->commands[n].arguments = ft_split(str + j + 1, ' ');
-	}
-	tab->commands[n].arguments_num = ft_arrlen(tab->commands[n].arguments);
+		tab->simple_commands[++i] = ft_split(str, ' ');
 }
 
 
 /*
 ** Finds the total number of simple commands in the command table
-** and sets their names ,arguments and argument number.
 **
 ** returns:	void
 **
@@ -89,11 +71,9 @@ static void		find_simple_commands(t_command_table *table, char *command_line)
 	char	*pipe_pos;
 
 	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
-	table->commands = malloc(sizeof(struct s_simple_command)
+	table->simple_commands = malloc(sizeof(char **)
 		* table->simple_commands_num);
-	i = -1;
-	while (++i < table->simple_commands_num)
-		find_next_simple_command(table, i, command_line);
+	find_next_simple_command(table, command_line);
 }
 
 /*
@@ -113,6 +93,9 @@ static void		set_redirections(t_command_table *table, char *command_line)
 	char		*ptr2;
 	int			i;
 
+	table->input_file = NULL;
+	table->output_file = NULL;
+	table->append_file = NULL;
 	i = -1;
 	ptr2 = ft_strchr(command_line, '<');
 	if ((ptr2))
@@ -133,7 +116,7 @@ static void		set_redirections(t_command_table *table, char *command_line)
 ** parameter #2:	int			number of ';'-terminated sentences
 */
 
-t_command_table	*tokenize(char **commands, int command_table_num)
+t_command_table	*tokenize(char **command_lines, int command_table_num)
 {
 	int					i;
 	t_command_table		*command_table;
@@ -147,9 +130,9 @@ t_command_table	*tokenize(char **commands, int command_table_num)
 	i = -1;
 	while (++i < command_table_num)
 	{
-		set_redirections(command_table + i, commands[i]);
-		find_simple_commands(command_table + i, commands[i]);
+		set_redirections(command_table + i, command_lines[i]);
+		find_simple_commands(command_table + i, command_lines[i]);
 	}
-	full_free((void **)commands, ft_arrlen(commands));
+	full_free((void **)command_lines, ft_arrlen(command_lines));
 	return (command_table);
 }
