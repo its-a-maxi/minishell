@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 11:46:30 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/22 13:13:45 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	exit_minishell(void)
 	while(g_env[i])
 		free(g_env[i++]);
 	free(g_env);
-	write(1, "\n", 1);
 	exit(0);
 }
 

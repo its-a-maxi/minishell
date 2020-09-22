@@ -1,4 +1,6 @@
 *.swp
 *.out
 *.o
+*.a
+minishell
 *.txt

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 12:32:01 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 13:14:59 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** into a command table for each ';'-terminated sentence.
 */
 
-static void		split_till_redirection(t_command_table *tab, char *str)
+static void		split_till_redirection(t_command_table *tab, char *str, int i)
 {
 	char	*inptr;
 	char	*outptr;
@@ -44,8 +44,6 @@ static void		split_till_redirection(t_command_table *tab, char *str)
 		tab->simple_commands[++i] = ft_split(str, ' ');
 		*outptr = tmp;
 	}
-}
-
 }
 
 /*
@@ -71,7 +69,7 @@ static void		find_next_simple_command(t_command_table *tab, char *str)
 		str = tmp + 1;
 	}
 	if ((tab->input_file) || (tab->output_file) || (tab->append_file))
-		split_till_redirection(tab, str);
+		split_till_redirection(tab, str, i);
 	else
 		tab->simple_commands[++i] = ft_split(str, ' ');
 }
@@ -88,13 +86,13 @@ static void		find_next_simple_command(t_command_table *tab, char *str)
 
 static void		find_simple_commands(t_command_table *table, char *command_line)
 {
-	int		i;
-	char	*pipe_pos;
-
 	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
 	if (!(table->simple_commands = malloc(sizeof(char **)
 		* table->simple_commands_num)))
-		exit_shell();
+	{
+		printf("error simple commands\n");
+		exit_minishell();
+	}
 	find_next_simple_command(table, command_line);
 }
 
@@ -123,9 +121,10 @@ static void		set_redirections(t_command_table *table, char *command_line)
 	if ((ptr2) && (ptr2 > ft_strchr(command_line, '|')))
 		set_redirect(table, ptr2, "input");
 	ptr1 = ft_strchr(command_line, '>');
-	if ((ptr1) && (ptr1 + 1) != '>'(ptr1 > ft_strchr(command_line, '|')))
+	if ((ptr1) && (*(ptr1 + 1) != '>') && (ptr1 > ft_strchr(command_line, '|')))
 		set_redirect(table, command_line, "output");
-	else if ((ptr1) && (ptr + 1) == '>'(ptr1 > ft_strchr(command_line, '|')))
+	else if ((ptr1) && (*(ptr1 + 1) == '>')
+		&& (ptr1 > ft_strchr(command_line, '|')))
 		set_redirect(table, ptr1, "append");
 }
 
@@ -145,7 +144,10 @@ t_command_table	*tokenize(char **command_lines, int command_table_num)
 
 	if (!(command_table = malloc(sizeof(struct s_command_table)
 		* command_table_num)))
+	{
+		printf("error command table. tablee_num:%d\n", command_table_num);
 		exit_minishell();
+	}
 	i = -1;
 	while (++i < command_table_num)
 	{

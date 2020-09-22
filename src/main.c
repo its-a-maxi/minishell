@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 11:23:04 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 13:11:35 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,10 @@ int			main(int argc, char **argv, char **envp)
 		signal(SIGINT, signal_handler);
 		signal(SIGQUIT, signal_handler);
 		read_input(input);
-		//caso de str vacia?
 		commands = ft_split(input, ';');
 		command_table_num = ft_arrlen(commands);
 		command_table = tokenize(commands, command_table_num - 1);
 		executor(command_table, command_table_num);
-		//Ver si returnearon error
 	}
-	//Liberar entorno
 	return (0);
 }

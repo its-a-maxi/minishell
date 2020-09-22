@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 12:10:37 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 13:04:53 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <string.h>
 # include <errno.h>
 # include "../libft/inc/libft.h"
+
+#include <libc.h>
 
 /*
 ** The t_command_table struct contains the information of a set of
@@ -62,7 +64,7 @@ void					set_redirect(t_command_table *t, char *str, char *type);
 /*
 ** parser.c
 */
-struct s_command_table	tokenize(char **command_lines, int table_num);
+struct s_command_table	*tokenize(char **command_lines, int table_num);
 /*
 ** executor.c
 */

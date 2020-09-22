@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 12:35:16 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 13:42:42 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 void		executor(t_command_table *table, int table_num)
 {
 	int		h = -1;
-
+printf("command_table_num:%d, simple_commands_num: %d\n", table_num, table->simple_commands_num);
 	while (++h < table_num)
 	{
 		int i = -1;
@@ -54,5 +54,5 @@ void		executor(t_command_table *table, int table_num)
 				printf("%s\n", table->simple_commands[i][j]);
 		}
 	}
-	free(command_table);
+	free(table);
 }
