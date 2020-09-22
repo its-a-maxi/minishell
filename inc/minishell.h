@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 11:26:35 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 11:58:18 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void					executor(t_command_table *table, int table_num);
 ** env_handler.c
 */
 void					save_env(int argc, char **argv, char **envp);
+void					exit_minishell(void);
 #endif
