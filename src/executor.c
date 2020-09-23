@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 10:19:15 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:41:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ printf("out: %s; in: %s; append: %s;\n", table[h].output_file, table[h].input_fi
 		{
 			int j = -1;
 			while (table[h].simple_commands[i][++j])
-				printf("\tsimple command %d: %s\n", i, table[h].simple_commands[i][j]);
+				printf("\tsimple command %d arg %d: %s\n", i, j, table[h].simple_commands[i][j]);
 		}
 	}
 	free(table);

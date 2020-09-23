@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 10:04:07 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:47:00 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ printf("input: %s\n", input);
 		command_table_num = ft_arrlen(commands);
 		command_table = tokenize(commands, command_table_num);
 		executor(command_table, command_table_num);
+		free_command_tables(command_table, command_table_num);
 	}
 	return (0);
 }

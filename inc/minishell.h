@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 11:12:43 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 12:05:10 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,14 @@ typedef struct			s_command_table
 char					**g_env;
 
 /*
+** parser_utils2.c
+*/
+char					**remove_empty_str(char **arr);
+
+/*
 ** parser_utils.c
 */
+void					free_command_tables(t_command_table *table, int num);
 char					*ft_str2chr(char *str, char c);
 char					*ft_add_char(char *str, char c);
 void					read_input(char **input);

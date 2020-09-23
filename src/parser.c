@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 11:19:43 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 12:14:32 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static void		split_till_redirection(t_command_table *tab, char *str, int i)
 	{
 		tmp = *inptr;
 		*inptr = '\0';
-		tab->simple_commands[++i] = ft_split(str, ' ');
+		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
 		*inptr = tmp;
 	}
 	else
 	{
 		tmp = *outptr;
 		*outptr = '\0';
-		tab->simple_commands[++i] = ft_split(str, ' ');
+		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
 		*outptr = tmp;
 	}
 }
@@ -67,13 +67,13 @@ static void		find_next_simple_command(t_command_table *tab, char *str)
 	while ((tmp = ft_strchr(str, '|')))
 	{
 		*tmp = '\0';
-		tab->simple_commands[++i] = ft_split(str, ' ');
+		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
 		str = tmp + 1;
 	}
 	if ((tab->input_file) || (tab->output_file) || (tab->append_file))
 		split_till_redirection(tab, str, i);
 	else
-		tab->simple_commands[++i] = ft_split(str, ' ');
+		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
 }
 
 
@@ -90,8 +90,9 @@ static void		find_simple_commands(t_command_table *table, char *command_line)
 {
 	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
 	if (!(table->simple_commands = malloc(sizeof(char **)
-		* table->simple_commands_num)))
+		* (table->simple_commands_num + 1))))
 		exit_minishell();
+	table->simple_commands[table->simple_commands_num] = NULL;
 	find_next_simple_command(table, command_line);
 }
 
@@ -106,8 +107,6 @@ static void		find_simple_commands(t_command_table *table, char *command_line)
 
 static void		set_redirections(t_command_table *table, char *command_line)
 {
-	//Puede haber espacios hasta el file
-	//Puede no haber espacios: echo hola>infile funciona
 	char		*ptr;
 	int			i;
 
