@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 09:26:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:08:56 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static void		split_till_redirection(t_command_table *tab, char *str, int i)
 	char	*outptr;
 	char	tmp;
 
-	if ((inptr = ft_strchr(str, '<')) < (outptr = ft_strchr(str, '>')))
+	inptr = ft_strchr(str, '<');
+	outptr = ft_strchr(str, '>');
+	if (((outptr) && (inptr < outptr)) || (!(outptr) && (inptr)))
 	{
 		tmp = *inptr;
 		*inptr = '\0';
@@ -106,23 +108,22 @@ static void		set_redirections(t_command_table *table, char *command_line)
 {
 	//Puede haber espacios hasta el file
 	//Puede no haber espacios: echo hola>infile funciona
-	char		*ptr1;
-	char		*ptr2;
+	char		*ptr;
 	int			i;
 
 	table->input_file = NULL;
 	table->output_file = NULL;
 	table->append_file = NULL;
 	i = -1;
-	ptr2 = ft_strchr(command_line, '<');
-	if ((ptr2) && (ptr2 > ft_strchr(command_line, '|')))
-		set_redirect(table, ptr2, "input");
-	ptr1 = ft_strchr(command_line, '>');
-	if ((ptr1) && (*(ptr1 + 1) != '>') && (ptr1 > ft_strchr(command_line, '|')))
-		set_redirect(table, command_line, "output");
-	else if ((ptr1) && (*(ptr1 + 1) == '>')
-		&& (ptr1 > ft_strchr(command_line, '|')))
-		set_redirect(table, ptr1, "append");
+	ptr = ft_strchr(command_line, '<');
+	if ((ptr) && (ptr > ft_strchr(command_line, '|')))
+		set_redirect(table, ptr, 'I');
+	ptr = ft_strchr(command_line, '>');
+	if ((ptr) && (*(ptr + 1) != '>') && (ptr > ft_strchr(command_line, '|')))
+		set_redirect(table, ptr, 'O');
+	ptr = ft_str2chr(command_line, '>');
+	if ((ptr))
+		set_redirect(table, ptr, 'A');
 }
 
 /*
@@ -148,6 +149,7 @@ t_command_table	*tokenize(char **command_lines, int command_table_num)
 		set_redirections(command_table + i, command_lines[i]);
 		find_simple_commands(command_table + i, command_lines[i]);
 	}
+printf("Ended the parsing\n");
 	full_free((void **)command_lines, ft_arrlen(command_lines));
 	return (command_table);
 }
