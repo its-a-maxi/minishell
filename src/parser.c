@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 11:08:56 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:19:43 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		split_till_redirection(t_command_table *tab, char *str, int i)
 
 	inptr = ft_strchr(str, '<');
 	outptr = ft_strchr(str, '>');
-	if (((outptr) && (inptr < outptr)) || (!(outptr) && (inptr)))
+	if ((inptr) && (((outptr) && (inptr < outptr)) || (!(outptr) && (inptr))))
 	{
 		tmp = *inptr;
 		*inptr = '\0';
