@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 10:36:47 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:12:43 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,9 @@ void					executor(t_command_table *table, int table_num);
 */
 void					save_env(int argc, char **argv, char **envp);
 void					exit_minishell(void);
+char					*env_selector(char *env);
+/*
+** cd_command.c
+*/
+int						cd_command(char **arg);
 #endif
