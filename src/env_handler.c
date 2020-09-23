@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 13:13:45 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 10:58:57 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,20 @@ void			save_env(int argc, char **argv, char **envp)
 	while (envp[++i])
 		if(!(g_env[i] = ft_strdup(envp[i])))
 			exit_minishell();
+}
+
+char     *env_selector(char *env)
+{
+    int		len;
+    char	*rst;
+	int		i;
+
+    len = ft_strlen(env);
+    i = 0;
+    while(ft_strncmp(env, g_env[i], len) != 0)
+        i++;
+    if(!g_env[i])
+        write(1, "please, specify correctly the name of the variable", 50);
+    rst = ft_substr(g_env[i], len + 1, ft_strlen(g_env[i]));
+    return (rst);
 }
