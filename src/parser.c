@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 13:14:59 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 09:26:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,7 @@ static void		find_simple_commands(t_command_table *table, char *command_line)
 	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
 	if (!(table->simple_commands = malloc(sizeof(char **)
 		* table->simple_commands_num)))
-	{
-		printf("error simple commands\n");
 		exit_minishell();
-	}
 	find_next_simple_command(table, command_line);
 }
 
@@ -144,10 +141,7 @@ t_command_table	*tokenize(char **command_lines, int command_table_num)
 
 	if (!(command_table = malloc(sizeof(struct s_command_table)
 		* command_table_num)))
-	{
-		printf("error command table. tablee_num:%d\n", command_table_num);
 		exit_minishell();
-	}
 	i = -1;
 	while (++i < command_table_num)
 	{

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:47:17 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 13:36:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 09:25:13 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static char	**init_table(char *str, int c)
 	char	**table;
 
 	i = ft_strnchr(str, c);
-	table = malloc(sizeof(char *) * (i + 1));
-	table[i] = NULL;
+	table = malloc(sizeof(char *) * (i + 2));
+	table[i + 1] = NULL;
 	return (table);
 }
 
