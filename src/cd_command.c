@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/23 10:58:52 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:10:50 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 int		cd_command(char **arg)
 {
 	int i;
+	char *path;
 
 	if (!arg[1])
-		chdir(env_selector("PATH"));
+	{
+		path = env_selector("PATH");
+		chdir(path);
+		free(path);
+		return (0);
+	}
 	if (arg[2])
 	{
 		write(1, "cd: string not in pwd: ", 23);
