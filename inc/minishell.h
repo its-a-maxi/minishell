@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 12:05:10 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 12:26:16 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,8 @@ char					*env_selector(char *env);
 ** cd_command.c
 */
 int						cd_command(char **arg);
+/*
+** env_command.c
+*/
+void    				env_command(char **arg);
 #endif
