@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 09:30:36 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 10:19:15 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ printf("command_table_num:%d\n", table_num);
 	while (++h < table_num)
 	{
 printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_num);
+printf("out: %s; in: %s; append: %s;\n", table[h].output_file, table[h].input_file, table[h].append_file);
 		int i = -1;
 		while (++i < table[h].simple_commands_num)
 		{

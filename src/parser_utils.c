@@ -6,13 +6,26 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 10:09:27 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:10:12 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			set_redirect(t_command_table *table, char *ptr, char *type)
+char			*ft_str2chr(char *str, char c)
+{
+	int		i;
+
+	i = -1;
+	while ((str[++i]) && (str[i + 1]))
+	{
+		if ((str[i] == c) && (str[i + 1] == c))
+			return (str + i + 1);
+	}
+	return (0);
+}
+
+void			set_redirect(t_command_table *table, char *ptr, char type)
 {
 	int			i;
 	int			j;
@@ -28,11 +41,11 @@ void			set_redirect(t_command_table *table, char *ptr, char *type)
 		;
 	temp = ptr[i];
 	ptr[i] = '\0';
-	if (ft_strcmp(type, "input"))
+	if (type == 'I')
 		table->input_file = ft_strdup(ptr + j);
-	else if (ft_strcmp(type, "output"))
+	else if (type == 'O')
 		table->output_file = ft_strdup(ptr + j);
-	else if (ft_strcmp(type, "append"))
+	else if (type == 'A')
 		table->append_file = ft_strdup(ptr + j);
 	ptr[i] = temp;
 }
