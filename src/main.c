@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 09:29:48 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 10:04:07 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int			main(int argc, char **argv, char **envp)
 	save_env(argc, argv, envp);
 	while (1)
 	{
-		if (!(input = ft_calloc(1, sizeof(char))))
-			return (0);
+		if (!(input = malloc(sizeof(char) * 1)))
+			return (1);
+		*input = '\0';
 		show_prompt();
 		signal(SIGINT, signal_handler);
 		signal(SIGQUIT, signal_handler);
-		read_input(input);
+		read_input(&input);
 printf("input: %s\n", input);
 		commands = ft_split(input, ';');
 		command_table_num = ft_arrlen(commands);

@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 13:37:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/23 10:09:27 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ char			*ft_add_char(char *str, char c)
 ** If ctrl-D (EOF) is invoked, the shell is terminated.
 */
 
-void			read_input(char *input)
+void			read_input(char **input)
 {
 	char	buff[1];
 	int		bytes_read;
 
 	while ((bytes_read = read(0, buff, 1)) && buff[0] != '\n')
-		input = ft_add_char(input, buff[0]);
-	input = ft_add_char(input, '\0');
+		*input = ft_add_char(*input, buff[0]);
+	*input = ft_add_char(*input, '\0');
 	if (!bytes_read)
 	{
-		free(input);
+		free(*input);
 		exit_minishell();
 	}
 }
