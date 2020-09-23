@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/22 13:04:53 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/22 13:52:32 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
+# include <stdlib.h>
 # include "../libft/inc/libft.h"
 
 #include <libc.h>
