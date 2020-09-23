@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 12:40:15 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/23 13:23:22 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,8 @@ void    				env_command(char **arg);
 ** echo_command.c
 */
 void					echo_command(char **argv);
+/*
+** pwd_command.c
+*/
+void    pwd_command(char **arg);
 #endif

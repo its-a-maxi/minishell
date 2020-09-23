@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_command.c                                     :+:      :+:    :+:   */
+/*   pwd_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/23 12:43:55 by mmonroy-         ###   ########.fr       */
+/*   Created: 2020/09/23 13:19:28 by mmonroy-          #+#    #+#             */
+/*   Updated: 2020/09/23 13:23:34 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    echo_command(char **arg)
+void    pwd_command(char **arg)
 {
-    int i;
-
-    i = 1;
-    if (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0)
-        i++;
-    while (arg[i])
-    {
-        write(1, arg[i], ft_strlen(arg[i]));
-        if (arg[++i])
-            write(1, " ", 1);
+    char    buff[4096 + 1];
+    
+    buff[4096] = '\0';
+    if (!arg[1])
+	{
+        getcwd(buff, 4096);
+	    write(1, buff, strlen(buff));
     }
-    if (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0)
-    {
-        if (!arg[2])
-            return;
-        write(1, "%", 1);
-    }
-    write(1, "\n", 1);
+    else
+        write (1, "pwd: too many arguments", 23);
     return;
 }
