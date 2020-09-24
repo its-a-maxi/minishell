@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_command.c                                      :+:      :+:    :+:   */
+/*   cmd_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/24 10:39:56 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/24 10:55:45 by mmonroy-         ###   ########.fr       */
+/*   Created: 2020/09/23 13:19:28 by mmonroy-          #+#    #+#             */
+/*   Updated: 2020/09/24 12:28:47 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void        env_command(char **arg)
+void    cmd_pwd(char **arg)
 {
-    int i;
+    char    buff[4096 + 1];
     
-    i = -1;
-    if (arg[1])
-    {
-        write (1, "env: ", 5);
-        write (1, arg[1], ft_strlen(arg[1]));
-        write (1, ": No such file or directory\n", 28);
-        return;
+    buff[4096] = '\0';
+    if (!arg[1])
+	{
+        getcwd(buff, 4096);
+	    write(1, buff, strlen(buff));
     }
-    while (g_env[++i])
-    {
-        write(1, g_env[i], ft_strlen(g_env[i]));
-        write(1, "\n", 1);
-    }
+    else
+        write (1, "pwd: too many arguments", 23);
+    write(1, "\n", 1);
     return;
 }

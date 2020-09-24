@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/24 12:18:53 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:30:46 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,21 @@ void					exit_minishell(void);
 char					*env_selector(char *env);
 int						envp_len(char **envp);
 /*
-** cd_command.c
+** cmd_cd.c
 */
-int						cd_command(char **arg);
+int						cmd_cd(char **arg);
 /*
-** env_command.c
+** cmd_env.c
 */
-void    				env_command(char **arg);
+void    				cmd_env(char **arg);
 /*
-** echo_command.c
+** cmd_echo.c
 */
-void					echo_command(char **argv);
+void					cmd_echo(char **argv);
 /*
-** pwd_command.c
+** cmd_pwd.c
 */
-void					pwd_command(char **arg);
+void					cmd_pwd(char **arg);
 /*
 ** cmd_export.c
 */

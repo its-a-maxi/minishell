@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_command.c                                     :+:      :+:    :+:   */
+/*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/23 12:43:55 by mmonroy-         ###   ########.fr       */
+/*   Created: 2020/09/24 10:39:56 by mmonroy-          #+#    #+#             */
+/*   Updated: 2020/09/24 12:28:12 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    echo_command(char **arg)
+void        cmd_env(char **arg)
 {
     int i;
-
-    i = 1;
-    if (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0)
-        i++;
-    while (arg[i])
+    
+    i = -1;
+    if (arg[1])
     {
-        write(1, arg[i], ft_strlen(arg[i]));
-        if (arg[++i])
-            write(1, " ", 1);
+        write (1, "env: ", 5);
+        write (1, arg[1], ft_strlen(arg[1]));
+        write (1, ": No such file or directory\n", 28);
+        return;
     }
-    if (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0)
+    while (g_env[++i])
     {
-        if (!arg[2])
-            return;
-        write(1, "%", 1);
+        write(1, g_env[i], ft_strlen(g_env[i]));
+        write(1, "\n", 1);
     }
-    write(1, "\n", 1);
     return;
 }
