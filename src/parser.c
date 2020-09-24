@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 12:14:32 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/24 08:54:37 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** into a command table for each ';'-terminated sentence.
 */
 
-static void		split_till_redirection(t_command_table *tab, char *str, int i)
+static void	split_till_redirection(t_command_table *tab, char *str, int i)
 {
 	char	*inptr;
 	char	*outptr;
@@ -32,18 +32,21 @@ static void		split_till_redirection(t_command_table *tab, char *str, int i)
 
 	inptr = ft_strchr(str, '<');
 	outptr = ft_strchr(str, '>');
-	if ((inptr) && (((outptr) && (inptr < outptr)) || (!(outptr) && (inptr))))
+	if ((inptr)
+		&& (((outptr) && (inptr < outptr)) || (!(outptr) && (inptr))))
 	{
 		tmp = *inptr;
 		*inptr = '\0';
-		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
+		tab->simple_commands[++i] = remove_empty_str(
+			ft_split_and_quotations(str, ' '));
 		*inptr = tmp;
 	}
 	else
 	{
 		tmp = *outptr;
 		*outptr = '\0';
-		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
+		tab->simple_commands[++i] = remove_empty_str(
+			ft_split_and_quotations(str, ' '));
 		*outptr = tmp;
 	}
 }
@@ -57,7 +60,7 @@ static void		split_till_redirection(t_command_table *tab, char *str, int i)
 ** parameter #3:		char *				the ';'-terminated line of the table
 */
 
-static void		find_next_simple_command(t_command_table *tab, char *str)
+static void	find_next_simple_command(t_command_table *tab, char *str)
 {
 	int		i;
 	char	*tmp;
@@ -67,13 +70,15 @@ static void		find_next_simple_command(t_command_table *tab, char *str)
 	while ((tmp = ft_strchr(str, '|')))
 	{
 		*tmp = '\0';
-		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
+		tab->simple_commands[++i] = remove_empty_str(
+			ft_split_and_quotations(str, ' '));
 		str = tmp + 1;
 	}
 	if ((tab->input_file) || (tab->output_file) || (tab->append_file))
 		split_till_redirection(tab, str, i);
 	else
-		tab->simple_commands[++i] = remove_empty_str(ft_split(str, ' '));
+		tab->simple_commands[++i] = remove_empty_str(
+			ft_split_and_quotations(str, ' '));
 }
 
 
@@ -86,7 +91,7 @@ static void		find_next_simple_command(t_command_table *tab, char *str)
 ** parameter #2:	char *				the ';'-terminated line of the table
 */
 
-static void		find_simple_commands(t_command_table *table, char *command_line)
+static void	find_simple_commands(t_command_table *table, char *command_line)
 {
 	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
 	if (!(table->simple_commands = malloc(sizeof(char **)
@@ -105,7 +110,7 @@ static void		find_simple_commands(t_command_table *table, char *command_line)
 ** parameter #2:	char *				the ';'-terminated line of the table
 */
 
-static void		set_redirections(t_command_table *table, char *command_line)
+static void	set_redirections(t_command_table *table, char *command_line)
 {
 	char		*ptr;
 	int			i;

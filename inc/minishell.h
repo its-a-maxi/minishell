@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 13:23:22 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/24 08:57:55 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char					**g_env;
 ** parser_utils2.c
 */
 char					**remove_empty_str(char **arr);
-
+char					**ft_split_and_quotations(char *str, char c);
 /*
 ** parser_utils.c
 */
