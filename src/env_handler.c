@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 10:58:57 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:18:56 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exit_minishell(void)
 	exit(0);
 }
 
-static int		envp_len(char **envp)
+int				envp_len(char **envp)
 {
 	int len;
 
