@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 13:19:28 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/23 13:23:34 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/24 10:36:05 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void    pwd_command(char **arg)
     }
     else
         write (1, "pwd: too many arguments", 23);
+    write(1, "\n", 1);
     return;
 }
