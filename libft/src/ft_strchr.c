@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:36:12 by aleon-ca          #+#    #+#             */
-/*   Updated: 2019/11/18 14:35:07 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/25 11:39:53 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,14 @@ char			*ft_strchr(const char *s, int c)
 	int		i;
 	char	*ptr;
 
-	i = 0;
-	while (s[i])
+	ptr = (char *)s;
+	if (!ptr)
+		return (0);
+	i = -1;
+	while (ptr[++i])
 	{
-		if (s[i] == c)
-		{
-			ptr = (char *)s + i;
-			return (ptr);
-		}
-		else
-			i++;
-	}
-	if (c == 0 && s[i] == '\0')
-	{
-		ptr = (char *)s + i;
-		return (ptr);
+		if (ptr[i] == c)
+			return (ptr + i);
 	}
 	return (0);
 }

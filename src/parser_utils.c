@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/23 11:59:57 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/25 11:51:22 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void			free_command_tables(t_command_table *table, int table_num)
 		{
 			j = -1;
 			while (++j < table[i].simple_commands_num)
-				/*full_free((void **)table[i].simple_commands[j],
+				full_free((void **)table[i].simple_commands[j],
 						ft_arrlen(table[i].simple_commands[j]));
-			*///free(table[i].simple_commands);
+			free(table[i].simple_commands);
 			if (table[i].input_file)
 				free(table[i].input_file);
 			if (table[i].output_file)
@@ -32,6 +32,7 @@ void			free_command_tables(t_command_table *table, int table_num)
 			if (table[i].append_file)
 				free(table[i].append_file);
 		}
+		free(table);
 }
 
 char			*ft_str2chr(char *str, char c)

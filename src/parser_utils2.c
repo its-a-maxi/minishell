@@ -6,20 +6,50 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/24 10:13:15 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/25 12:33:10 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** Removes the possible empty strings after a ft_split call.
+** Removes the possible empty strings after a ft_split call. Also removes
+** the '"' from possible remaining '"'-encapsulated sentences.
 **
 ** returns:		the array of strings resulted from the split call, minus the
-**				empty ones.
+**				empty ones, or any remaining '"'-encapsulated sentences.
 **
 ** parameter #1:	an array of strings
 */
+
+static char	**remove_quots(char **arr)
+{
+	int		i;
+	char	*quotpos[2];
+	char	*temp[2];
+
+	i = -1;
+	while (arr[++i])
+	{
+		quotpos[0] = ft_strchr(arr[i], '"');
+		if ((quotpos[0]))
+			quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
+		while ((quotpos[0]) && (quotpos[1]))
+		{
+			**quotpos = '\0';
+			*(*(quotpos + 1)) = '\0';
+			temp[0] = ft_strjoin(arr[i], quotpos[0] + 1);
+			temp[1] = ft_strjoin(temp[0], quotpos[1] + 1);
+			free(temp[0]);
+			free(arr[i]);
+			arr[i] = temp[1];
+			quotpos[0] = ft_strchr(arr[i], '"');
+			if ((quotpos[0]))
+				quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
+		}
+	}
+	return (arr);
+}
 
 char		**remove_empty_str(char **arr)
 {
@@ -44,6 +74,7 @@ char		**remove_empty_str(char **arr)
 			result[++count] = ft_strdup(arr[i]);
 	}
 	full_free((void **)arr, ft_arrlen(arr));
+	result = remove_quots(result);
 	arr = result;
 	return (arr);
 }
@@ -95,8 +126,10 @@ char		**ft_split_and_quotations(char *str, char c)
 	int	count;
 
 	quotpos[0] = ft_strchr(str, '"');
-	quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
-	if (!(quotpos[0]) || !(quotpos[1]))
+	if ((quotpos[0]))
+		quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
+	if (!(ft_strchr(str, c)) || !(quotpos[0]) || !(quotpos[1])
+		|| ((ft_strchr(str, c)) > quotpos[1]))
 		return (ft_split(str, c));
 	*(*(quotpos + 1)) = '\0';
 	*(*quotpos) = '\0';
