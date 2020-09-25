@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/25 12:33:10 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/25 13:42:25 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static char	**remove_quots(char **arr)
 				quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
 		}
 	}
+printf("\tremove quots successful\n");
 	return (arr);
 }
 
@@ -76,54 +77,54 @@ char		**remove_empty_str(char **arr)
 	full_free((void **)arr, ft_arrlen(arr));
 	result = remove_quots(result);
 	arr = result;
+printf("\tremove empty strings successful\n");
 	return (arr);
 }
 
 /*
 ** Like ft_split but it considers a '"'-encapsulated sentence as a
 ** whole "character" when splitting, v. g.,
-**	ft_split_and_quotations("echo '"'Hello!'"'");
-**	returns arr[] = {echo, Hello!, NULL}
+**	ft_split_and_quotations("echo '"'Oye chico!'"'");
+**	returns arr[] = {echo, Oye chico!, NULL}
 */
 
 static void	loop_table(char **tab, char *str, char c, char **quotpos)
 {
-	int	i;
-	char	*sentence;
+	int		i;
 	char	*pos;
-	int	sentence_with_c;
 
-	sentence = ft_strdup(quotpos[0] + 1);
-	sentence_with_c = (ft_strchr(sentence, c)) ? 1 : 0;
 	i = -1;
 	while ((pos = ft_strchr(str, c)))
 	{
-		if ((pos < quotpos[0]) || ((pos > quotpos[1])
-			&& (sentence_with_c)))
+		if (!((pos > quotpos[0]) && (pos < quotpos[1])))
 		{
 			*pos = '\0';
 			tab[++i] = ft_strdup(str);
 			str = pos + 1;
+int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 		}
-		else if ((!sentence_with_c) || ((sentence_with_c)
-			&& ((pos > quotpos[0]) && (pos < quotpos[1]))))
+		else
 		{
-			tab[++i] = sentence;
-			str = (sentence_with_c) ? quotpos[1] + 1 : pos + 1 ;
-			sentence_with_c = 1;
+			*(*(quotpos + 1)) = '\0';
+			tab[++i] = ft_strdup(quotpos[0] + 1);
+			str = quotpos[1] + 1;
+			while ((*str) && (*str == c))
+				str++;
+int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 		}
 	}
-	if ((pos = ft_strrchr(str, c)) > quotpos[1])
+	if ((str > quotpos[1]))
 		tab[++i] = ft_strdup(str);
 	else
-		tab[++i] = sentence;
+		tab[++i] = ft_strdup(quotpos[0] + 1);
+int j = -1; printf("last loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 }
 
 char		**ft_split_and_quotations(char *str, char c)
 {
 	char	*quotpos[2];
 	char	**table;
-	int	count;
+	int		count;
 
 	quotpos[0] = ft_strchr(str, '"');
 	if ((quotpos[0]))
@@ -137,6 +138,8 @@ char		**ft_split_and_quotations(char *str, char c)
 	count += ft_strnchr(quotpos[1] + 1, c);
 	table = malloc(sizeof(char *) * (count + 2));
 	table[count + 1] = NULL;
+	*(*(quotpos + 1)) = '"';
+	*(*quotpos) = '"';
 	loop_table(table, str, c, quotpos);
 	return (table);
 }
