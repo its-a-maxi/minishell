@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/24 12:30:46 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/28 10:49:03 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,9 @@ void					cmd_pwd(char **arg);
 /*
 ** cmd_export.c
 */
-void					cmd_export(char **argv);
+void					cmd_export(char **arg);
+/*
+** cmd_unset.c
+*/
+void            		cmd_unset(char **arg);
 #endif
