@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/25 13:42:25 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/28 10:53:29 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,24 @@
 ** parameter #1:	an array of strings
 */
 
-static char	**remove_quots(char **arr)
+static void	remove_quots(char **arr)
 {
 	int		i;
-	char	*quotpos[2];
-	char	*temp[2];
+	char	*quotpos;
+	char	*temp;
 
 	i = -1;
 	while (arr[++i])
 	{
-		quotpos[0] = ft_strchr(arr[i], '"');
-		if ((quotpos[0]))
-			quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
-		while ((quotpos[0]) && (quotpos[1]))
+		while ((quotpos = ft_strchr(arr[i], '"')))
 		{
-			**quotpos = '\0';
-			*(*(quotpos + 1)) = '\0';
-			temp[0] = ft_strjoin(arr[i], quotpos[0] + 1);
-			temp[1] = ft_strjoin(temp[0], quotpos[1] + 1);
-			free(temp[0]);
+			*quotpos = '\0';
+			temp = ft_strjoin(arr[i], quotpos + 1);
 			free(arr[i]);
-			arr[i] = temp[1];
-			quotpos[0] = ft_strchr(arr[i], '"');
-			if ((quotpos[0]))
-				quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
+			arr[i] = temp;
 		}
 	}
-printf("\tremove quots successful\n");
-	return (arr);
+//printf("\tremove quots successful\n");
 }
 
 char		**remove_empty_str(char **arr)
@@ -75,9 +65,9 @@ char		**remove_empty_str(char **arr)
 			result[++count] = ft_strdup(arr[i]);
 	}
 	full_free((void **)arr, ft_arrlen(arr));
-	result = remove_quots(result);
+	remove_quots(result);
 	arr = result;
-printf("\tremove empty strings successful\n");
+//printf("\tremove empty strings successful\n");
 	return (arr);
 }
 
@@ -101,7 +91,7 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 			*pos = '\0';
 			tab[++i] = ft_strdup(str);
 			str = pos + 1;
-int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
+//int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 		}
 		else
 		{
@@ -110,14 +100,14 @@ int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);
 			str = quotpos[1] + 1;
 			while ((*str) && (*str == c))
 				str++;
-int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
+//int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 		}
 	}
-	if ((str > quotpos[1]))
+	if ((str > quotpos[1]) && (*str))
 		tab[++i] = ft_strdup(str);
-	else
+	else if ((*str))
 		tab[++i] = ft_strdup(quotpos[0] + 1);
-int j = -1; printf("last loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
+//printf("last loop set:%s\n", tab[i]);
 }
 
 char		**ft_split_and_quotations(char *str, char c)
@@ -138,8 +128,11 @@ char		**ft_split_and_quotations(char *str, char c)
 	count += ft_strnchr(quotpos[1] + 1, c);
 	table = malloc(sizeof(char *) * (count + 2));
 	table[count + 1] = NULL;
+//printf("Table size:%d\n", count + 1);
 	*(*(quotpos + 1)) = '"';
 	*(*quotpos) = '"';
 	loop_table(table, str, c, quotpos);
+//	int i = -1;while (table[++i]){printf("\ttable[%d]:%s\n", i, table[i]);}
+//printf("printing ended\n");
 	return (table);
 }
