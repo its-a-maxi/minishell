@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 10:21:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:40:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,21 @@ typedef struct			s_command_table
 */
 char					**g_env;
 /*
+** parser_utils5.c
+*/
+void					replace_input_arr(t_command_table *t, char ***tmp);
+void					replace_outpt_arr(t_command_table *t, char ***tmp);
+void					replace_appnd_arr(t_command_table *t, char ***tmp);
+/*
+** parser_utils4.c
+*/
+void					split_remaining_redirections(t_command_table *table);
+/*
 ** parser_utils3.c
 */
 void					set_inredirect(t_command_table *t, int c);
 void					set_outredirect(t_command_table *t, int c);
 void					set_appredirect(t_command_table *t, int c);
-void					split_remaining_redirections(t_command_table *table);
 /*
 ** parser_utils2.c
 */

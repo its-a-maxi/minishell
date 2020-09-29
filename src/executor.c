@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 10:15:50 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/29 11:54:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ printf("\tout[%d]: %s", k, table[h].output_file[k]);
 printf("\tin[%d]: %s", k, table[h].input_file[k]);
 		k = -1;
 		while (++k < ft_arrlen(table[h].append_file))
-printf("\tapp[%d]: %s\t", k, table[h].append_file[k]);
+printf("\tapp[%d]: %s", k, table[h].append_file[k]);
+printf("\n");
 	}
 }

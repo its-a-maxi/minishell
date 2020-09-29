@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 12:29:44 by alejandro         #+#    #+#             */
-/*   Updated: 2020/09/29 10:19:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/29 10:29:47 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,4 @@ void		set_appredirect(t_command_table *table, int appcount)
 			i = -1;
 		}
 	}
-}
-
-static void	split_remaining_redirections(t_command_table *table)
-{
 }
