@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/24 08:54:37 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/28 13:09:17 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,13 @@
 ** into a command table for each ';'-terminated sentence.
 */
 
-static void	split_till_redirection(t_command_table *tab, char *str, int i)
-{
-	char	*inptr;
-	char	*outptr;
-	char	tmp;
-
-	inptr = ft_strchr(str, '<');
-	outptr = ft_strchr(str, '>');
-	if ((inptr)
-		&& (((outptr) && (inptr < outptr)) || (!(outptr) && (inptr))))
-	{
-		tmp = *inptr;
-		*inptr = '\0';
-		tab->simple_commands[++i] = remove_empty_str(
-			ft_split_and_quotations(str, ' '));
-		*inptr = tmp;
-	}
-	else
-	{
-		tmp = *outptr;
-		*outptr = '\0';
-		tab->simple_commands[++i] = remove_empty_str(
-			ft_split_and_quotations(str, ' '));
-		*outptr = tmp;
-	}
-}
-
 /*
 ** Finds and sets the simple commands in the command table.
 **
 ** returns: void
 **
 ** parameter #1:		t_command_table		the command table
-** parameter #3:		char *				the ';'-terminated line of the table
+** parameter #2:		char *				the ';'-terminated line of the table
 */
 
 static void	find_next_simple_command(t_command_table *tab, char *str)
@@ -74,11 +47,8 @@ static void	find_next_simple_command(t_command_table *tab, char *str)
 			ft_split_and_quotations(str, ' '));
 		str = tmp + 1;
 	}
-	if ((tab->input_file) || (tab->output_file) || (tab->append_file))
-		split_till_redirection(tab, str, i);
-	else
-		tab->simple_commands[++i] = remove_empty_str(
-			ft_split_and_quotations(str, ' '));
+	tab->simple_commands[++i] = remove_empty_str(
+		ft_split_and_quotations(str, ' '));
 }
 
 
@@ -110,24 +80,32 @@ static void	find_simple_commands(t_command_table *table, char *command_line)
 ** parameter #2:	char *				the ';'-terminated line of the table
 */
 
-static void	set_redirections(t_command_table *table, char *command_line)
+static void	set_redirections(t_command_table *table)
 {
-	char		*ptr;
-	int			i;
+	char	*ptr;
+	int	i;
+	int	incount;
+	int	outcount;
+	int	appcount;
 
-	table->input_file = NULL;
-	table->output_file = NULL;
-	table->append_file = NULL;
+	incount = 0;
+	outcount = 0;
+	appcount = 0;
 	i = -1;
-	ptr = ft_strchr(command_line, '<');
-	if ((ptr) && (ptr > ft_strchr(command_line, '|')))
-		set_redirect(table, ptr, 'I');
-	ptr = ft_strchr(command_line, '>');
-	if ((ptr) && (*(ptr + 1) != '>') && (ptr > ft_strchr(command_line, '|')))
-		set_redirect(table, ptr, 'O');
-	ptr = ft_str2chr(command_line, '>');
-	if ((ptr))
-		set_redirect(table, ptr, 'A');
+	while ((ptr = table->simple_commands
+		[table->simple_commands_num - 1][++i]))
+	{
+		if ((ft_strchr(ptr, '<')))
+			incount++;
+		else if ((ft_str2chr(ptr, '>')))
+			appcount++;
+		else if ((ft_strchr(ptr, '>')))
+			outcount++;
+	}
+printf("Found %d input_files; %d output_files; %d append_files\n", incount, outcount, appcount);
+	set_inredirect(table, incount);
+	set_outredirect(table, outcount);
+	set_appredirect(table, appcount);
 }
 
 /*
@@ -150,8 +128,8 @@ t_command_table	*tokenize(char **command_lines, int command_table_num)
 	i = -1;
 	while (++i < command_table_num)
 	{
-		set_redirections(command_table + i, command_lines[i]);
 		find_simple_commands(command_table + i, command_lines[i]);
+		set_redirections(command_table + i);
 	}
 printf("Ended the parsing\n");
 	full_free((void **)command_lines, ft_arrlen(command_lines));

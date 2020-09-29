@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:23:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/02/03 14:25:57 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/28 12:03:04 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int		ft_arrlen(char **arr)
 {
 	int i;
 
-	i = 0;
-	while (arr[i])
-		i++;
+	if (!arr)
+		return (0);
+	i = -1;
+	while (arr[++i])
+		;
 	return (i);
 }

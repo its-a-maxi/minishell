@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/25 11:51:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/28 12:29:15 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,7 @@ char			*ft_str2chr(char *str, char c)
 	return (0);
 }
 
-void			set_redirect(t_command_table *table, char *ptr, char type)
-{
-	int			i;
-	int			j;
-	char		temp;
 
-	i = 0;
-	while ((ft_isspace_not_nl(ptr[++i])))
-		;
-	j = i;
-	i--;
-	while ((ptr[++i]) && !(ft_isspace_not_nl(ptr[i]))
-		&& ((ft_isalnum(ptr[i])) || (ptr[i] == '.')))
-		;
-	temp = ptr[i];
-	ptr[i] = '\0';
-	if (type == 'I')
-		table->input_file = ft_strdup(ptr + j);
-	else if (type == 'O')
-		table->output_file = ft_strdup(ptr + j);
-	else if (type == 'A')
-		table->append_file = ft_strdup(ptr + j);
-	ptr[i] = temp;
-}
 
 char			*ft_add_char(char *str, char c)
 {

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/28 10:54:03 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/28 11:21:36 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@
 void		executor(t_command_table *table, int table_num)
 {
 	int		h = -1;
-//printf("command_table_num:%d\n", table_num);
+printf("command_table_num:%d\n", table_num);
 	while (++h < table_num)
 	{
 printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_num);
-printf("out: %s; in: %s; append: %s;\n", table[h].output_file, table[h].input_file, table[h].append_file);
 		int i = -1;
 		while (++i < table[h].simple_commands_num)
 		{
@@ -55,5 +54,15 @@ printf("out: %s; in: %s; append: %s;\n", table[h].output_file, table[h].input_fi
 			while (table[h].simple_commands[i][++j])
 				printf("\tsimple command %d arg %d: %s\n", i, j, table[h].simple_commands[i][j]);
 		}
+/*		int k = -1;
+		while (++k < ft_arrlen(table[h].output_file))
+printf("out[%d]: %s\n", k, table[h].output_file[k]);
+		k = -1;
+		while (++k < ft_arrlen(table[h].input_file))
+printf("in[%d]: %s\n", k, table[h].input_file[k]);
+		k = -1;
+		while (++k < ft_arrlen(table[h].append_file))
+printf("app[%d]: %s\n", k, table[h].append_file[k]);
+	*/
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/28 10:49:03 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/28 12:42:18 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,28 @@
 ** The simple_commands contain the name and arguments of
 ** an input command:
 **
-** simple_command[][] = {name, argument #1, ... argument #n, NULL}
+** simple_commands[][] = {name, argument #1, ... argument #n, NULL}
 */
 
 typedef struct			s_command_table
 {
 	char				***simple_commands;
 	int					simple_commands_num;
-	char				*input_file;
-	char				*output_file;
-	char				*append_file;
+	char				**input_file;
+	char				**output_file;
+	char				**append_file;
 }						t_command_table;
 
 /*
 ** General Env variables
 */
 char					**g_env;
-
+/*
+** parser_utils3.c
+*/
+void					set_inredirect(t_command_table *t, int c);
+void					set_outredirect(t_command_table *t, int c);
+void					set_appredirect(t_command_table *t, int c);
 /*
 ** parser_utils2.c
 */
@@ -68,7 +73,6 @@ void					free_command_tables(t_command_table *table, int num);
 char					*ft_str2chr(char *str, char c);
 char					*ft_add_char(char *str, char c);
 void					read_input(char **input);
-void					set_redirect(t_command_table *t, char *str, char type);
 /*
 ** parser.c
 */
