@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 10:12:52 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:30:19 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char		**remove_empty_str(char **arr)
 	remove_quots(result);
 	arr = result;
 //printf("\tremove empty strings successful\n");
-//int j = -1;while (arr[++j]){printf("\ttable[%d]:%s\n", j, arr[j]);}
+int j = -1;while (arr[++j]){printf("\ttable[%d]:%s\n", j, arr[j]);}
 	return (arr);
 }
 

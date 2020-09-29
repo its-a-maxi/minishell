@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 11:40:14 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:28:38 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void					split_remaining_redirections(t_command_table *table);
 /*
 ** parser_utils3.c
 */
-void					set_inredirect(t_command_table *t, int c);
-void					set_outredirect(t_command_table *t, int c);
-void					set_appredirect(t_command_table *t, int c);
+void					set_inredirect(t_command_table *t, int j, int count);
+void					set_outredirect(t_command_table *t, int j, int count);
+void					set_appredirect(t_command_table *t, int j, int count);
 /*
 ** parser_utils2.c
 */
