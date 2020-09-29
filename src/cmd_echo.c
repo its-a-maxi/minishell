@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/24 12:27:46 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:30:36 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    cmd_echo(char **arg)
     int i;
 
     i = 1;
-    if (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0)
+    if (arg[i] && (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0))
         i++;
     while (arg[i])
     {
@@ -25,12 +25,12 @@ void    cmd_echo(char **arg)
         if (arg[++i])
             write(1, " ", 1);
     }
-    if (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0)
+    if (arg[i] && (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0))
     {
         if (!arg[2])
-            return;
+            return ;
         write(1, "%", 1);
     }
     write(1, "\n", 1);
-    return;
+    return ;
 }
