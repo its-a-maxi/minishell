@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/28 12:42:18 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/29 10:21:22 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char					**g_env;
 void					set_inredirect(t_command_table *t, int c);
 void					set_outredirect(t_command_table *t, int c);
 void					set_appredirect(t_command_table *t, int c);
+void					split_remaining_redirections(t_command_table *table);
 /*
 ** parser_utils2.c
 */

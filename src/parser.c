@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/28 13:09:17 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/09/29 10:20:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ static void	set_redirections(t_command_table *table)
 	int	outcount;
 	int	appcount;
 
+	table->input_file = NULL;
 	incount = 0;
+	table->output_file = NULL;
 	outcount = 0;
+	table->append_file = NULL;
 	appcount = 0;
 	i = -1;
 	while ((ptr = table->simple_commands
@@ -102,10 +105,15 @@ static void	set_redirections(t_command_table *table)
 		else if ((ft_strchr(ptr, '>')))
 			outcount++;
 	}
-printf("Found %d input_files; %d output_files; %d append_files\n", incount, outcount, appcount);
+//printf("Found %d input_files; %d output_files; %d append_files\n", incount, outcount, appcount);
+//printf("Entering set_indirect...\n");
 	set_inredirect(table, incount);
+//printf("set_indirect successful.\nEntering set_outdirect...\n");
 	set_outredirect(table, outcount);
+//printf("set_outdirect successful.\nEntering set_appdirect...\n");
 	set_appredirect(table, appcount);
+//printf("set_appdirect successful.\nRedirection parsing ended.\n");
+	split_remaining_redirections(table);
 }
 
 /*
@@ -131,7 +139,7 @@ t_command_table	*tokenize(char **command_lines, int command_table_num)
 		find_simple_commands(command_table + i, command_lines[i]);
 		set_redirections(command_table + i);
 	}
-printf("Ended the parsing\n");
+//printf("Ended the parsing\n");
 	full_free((void **)command_lines, ft_arrlen(command_lines));
 	return (command_table);
 }
