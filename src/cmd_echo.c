@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/29 13:21:39 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:30:36 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    cmd_echo(char **arg)
         i++;
     while (arg[i])
     {
-        write(1, arg[i], strlen(arg[i]));
+        write(1, arg[i], ft_strlen(arg[i]));
         if (arg[++i])
             write(1, " ", 1);
     }
