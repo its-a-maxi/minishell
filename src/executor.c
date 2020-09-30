@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 11:54:14 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 13:38:41 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,73 @@ printf("\tapp[%d]: %s", k, table[h].append_file[k]);
 printf("\n");
 	}
 }
+
+
+ EXAMPLE
+
+ void		execute(char ***arg)
+ {
+	//save in/out
+	int tmpin;
+	int tmpout;
+	int fdin;
+	int ret;
+	int fdout;
+	int i;
+	int fdpipe[2];
+ 
+	i = 0;
+	tmpin = dup(0);
+	tmpout = dup(1);
+	//set the initial input
+	if (infile)
+		fdin = open(infile, O_READ); 
+	else
+	// Use default input
+		fdin = dup(tmpin);
+	
+	while (arg[i++])
+	{
+		//redirect input
+		dup2(fdin, 0);
+		close(fdin);
+		//setup output
+		if (!arg[i])
+		{
+			// Last simple command 
+			if (outfile)
+				fdout = open(outfile,â€¦â€¦);
+			else
+			// Use default output
+				fdout = dup(tmpout);
+		}
+		else
+		{
+			// Not last 
+			//simple command
+			//create pipe
+			pipe(fdpipe);
+			fdout = fdpipe[1];
+			fdin = fdpipe[0];
+		}
+		// Redirect output
+		dup2(fdout, 1);
+		close(fdout);
+		// Create child process
+		ret = fork();
+		if (ret == 0)
+		{
+			execvp(scmd[i].args[0], scmd[i].args);
+			perror(â€œexecvpâ€);
+			_exit(1);
+		}
+	}
+	//restore in/out defaults
+	dup2(tmpin, 0);
+	dup2(tmpout, 1);
+	close(tmpin);
+	close(tmpout);
+	// Wait for last command
+	waitpid(ret, NULL);
+}
+*/
