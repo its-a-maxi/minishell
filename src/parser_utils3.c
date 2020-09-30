@@ -6,11 +6,40 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 12:29:44 by alejandro         #+#    #+#             */
-/*   Updated: 2020/09/29 13:40:26 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 10:20:35 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	resize_arr(t_command_table *tb, int j, int n, int t)
+{
+	char	**temp;
+
+	j = (t == 'O') * ft_arrlen(tb->output_file) + (t == 'I') *
+		ft_arrlen(tb->input_file) + (t == 'A') * ft_arrlen(tb->append_file);
+	temp = malloc(sizeof(char *) * (j + n + 1));
+	temp[j + n] = NULL;
+	j = -1;
+	while (++j < ((t == 'O') * ft_arrlen(tb->output_file) + (t == 'I')
+		* ft_arrlen(tb->input_file) + (t == 'A') * ft_arrlen(tb->append_file)))
+	{
+		if (t == 'O')
+			temp[j] = ft_strdup(tb->output_file[j]);
+		else if (t == 'I')
+			temp[j] = ft_strdup(tb->input_file[j]);
+		else
+			temp[j] = ft_strdup(tb->append_file[j]);
+	}
+	if (t == 'O')
+		repointer_arr(&temp, &tb->output_file); 
+	else if (t == 'I')
+		repointer_arr(&temp, &tb->input_file);
+	else
+		repointer_arr(&temp, &tb->append_file);
+printf("Resized arr successful. Now [%c] files are:\n", t);
+	return (j - 1);
+}
 
 static void	remove_redirect_from_args(t_command_table *tab, int i, int l, int c)
 {
@@ -49,18 +78,21 @@ void		set_inredirect(t_command_table *table, int j, int incount)
 		table->input_file = malloc(sizeof(char *) * (incount + 1));
 		table->input_file[incount] = NULL;
 		incount = -1;
-		i = -1;
-		while ((ptr = table->simple_commands[j][++i]))
+	}
+	else
+		incount = resize_arr(table, j, incount, 'I');
+	i = -1;
+	while ((ptr = table->simple_commands[j][++i]))
+	{
+		if ((ft_strchr(ptr, '<')))
 		{
-			if ((ft_strchr(ptr, '<')))
-			{
-				incount++;
-				table->input_file[incount] = (ft_strlen(ptr) != 1) ?
-				ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
-					[j][i + 1]);
-				remove_redirect_from_args(table, i, j, 'I');
-				i = -1;
-			}
+			incount++;
+			table->input_file[incount] = (ft_strlen(ptr) != 1) ?
+			ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
+				[j][i + 1]);
+			remove_redirect_from_args(table, i, j, 'I');
+			check_redirection_error(table->input_file[incount]);
+			i = -1;
 		}
 	}
 }
@@ -74,8 +106,10 @@ void		set_outredirect(t_command_table *table, int j, int outcount)
 	{
 		table->output_file = malloc(sizeof(char *) * (outcount + 1));
 		table->output_file[outcount] = NULL;
+		outcount = -1;
 	}
-	outcount = -1;
+	else
+		outcount = resize_arr(table, j, outcount, 'O');
 	i = -1;
 	while ((ptr = table->simple_commands[j][++i]))
 	{	
@@ -86,6 +120,7 @@ void		set_outredirect(t_command_table *table, int j, int outcount)
 			ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
 				[j][i + 1]);
 			remove_redirect_from_args(table, i, j, 'O');	
+			check_redirection_error(table->output_file[outcount]);
 			i = -1;
 		}
 	}
@@ -100,8 +135,10 @@ void		set_appredirect(t_command_table *table, int j, int appcount)
 	{
 		table->append_file = malloc(sizeof(char *) * (appcount + 1));
 		table->append_file[appcount] = NULL;
+		appcount = -1;
 	}
-	appcount = -1;
+	else
+		appcount = resize_arr(table, j, appcount, 'A');
 	i = -1;
 	while ((ptr = table->simple_commands[j][++i]))
 	{
@@ -112,6 +149,7 @@ void		set_appredirect(t_command_table *table, int j, int appcount)
 			ft_strdup(ptr + 2) : ft_strdup(table->simple_commands
 				[j][i + 1]);
 			remove_redirect_from_args(table, i, j, 'A');
+			check_redirection_error(table->append_file[appcount]);
 			i = -1;
 		}
 	}

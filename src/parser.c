@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 13:38:43 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 09:43:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@ static void	set_redirections(t_command_table *table)
 	int		appcount;
 
 	table->input_file = NULL;
-	incount = 0;
 	table->output_file = NULL;
-	outcount = 0;
 	table->append_file = NULL;
-	appcount = 0;
 	i[1] = -1;
 	while (table->simple_commands[++i[1]])
 	{
+		incount = 0;
+		outcount = 0;
+		appcount = 0;
 		i[0] = -1;
 printf("Checking for redirections in command %d\n", i[1]);
 		while ((ptr = table->simple_commands[i[1]][++i[0]]))

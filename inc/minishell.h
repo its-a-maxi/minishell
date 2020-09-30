@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 13:28:38 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 10:19:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 # include <errno.h>
 # include <stdlib.h>
 # include "../libft/inc/libft.h"
+# include "../libft/inc/ft_printf.h"
 
 #include <libc.h>
 
+# define EREDIR "minishell: parse error near a redirection.\n"
 /*
 ** The t_command_table struct contains the information of a set of
 ** input commands, i.e, some input line of the form:
@@ -56,11 +58,16 @@ typedef struct			s_command_table
 */
 char					**g_env;
 /*
+** error_in_parsing
+*/
+void					check_redirection_error(char *str);
+/*
 ** parser_utils5.c
 */
 void					replace_input_arr(t_command_table *t, char ***tmp);
 void					replace_outpt_arr(t_command_table *t, char ***tmp);
 void					replace_appnd_arr(t_command_table *t, char ***tmp);
+void					repointer_arr(char ***change_to,  char ***to_replace);
 /*
 ** parser_utils4.c
 */

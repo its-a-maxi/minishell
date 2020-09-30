@@ -6,11 +6,17 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:41:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 11:52:10 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 09:36:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		repointer_arr(char ***new, char ***old)
+{
+	full_free((void **)*old, ft_arrlen(*old));
+	*old = *new;
+}
 
 void		replace_appnd_arr(t_command_table *table, char ***temp)
 {	
