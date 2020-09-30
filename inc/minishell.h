@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 10:19:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 13:09:26 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void					check_redirection_error(char *str);
 void					replace_input_arr(t_command_table *t, char ***tmp);
 void					replace_outpt_arr(t_command_table *t, char ***tmp);
 void					replace_appnd_arr(t_command_table *t, char ***tmp);
+void					replace_env_var(t_command_table *table);
 void					repointer_arr(char ***change_to,  char ***to_replace);
 /*
 ** parser_utils4.c

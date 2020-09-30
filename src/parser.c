@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 09:43:31 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 13:08:29 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ t_command_table	*tokenize(char **command_lines, int command_table_num)
 	{
 		find_simple_commands(command_table + i, command_lines[i]);
 		set_redirections(command_table + i);
+		replace_env_var(command_table + i);
 	}
 printf("Ended the parsing\n");
 	full_free((void **)command_lines, ft_arrlen(command_lines));

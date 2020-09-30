@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/24 12:18:56 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/09/30 13:00:33 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,16 @@ char     *env_selector(char *env)
     int		len;
     char	*rst;
 	int		i;
-
-    len = ft_strlen(env);
+	
+	i = -1;
+	while (env[++i] && (env[i] != ' ') && (env[i] != '\t'))
+		;
+    len = i;
     i = 0;
-    while(ft_strncmp(env, g_env[i], len) != 0)
+    while (ft_strncmp(env, g_env[i], len) != 0)
         i++;
-    if(!g_env[i])
-        write(1, "please, specify correctly the name of the variable", 50);
+    if (!g_env[i])
+        rst = ft_strdup("");
     rst = ft_substr(g_env[i], len + 1, ft_strlen(g_env[i]));
     return (rst);
 }
