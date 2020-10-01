@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 17:57:32 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 13:19:04 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,33 +84,32 @@ static void	set_redirections(t_command_table *table)
 {
 	char	*ptr;
 	int		i[2];
-	int		incount;
-	int		outcount;
-	int		appcount;
+	int		count[3];
 
-	table->input_file = NULL;
-	table->output_file = NULL;
-	table->append_file = NULL;
 	i[1] = -1;
+	initr(table, i[1], count);
 	while (table->simple_commands[++i[1]])
-	{
-		incount = 0;
-		outcount = 0;
-		appcount = 0;
+	{//init_redirect irá aquí cuando se ponga ***input_file
+		count[0] = 0;
+		count[1] = 0;
+		count[2] = 0;
 		i[0] = -1;
 		while ((ptr = table->simple_commands[i[1]][++i[0]]))
 		{
 			if ((ft_strchr(ptr, '<')))
-				incount++;
+				++count[0];
 			else if ((ft_str2chr(ptr, '>')))
-				appcount++;
+				++count[2];
 			else if ((ft_strchr(ptr, '>')))
-				outcount++;
+				++count[1];
 		}
-		setin(table, i[1], incount);
-		stout(table, i[1], outcount);
-		stapp(table, i[1], appcount);
-		split_redirect(table);
+printf("Entering setin...\n");
+		setin(table, i[1], count[0]);
+printf("setin successful.\nEntering stout...\n");
+		stout(table, i[1], count[1]);
+printf("stout sucessful.\nEntering stapp...\n");
+		stapp(table, i[1], count[2]);
+printf("stapp sucessful.\n");
 	}
 }
 
@@ -123,22 +122,19 @@ static void	set_redirections(t_command_table *table)
 ** parameter #2:	int			number of ';'-terminated sentences
 */
 
-t_command_table	*tokenize(char **command_lines, int command_table_num)
+void		tokenize(char **lines, t_command_table *tab, int table_num)
 {
 	int					i;
-	t_command_table		*command_table;
 
-	if (!(command_table = malloc(sizeof(struct s_command_table)
-		* command_table_num)))
-		exit_minishell();
 	i = -1;
-	while (++i < command_table_num)
+	while (++i < table_num)
 	{
-		find_simple_commands(command_table + i, command_lines[i]);
-		set_redirections(command_table + i);
-		replace_env_var(command_table + i);
+		find_simple_commands(tab + i, lines[i]);
+		/*if ((*/set_redirections(tab + i);/*))*/
+//			return (free_error_parsing(tab, i));
+		replace_env_var(tab + i);
 	}
 printf("Ended the parsing\n");
-	full_free((void **)command_lines, ft_arrlen(command_lines));
-	return (command_table);
+	full_free((void **)lines, ft_arrlen(lines));
+//	return (0);
 }

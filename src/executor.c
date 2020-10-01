@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 13:57:51 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/01 13:13:04 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ printf("\tin[%d]: %s", k, table[h].input_file[k]);
 printf("\tapp[%d]: %s", k, table[h].append_file[k]);
 printf("\n");
 	}
+	free_command_tables(table, table_num);
 }
 
 

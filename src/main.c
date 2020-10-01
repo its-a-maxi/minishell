@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/28 11:22:44 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 13:15:38 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,22 @@ int			main(int argc, char **argv, char **envp)
 	char				*input;
 	char				**commands;
 	t_command_table		*command_table;
-	int					command_table_num;
 
 	save_env(argc, argv, envp);
 	while (1)
 	{
-		if (!(input = malloc(sizeof(char) * 1)))
-			return (1);
-		*input = '\0';
+		if (!(input = ft_calloc(1, sizeof(char))))
+			return (EXIT_FAILURE);
 		show_prompt();
 		signal(SIGINT, signal_handler);
 		signal(SIGQUIT, signal_handler);
 		read_input(&input);
 		commands = ft_split(input, ';');
-		command_table_num = ft_arrlen(commands);
-		command_table = tokenize(commands, command_table_num);
-		executor(command_table, command_table_num);
-		free_command_tables(command_table, command_table_num);
+		if (!(command_table = malloc(sizeof(t_command_table) *
+			ft_arrlen(commands))))
+			return (EXIT_FAILURE);
+		/*if (!(*/tokenize(commands, command_table, ft_arrlen(commands));//))
+			executor(command_table, ft_arrlen(commands));
 		free(input);
 	}
 	return (0);

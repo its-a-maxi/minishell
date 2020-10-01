@@ -5,151 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 12:29:44 by alejandro         #+#    #+#             */
-/*   Updated: 2020/09/30 17:58:23 by alejandro        ###   ########.fr       */
+/*   Created: 2020/10/01 13:03:05 by alejandro         #+#    #+#             */
+/*   Updated: 2020/10/01 13:14:40 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	resize_arr(t_command_table *tb, int j, int n, int t)
+static void	remove_backslash(char **strdir, char *slashpos)
 {
-	char	**temp;
+	char	*str;
+	char	*temp;
 
-	j = (t == 'O') * ft_arrlen(tb->output_file) + (t == 'I') *
-		ft_arrlen(tb->input_file) + (t == 'A') * ft_arrlen(tb->append_file);
-	temp = malloc(sizeof(char *) * (j + n + 1));
-	temp[j + n] = NULL;
-	j = -1;
-	while (++j < ((t == 'O') * ft_arrlen(tb->output_file) + (t == 'I')
-		* ft_arrlen(tb->input_file) + (t == 'A') * ft_arrlen(tb->append_file)))
+	if ((ft_strlen(str = ft_strdup(slashpos + 1))) == ft_strlen(*strdir))
 	{
-		if (t == 'O')
-			temp[j] = ft_strdup(tb->output_file[j]);
-		else if (t == 'I')
-			temp[j] = ft_strdup(tb->input_file[j]);
-		else
-			temp[j] = ft_strdup(tb->append_file[j]);
+		free(*strdir);
+		*strdir = str;
 	}
-	if (t == 'O')
-		arr_swap(&temp, &tb->output_file); 
-	else if (t == 'I')
-		arr_swap(&temp, &tb->input_file);
 	else
-		arr_swap(&temp, &tb->append_file);
-	return (j - 1);
+	{
+		*slashpos = '\0';
+		temp = ft_strjoin(*strdir, str);
+		free(*strdir);
+		free(str);
+		*strdir = temp;
+	}
 }
 
-static void	remove_redirect_from_args(t_command_table *tab, int i, int l, int c)
+static void	replace_var_in_str(char **strdir, char *ptr)
 {
-	char	**temp;
-	int		arrlen;
-	int		len;
+	char	*str;
+	char	*temp;
+	char	*temp2;
+
+	if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
+	{
+		free(*strdir);
+		*strdir = str;
+	}
+	else
+	{
+		ptr[-1] = '\0';
+		temp = ft_strdup(*strdir);
+		temp2 = ft_strjoin(temp, str);
+		free(temp);
+		temp = ft_strjoin(temp2, ptr + ft_strlen(str));
+		free(str);
+		free(temp2);
+		free(*strdir);
+		*strdir = temp;
+	}
+}
+
+void		replace_env_var(t_command_table *table)
+{
+	int		i;
 	int		j;
-	int		k;
-
-	len = ft_strlen(tab->simple_commands[l][i]);
-	arrlen = ft_arrlen(tab->simple_commands[l]);
-	temp = malloc(sizeof(char *) * (arrlen - 1 * (((len == 1) && (c != 'A'))
-		|| ((len == 2) && (c == 'A')))));
-	temp[arrlen - 1 - 1 * (((len == 1) && (c != 'A'))
-		|| ((len == 2) && (c == 'A')))] = NULL;
-	k = -1;
-	j = -1;
-	while (tab->simple_commands[l][++j])
-	{
-		if ((j == i) || ((j == i + 1) && (((c == 'A') && (len == 2))
-			|| ((c != 'A') && (len == 1)))))
-			continue;
-		temp[++k] = ft_strdup(tab->simple_commands[l][j]);
-	}
-	full_free((void **)tab->simple_commands[l], arrlen);
-	tab->simple_commands[l] = temp;
-}
-
-void		setin(t_command_table *table, int j, int incount)
-{
-	int		i;
 	char	*ptr;
 
-	if (!table->input_file)
-	{
-		table->input_file = malloc(sizeof(char *) * (incount + 1));
-		table->input_file[incount] = NULL;
-		incount = -1;
-	}
-	else
-		incount = resize_arr(table, j, incount, 'I');
 	i = -1;
-	while ((ptr = table->simple_commands[j][++i]))
+	while (table->simple_commands[++i])
 	{
-		if ((ft_strchr(ptr, '<')))
+		j = -1;
+		while (table->simple_commands[i][++j])
 		{
-			incount++;
-			table->input_file[incount] = (ft_strlen(ptr) != 1) ?
-			ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
-				[j][i + 1]);
-			remove_redirect_from_args(table, i, j, 'I');
-			check_redirection_error(table->input_file[incount]);
-			i = -1;
+			if ((ptr = ft_strchr(table->simple_commands[i][j], '$')))
+			{
+				if (((ptr - table->simple_commands[i][j]) != 0)
+					&& (ptr[-1] == '\\'))
+					remove_backslash(&table->simple_commands[i][j], ptr - 1);
+				else
+					replace_var_in_str(&table->simple_commands[i][j], ptr + 1);
+			}
 		}
 	}
 }
 
-void		stout(t_command_table *table, int j, int outcount)
+void		initr(t_command_table *tab, int i, int *count)
 {
-	int		i;
-	char	*ptr;
-
-	if (!table->output_file)
-	{
-		table->output_file = malloc(sizeof(char *) * (outcount + 1));
-		table->output_file[outcount] = NULL;
-		outcount = -1;
-	}
-	else
-		outcount = resize_arr(table, j, outcount, 'O');
-	i = -1;
-	while ((ptr = table->simple_commands[j][++i]))
-	{	
-		if (!(ft_str2chr(ptr, '>')) && (ft_strchr(ptr, '>')))
-		{
-			outcount++;
-			table->output_file[outcount] = (ft_strlen(ptr) != 1) ?
-			ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
-				[j][i + 1]);
-			remove_redirect_from_args(table, i, j, 'O');	
-			check_redirection_error(table->output_file[outcount]);
-			i = -1;
-		}
-	}
+	i = 0;
+	tab->input_file/*[i]*/ = NULL;
+	count[0] = 0;
+	tab->output_file/*[i]*/ = NULL;
+	count[1] = 0;
+	tab->append_file/*[i]*/ = NULL;
+	count[2] = 0;
 }
 
-void		stapp(t_command_table *table, int j, int appcount)
+void		arr_swap(char ***new, char ***old)
 {
-	int		i;
-	char	*ptr;
-
-	if (!table->append_file)
-	{
-		table->append_file = malloc(sizeof(char *) * (appcount + 1));
-		table->append_file[appcount] = NULL;
-		appcount = -1;
-	}
-	else
-		appcount = resize_arr(table, j, appcount, 'A');
-	i = -1;
-	while ((ptr = table->simple_commands[j][++i]))
-	{
-		if ((ft_str2chr(ptr, '>')))
-		{
-			appcount++;
-			table->append_file[appcount] = (ft_strlen(ptr) > 2) ?
-			ft_strdup(ptr + 2) : ft_strdup(table->simple_commands
-				[j][i + 1]);
-			remove_redirect_from_args(table, i, j, 'A');
-			check_redirection_error(table->append_file[appcount]);
-			i = -1;
-		}
-	}
+	full_free((void **)*old, ft_arrlen(*old));
+	*old = *new;
 }

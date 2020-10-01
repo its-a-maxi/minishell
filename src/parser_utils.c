@@ -6,13 +6,13 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 10:07:53 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:49:53 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			free_command_tables(t_command_table *table, int table_num)
+void			free_command_tables(t_command_table *tab, int table_num)
 {
 		int		i;
 		int		j;
@@ -21,21 +21,21 @@ void			free_command_tables(t_command_table *table, int table_num)
 		while (++i < table_num)
 		{
 			j = -1;
-			while (++j < table[i].simple_commands_num)
-				full_free((void **)table[i].simple_commands[j],
-						ft_arrlen(table[i].simple_commands[j]));
-			free(table[i].simple_commands);
-			if (table[i].input_file)
-				full_free((void **)table[i].input_file,
-					ft_arrlen(table[i].input_file));
-			if (table[i].output_file)
-				full_free((void **)table[i].output_file,
-					ft_arrlen(table[i].output_file));
-			if (table[i].append_file)
-				full_free((void **)table[i].append_file,
-					ft_arrlen(table[i].append_file));
+			while (++j < tab[i].simple_commands_num)
+				full_free((void **)tab[i].simple_commands[j],
+					ft_arrlen(tab[i].simple_commands[j]));
+			free(tab[i].simple_commands);
+			if (tab[i].input_file)
+				full_free((void **)tab[i].input_file,
+					ft_arrlen(tab[i].input_file));
+			if (tab[i].output_file)
+				full_free((void **)tab[i].output_file,
+					ft_arrlen(tab[i].output_file));
+			if (tab[i].append_file)
+				full_free((void **)tab[i].append_file,
+					ft_arrlen(tab[i].append_file));
 		}
-		free(table);
+		free(tab);
 }
 
 char			*ft_str2chr(char *str, char c)

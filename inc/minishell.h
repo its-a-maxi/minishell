@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 17:47:25 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 13:14:51 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,23 @@ char					**g_env;
 */
 void					check_redirection_error(char *str);
 /*
-** parser_utils6.c
+** parser_input.c
 */
-void					replace_env_var(t_command_table *table);
+void					setin(t_command_table *t, int j, int n);
 /*
-** parser_utils5.c
+** parser_output.c
 */
-void					rinput(t_command_table *t, char ***tmp);
-void					routpt(t_command_table *t, char ***tmp);
-void					rappnd(t_command_table *t, char ***tmp);
-void					arr_swap(char ***dst,  char ***src);
+void					stout(t_command_table *t, int j, int n);
 /*
-** parser_utils4.c
+** parser_append.c
 */
-void					split_redirect(t_command_table *table);
+void					stapp(t_command_table *t, int j, int n);
 /*
 ** parser_utils3.c
 */
-void					setin(t_command_table *t, int j, int n);
-void					stout(t_command_table *t, int j, int n);
-void					stapp(t_command_table *t, int j, int n);
+void					replace_env_var(t_command_table *table);
+void					arr_swap(char ***dst,  char ***src);
+void					initr(t_command_table *t, int i, int *n);
 /*
 ** parser_utils2.c
 */
@@ -97,7 +94,7 @@ void					read_input(char **input);
 /*
 ** parser.c
 */
-struct s_command_table	*tokenize(char **command_lines, int table_num);
+void					tokenize(char **lines, t_command_table *t, int n);
 /*
 ** executor.c
 */
