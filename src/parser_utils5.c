@@ -6,19 +6,19 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:41:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 13:11:54 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:43:34 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		repointer_arr(char ***new, char ***old)
+void		arr_swap(char ***new, char ***old)
 {
 	full_free((void **)*old, ft_arrlen(*old));
 	*old = *new;
 }
 
-void		replace_appnd_arr(t_command_table *table, char ***temp)
+void		rappnd(t_command_table *table, char ***temp)
 {	
 	int		i;
 	int		j;
@@ -46,7 +46,7 @@ void		replace_appnd_arr(t_command_table *table, char ***temp)
 	table->append_file = *temp;
 }
 
-void		replace_outpt_arr(t_command_table *table, char ***temp)
+void		routpt(t_command_table *table, char ***temp)
 {	
 	int		i;
 	int		j;
@@ -74,7 +74,7 @@ void		replace_outpt_arr(t_command_table *table, char ***temp)
 	table->output_file = *temp;
 }
 
-void		replace_input_arr(t_command_table *table, char ***temp)
+void		rinput(t_command_table *table, char ***temp)
 {
 	int		i;
 	int		j;

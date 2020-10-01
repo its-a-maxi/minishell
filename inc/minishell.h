@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 13:09:26 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:47:25 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,31 @@ char					**g_env;
 */
 void					check_redirection_error(char *str);
 /*
+** parser_utils6.c
+*/
+void					replace_env_var(t_command_table *table);
+/*
 ** parser_utils5.c
 */
-void					replace_input_arr(t_command_table *t, char ***tmp);
-void					replace_outpt_arr(t_command_table *t, char ***tmp);
-void					replace_appnd_arr(t_command_table *t, char ***tmp);
-void					replace_env_var(t_command_table *table);
-void					repointer_arr(char ***change_to,  char ***to_replace);
+void					rinput(t_command_table *t, char ***tmp);
+void					routpt(t_command_table *t, char ***tmp);
+void					rappnd(t_command_table *t, char ***tmp);
+void					arr_swap(char ***dst,  char ***src);
 /*
 ** parser_utils4.c
 */
-void					split_remaining_redirections(t_command_table *table);
+void					split_redirect(t_command_table *table);
 /*
 ** parser_utils3.c
 */
-void					set_inredirect(t_command_table *t, int j, int count);
-void					set_outredirect(t_command_table *t, int j, int count);
-void					set_appredirect(t_command_table *t, int j, int count);
+void					setin(t_command_table *t, int j, int n);
+void					stout(t_command_table *t, int j, int n);
+void					stapp(t_command_table *t, int j, int n);
 /*
 ** parser_utils2.c
 */
 char					**remove_empty_str(char **arr);
-char					**ft_split_and_quotations(char *str, char c);
+char					**ft_split__quots(char *str, char c);
 /*
 ** parser_utils.c
 */

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 13:30:19 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:50:11 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	remove_quots(char **arr)
 			arr[i] = temp;
 		}
 	}
-//printf("\tremove quots successful\n");
 }
 
 char		**remove_empty_str(char **arr)
@@ -67,15 +66,13 @@ char		**remove_empty_str(char **arr)
 	full_free((void **)arr, ft_arrlen(arr));
 	remove_quots(result);
 	arr = result;
-//printf("\tremove empty strings successful\n");
-int j = -1;while (arr[++j]){printf("\ttable[%d]:%s\n", j, arr[j]);}
 	return (arr);
 }
 
 /*
 ** Like ft_split but it considers a '"'-encapsulated sentence as a
 ** whole "character" when splitting, v. g.,
-**	ft_split_and_quotations("echo '"'Oye chico!'"'");
+**	ft_split__quots("echo '"'Oye chico!'"'");
 **	returns arr[] = {echo, Oye chico!, NULL}
 */
 
@@ -92,7 +89,6 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 			*pos = '\0';
 			tab[++i] = ft_strdup(str);
 			str = pos + 1;
-//int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 		}
 		else
 		{
@@ -101,17 +97,15 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 			str = quotpos[1] + 1;
 			while ((*str) && (*str == c))
 				str++;
-//int j = -1; printf("one loop set:");while (tab[i][++j]){printf("%c", tab[i][j]);}printf("\n");
 		}
 	}
 	if ((str > quotpos[1]) && (*str))
 		tab[++i] = ft_strdup(str);
 	else if ((*str))
 		tab[++i] = ft_strdup(quotpos[0] + 1);
-//printf("last loop set:%s\n", tab[i]);
 }
 
-char		**ft_split_and_quotations(char *str, char c)
+char		**ft_split__quots(char *str, char c)
 {
 	char	*quotpos[2];
 	char	**table;
@@ -129,10 +123,8 @@ char		**ft_split_and_quotations(char *str, char c)
 	count += ft_strnchr(quotpos[1] + 1, c);
 	table = malloc(sizeof(char *) * (count + 2));
 	table[count + 1] = NULL;
-//printf("Table size:%d\n", count + 1);
 	*(*(quotpos + 1)) = '"';
 	*(*quotpos) = '"';
 	loop_table(table, str, c, quotpos);
-//printf("printing ended\n");
 	return (table);
 }

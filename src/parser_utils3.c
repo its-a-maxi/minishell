@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 12:29:44 by alejandro         #+#    #+#             */
-/*   Updated: 2020/09/30 10:20:35 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:58:23 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ static int	resize_arr(t_command_table *tb, int j, int n, int t)
 			temp[j] = ft_strdup(tb->append_file[j]);
 	}
 	if (t == 'O')
-		repointer_arr(&temp, &tb->output_file); 
+		arr_swap(&temp, &tb->output_file); 
 	else if (t == 'I')
-		repointer_arr(&temp, &tb->input_file);
+		arr_swap(&temp, &tb->input_file);
 	else
-		repointer_arr(&temp, &tb->append_file);
-printf("Resized arr successful. Now [%c] files are:\n", t);
+		arr_swap(&temp, &tb->append_file);
 	return (j - 1);
 }
 
@@ -68,7 +67,7 @@ static void	remove_redirect_from_args(t_command_table *tab, int i, int l, int c)
 	tab->simple_commands[l] = temp;
 }
 
-void		set_inredirect(t_command_table *table, int j, int incount)
+void		setin(t_command_table *table, int j, int incount)
 {
 	int		i;
 	char	*ptr;
@@ -97,7 +96,7 @@ void		set_inredirect(t_command_table *table, int j, int incount)
 	}
 }
 
-void		set_outredirect(t_command_table *table, int j, int outcount)
+void		stout(t_command_table *table, int j, int outcount)
 {
 	int		i;
 	char	*ptr;
@@ -126,7 +125,7 @@ void		set_outredirect(t_command_table *table, int j, int outcount)
 	}
 }
 
-void		set_appredirect(t_command_table *table, int j, int appcount)
+void		stapp(t_command_table *table, int j, int appcount)
 {
 	int		i;
 	char	*ptr;

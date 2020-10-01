@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:29:56 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/29 13:28:23 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:44:32 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	split_append(t_command_table *table)
 		temp = malloc(sizeof(char *) * (ft_arrlen(table->append_file)
 			+ incount + 1));
 		temp[ft_arrlen(table->append_file) + incount] = NULL;
-		replace_appnd_arr(table, &temp);
+		rappnd(table, &temp);
 	}
 }
 
@@ -62,7 +62,7 @@ static void	split_output(t_command_table *table)
 		temp = malloc(sizeof(char *) * (ft_arrlen(table->output_file)
 			+ incount + 1));
 		temp[ft_arrlen(table->output_file) + incount] = NULL;
-		replace_outpt_arr(table, &temp);
+		routpt(table, &temp);
 	}
 }
 
@@ -89,11 +89,11 @@ static void	split_input(t_command_table *table)
 		temp = malloc(sizeof(char *) * (ft_arrlen(table->input_file)
 			+ incount + 1));
 		temp[ft_arrlen(table->input_file) + incount] = NULL;
-		replace_input_arr(table, &temp);
+		rinput(table, &temp);
 	}
 }
 
-void		split_remaining_redirections(t_command_table *table)
+void		split_redirect(t_command_table *table)
 {
 	if (table->input_file)
 		split_input(table);

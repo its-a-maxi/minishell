@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 13:08:29 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:57:32 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void	find_next_simple_command(t_command_table *tab, char *str)
 	{
 		*tmp = '\0';
 		tab->simple_commands[++i] = remove_empty_str(
-			ft_split_and_quotations(str, ' '));
+			ft_split__quots(str, ' '));
 		str = tmp + 1;
 	}
 	tab->simple_commands[++i] = remove_empty_str(
-		ft_split_and_quotations(str, ' '));
+		ft_split__quots(str, ' '));
 }
 
 
@@ -98,7 +98,6 @@ static void	set_redirections(t_command_table *table)
 		outcount = 0;
 		appcount = 0;
 		i[0] = -1;
-printf("Checking for redirections in command %d\n", i[1]);
 		while ((ptr = table->simple_commands[i[1]][++i[0]]))
 		{
 			if ((ft_strchr(ptr, '<')))
@@ -108,16 +107,10 @@ printf("Checking for redirections in command %d\n", i[1]);
 			else if ((ft_strchr(ptr, '>')))
 				outcount++;
 		}
-printf("Found %d input_files; %d output_files; %d append_files\n", incount, outcount, appcount);
-printf("Entering set_indirect...\n");
-		set_inredirect(table, i[1], incount);
-printf("set_indirect successful.\nEntering set_outdirect...\n");
-		set_outredirect(table, i[1], outcount);
-printf("set_outdirect successful.\nEntering set_appdirect...\n");
-		set_appredirect(table, i[1], appcount);
-printf("set_appdirect successful.\n");
-		split_remaining_redirections(table);
-printf("Redirection parsing ended.\n");	
+		setin(table, i[1], incount);
+		stout(table, i[1], outcount);
+		stapp(table, i[1], appcount);
+		split_redirect(table);
 	}
 }
 
