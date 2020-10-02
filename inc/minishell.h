@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 13:14:51 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:26:13 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,32 @@ typedef struct			s_command_table
 */
 char					**g_env;
 /*
-** error_in_parsing
+** parser_error.c
 */
-void					check_redirection_error(char *str);
+int					free_errpars(t_command_table *t, int i);
+int					check_redirection_error(char *str);
 /*
 ** parser_input.c
 */
-void					setin(t_command_table *t, int j, int n);
+int					setin(t_command_table *t, int j, int n);
+void					rmin(t_command_table *t, int j, int n);
 /*
 ** parser_output.c
 */
-void					stout(t_command_table *t, int j, int n);
+int					stout(t_command_table *t, int j, int n);
+void					rmout(t_command_table *t, int j, int n);
 /*
 ** parser_append.c
 */
-void					stapp(t_command_table *t, int j, int n);
+int					stapp(t_command_table *t, int j, int n);
+void					rmapp(t_command_table *t, int j, int n);
+
+/*
+** parser_utils4.c
+*/
+int					uptin(t_command_table *t, int j, int n);
+int					upout(t_command_table *t, int j, int n);
+int					upapp(t_command_table *t, int j, int n);
 /*
 ** parser_utils3.c
 */
@@ -87,14 +98,14 @@ char					**ft_split__quots(char *str, char c);
 /*
 ** parser_utils.c
 */
-void					free_command_tables(t_command_table *table, int num);
+void					freetb(t_command_table *table, int num);
 char					*ft_str2chr(char *str, char c);
 char					*ft_add_char(char *str, char c);
 void					read_input(char **input);
 /*
 ** parser.c
 */
-void					tokenize(char **lines, t_command_table *t, int n);
+int					tk(char **a, t_command_table *t, int n);
 /*
 ** executor.c
 */

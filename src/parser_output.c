@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 12:43:21 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/01 13:23:50 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:21:30 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	resize_arr(t_command_table *tb, int j, int n)
 	return (j - 1);
 }
 
-static void	remove_redirect_from_args(t_command_table *tab, int i, int l)
+void		rmout(t_command_table *tab, int i, int l)
 {
 	char	**temp;
 	int		arrlen;
@@ -106,11 +106,8 @@ static void	remove_redirect_from_args(t_command_table *tab, int i, int l)
 	tab->simple_commands[l] = temp;
 }
 
-void		stout(t_command_table *table, int j, int outcount)
+int		stout(t_command_table *table, int j, int outcount)
 {
-	int		i;
-	char	*ptr;
-
 	if (!table->output_file)
 	{
 		table->output_file = malloc(sizeof(char *) * (outcount + 1));
@@ -119,24 +116,9 @@ void		stout(t_command_table *table, int j, int outcount)
 	}
 	else
 		outcount = resize_arr(table, j, outcount);
-	i = -1;
-	while ((ptr = table->simple_commands[j][++i]))
-	{	
-		if (!(ft_str2chr(ptr, '>')) && (ft_strchr(ptr, '>')))
-		{
-			outcount++;
-			table->output_file[outcount] = (ft_strlen(ptr) != 1) ?
-			ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
-				[j][i + 1]);
-printf("\tRemoving redirection from arguments...\n");
-			remove_redirect_from_args(table, i, j);	
-printf("\tRedirections removed.\n\tChecking for parse errors...\n");
-			check_redirection_error(table->output_file[outcount]);
-printf("\tNo error found.\n");
-			i = -1;
-		}
-	}
-printf("\tSplitting the redirection...\n");
+	if ((upout(table, j, outcount)))
+		return (1);
 	split_output(table);
+	return (0);
 }
 

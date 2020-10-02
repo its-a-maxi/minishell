@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 13:13:04 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:23:46 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 void		executor(t_command_table *table, int table_num)
 {
 	int		h = -1;
-//printf("command_table_num:%d\n", table_num);
 	while (++h < table_num)
 	{
 printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_num);
@@ -65,7 +64,7 @@ printf("\tin[%d]: %s", k, table[h].input_file[k]);
 printf("\tapp[%d]: %s", k, table[h].append_file[k]);
 printf("\n");
 	}
-	free_command_tables(table, table_num);
+	freetb(table, table_num);
 }
 
 

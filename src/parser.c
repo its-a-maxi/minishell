@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 13:19:04 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:30:08 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,17 @@ static void	find_simple_commands(t_command_table *table, char *command_line)
 ** parameter #2:	char *				the ';'-terminated line of the table
 */
 
-static void	set_redirections(t_command_table *table)
+static void	find_redirect(char *ptr, int *count)
+{
+	if ((ft_strchr(ptr, '<')))
+		++count[0];
+	else if ((ft_str2chr(ptr, '>')))
+		++count[2];
+	else if ((ft_strchr(ptr, '>')))
+		++count[1];
+}
+
+static int	set_redirections(t_command_table *table)
 {
 	char	*ptr;
 	int		i[2];
@@ -95,22 +105,12 @@ static void	set_redirections(t_command_table *table)
 		count[2] = 0;
 		i[0] = -1;
 		while ((ptr = table->simple_commands[i[1]][++i[0]]))
-		{
-			if ((ft_strchr(ptr, '<')))
-				++count[0];
-			else if ((ft_str2chr(ptr, '>')))
-				++count[2];
-			else if ((ft_strchr(ptr, '>')))
-				++count[1];
-		}
-printf("Entering setin...\n");
-		setin(table, i[1], count[0]);
-printf("setin successful.\nEntering stout...\n");
-		stout(table, i[1], count[1]);
-printf("stout sucessful.\nEntering stapp...\n");
-		stapp(table, i[1], count[2]);
-printf("stapp sucessful.\n");
+			find_redirect(ptr, count);
+		if ((setin(table, i[1], count[0])) || (stout(table, i[1],
+			count[1])) || (stapp(table, i[1], count[2])))
+			return (1);
 	}
+	return (0);
 }
 
 /*
@@ -122,7 +122,7 @@ printf("stapp sucessful.\n");
 ** parameter #2:	int			number of ';'-terminated sentences
 */
 
-void		tokenize(char **lines, t_command_table *tab, int table_num)
+int		tk(char **lines, t_command_table *tab, int table_num)
 {
 	int					i;
 
@@ -130,11 +130,11 @@ void		tokenize(char **lines, t_command_table *tab, int table_num)
 	while (++i < table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
-		/*if ((*/set_redirections(tab + i);/*))*/
-//			return (free_error_parsing(tab, i));
+		if ((set_redirections(tab + i)))
+			return (free_errpars(tab, table_num));
 		replace_env_var(tab + i);
 	}
 printf("Ended the parsing\n");
 	full_free((void **)lines, ft_arrlen(lines));
-//	return (0);
+	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 11:49:53 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:24:20 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			free_command_tables(t_command_table *tab, int table_num)
+void			freetb(t_command_table *tab, int table_num)
 {
 		int		i;
 		int		j;

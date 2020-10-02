@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 12:25:28 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/01 13:24:34 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:21:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	resize_arr(t_command_table *tb, int j, int n)
 	return (j - 1);
 }
 
-static void	remove_redirect_from_args(t_command_table *tab, int i, int l)
+void		rmin(t_command_table *tab, int i, int l)
 {
 	char	**temp;
 	int		arrlen;
@@ -105,36 +105,18 @@ static void	remove_redirect_from_args(t_command_table *tab, int i, int l)
 	tab->simple_commands[l] = temp;
 }
 
-void		setin(t_command_table *table, int j, int incount)
+int		setin(t_command_table *t, int j, int n)
 {
-	int		i;
-	char	*ptr;
-
-	if (!table->input_file)
+	if (!t->input_file)
 	{
-		table->input_file = malloc(sizeof(char *) * (incount + 1));
-		table->input_file[incount] = NULL;
-		incount = -1;
+		t->input_file = malloc(sizeof(char *) * (n + 1));
+		t->input_file[n] = NULL;
+		n = -1;
 	}
 	else
-		incount = resize_arr(table, j, incount);
-	i = -1;
-	while ((ptr = table->simple_commands[j][++i]))
-	{
-		if ((ft_strchr(ptr, '<')))
-		{
-			incount++;
-			table->input_file[incount] = (ft_strlen(ptr) != 1) ?
-			ft_strdup(ptr + 1) : ft_strdup(table->simple_commands
-				[j][i + 1]);
-printf("\tRemoving redirection from arguments...\n");
-			remove_redirect_from_args(table, i, j);
-printf("\tRedirections removed.\n\tChecking for parse errors...\n");
-			check_redirection_error(table->input_file[incount]);
-printf("\tNo error found.\n");
-			i = -1;
-		}
-	}
-printf("\tSplitting the redirection...\n");
-	split_input(table);
+		n = resize_arr(t, j, n);
+	if ((uptin(t, j, n)))
+		return (1);
+	split_input(t);
+	return (0);
 }

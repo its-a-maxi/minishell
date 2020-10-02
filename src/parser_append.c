@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 12:44:02 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/01 13:23:43 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/01 17:19:55 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	resize_arr(t_command_table *tb, int j, int n)
 	return (j - 1);
 }
 
-static void	remove_redirect_from_args(t_command_table *tab, int i, int l)
+void		rmapp(t_command_table *tab, int i, int l)
 {
 	char	**temp;
 	int		arrlen;
@@ -106,11 +106,8 @@ static void	remove_redirect_from_args(t_command_table *tab, int i, int l)
 	tab->simple_commands[l] = temp;
 }
 
-void		stapp(t_command_table *table, int j, int appcount)
+int		stapp(t_command_table *table, int j, int appcount)
 {
-	int		i;
-	char	*ptr;
-
 	if (!table->append_file)
 	{
 		table->append_file = malloc(sizeof(char *) * (appcount + 1));
@@ -119,23 +116,8 @@ void		stapp(t_command_table *table, int j, int appcount)
 	}
 	else
 		appcount = resize_arr(table, j, appcount);
-	i = -1;
-	while ((ptr = table->simple_commands[j][++i]))
-	{
-		if ((ft_str2chr(ptr, '>')))
-		{
-			appcount++;
-			table->append_file[appcount] = (ft_strlen(ptr) > 2) ?
-			ft_strdup(ptr + 2) : ft_strdup(table->simple_commands
-				[j][i + 1]);
-printf("\tRemoving redirection from arguments...\n");
-			remove_redirect_from_args(table, i, j);
-printf("\tRedirections removed.\n\tChecking for parse errors...\n");
-			check_redirection_error(table->append_file[appcount]);
-printf("\tNo error found.\n");
-			i = -1;
-		}
-	}
-printf("\tSplitting the redirection...\n");
+	if ((upapp(table, j, appcount)))
+		return (1);
 	split_append(table);
+	return (0);
 }
