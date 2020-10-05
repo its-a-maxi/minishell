@@ -14,7 +14,7 @@
 - [ ] Executor: generates processes for each command, creates pipes, redirects.
 ## Peculiaridades de bash
 - Si un command tiene más de un input asociado, usa sólo el último.
-- De la misma manera, si tiene más de un output asociado, usa sólo el último.
+- De la misma manera, si tiene más de un output y/o append asociado, usa sólo el último.
 - Si un command tiene un output redirection y además es una pipe, su output 
 va a la redirection y la pipe se queda sin input.
 ## Roadmap
