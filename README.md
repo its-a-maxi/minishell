@@ -12,6 +12,10 @@
 - [ ] Lexer: tokenizes input
 - [ ] Parser: builds Command Table from tokens
 - [ ] Executor: generates processes for each command, creates pipes, redirects
+## Peculiaridades de bash
+- Si un command tiene más de un input asociado, usa sólo el último
+- Si un command tiene un output redirection y además es una pipe, su output 
+va a la redirection y la pipe se queda sin input.
 ## Roadmap
 1. Entender sintáxis y funcionamiento de bash que nos piden.
 2. Idear arquitectura **LPEE** que no nos haga _espaguetificar_ el asunto.
