@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/09/29 11:34:11 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/05 11:46:25 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int		cmd_cd(char **arg)
 	}
 	if (arg[2] && !arg[3])
 	{
-		write(1, "cd: String not in pwd: ", 23);
+		write(1, "cd: string not in pwd: ", 23);
 		write(1, arg[1], ft_strlen(arg[1]));
 		write(1, "\n", 1);
 		return (1);
 	}
-	if (arg[3])
+	if (arg[2] && arg[3])
 	{
-		write(1, "cd: Too many arguments\n", 23);
+		write(1, "cd: too many arguments\n", 23);
 		return (1);
 	}
 	i = chdir(arg[1]);

@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/02 11:56:12 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/05 11:57:16 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,27 @@ static void     new_g_env(char *str)
 
     i = -1;
     j = -1;
-    temp = (char**)ft_calloc(envp_len(g_env) + 2, sizeof(char*));
+    temp = (char**)ft_calloc(envp_len(g_env) + 4, sizeof(char*));
     while (g_env[++i] && ft_strncmp("_=", g_env[i], 2) != 0)
 	    if(!(temp[i] = ft_strdup(g_env[i])))
 		    exit_minishell();
     str = check_str(str);
     while (g_env[++j])
-        if (ft_strncmp(str, g_env[j], ft_strlen(str)))
-            if(!(temp[i++] = ft_strdup(str)))
+        if (ft_strncmp(str, g_env[j], ft_strnchr(str, '=')) == 0)
+        {
+            if(!(temp[j] = ft_strdup(str)))
 	            exit_minishell();
+            i++;
+            break;
+        }
     if (!g_env[j])
-        if(!(temp[i++] = ft_strdup(str)))
+        if(!(temp[i] = ft_strdup(str)))
 	        exit_minishell();
-    while (g_env[i - 1])
+    while (g_env[++i - 1])
+    {
         if(!(temp[i] = ft_strdup(g_env[i - 1])))
 	        exit_minishell();
+    }
     buff = g_env;
     g_env = temp;
     free_double(buff);
