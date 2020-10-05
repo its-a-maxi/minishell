@@ -15,6 +15,8 @@
 ## Peculiaridades de bash
 - Si un command tiene más de un input asociado, usa sólo el último.
 - De la misma manera, si tiene más de un output y/o append asociado, usa sólo el último.
+- Lo que sí que hace es esos casos es crear todos los outputs puestos, pero vacios salvo
+el último.
 - Si un command tiene un output redirection y además es una pipe, su output 
 va a la redirection y la pipe se queda sin input.
 ## Roadmap
