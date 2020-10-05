@@ -9,11 +9,12 @@
 - [Uso de arg ****envp** en el main](https://www.quora.com/What-is-the-3rd-parameter-in-the-main-function-char-envp#:~:text=The%20non%2Dportable%2Dbut%2D,As%20always%2C%20I%20recommend%20experimenting.)
 - [Algoritmo](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) pipes para A|B|C|D > outfile < infile 
 ## Partes del Proyecto
-- [ ] Lexer: tokenizes input
-- [ ] Parser: builds Command Table from tokens
-- [ ] Executor: generates processes for each command, creates pipes, redirects
+- [ ] Lexer: tokenizes input.
+- [ ] Parser: builds Command Table from tokens.
+- [ ] Executor: generates processes for each command, creates pipes, redirects.
 ## Peculiaridades de bash
-- Si un command tiene más de un input asociado, usa sólo el último
+- Si un command tiene más de un input asociado, usa sólo el último.
+- De la misma manera, si tiene más de un output asociado, usa sólo el último.
 - Si un command tiene un output redirection y además es una pipe, su output 
 va a la redirection y la pipe se queda sin input.
 ## Roadmap
