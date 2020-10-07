@@ -1,7 +1,3 @@
-Hacer que echo "Hola > k ase" devuelva
-	{echo, Hola > k ase, NULL}
-en vez de {echo, NULL} con redirecciones.
-
-i- No quitar '"' en find_simple_commands
-ii- No redireccionar si hay quots en la cadena
-iii- Quitar las '"' al final
+- Falta meter out y append correcto
+- Falta ejecutables
+- Fixear redirecciones

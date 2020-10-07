@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/06 16:43:46 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/07 11:58:21 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,10 @@ static int	find_redirections(t_command_table *table)
 	i[0] = -1;
 	while (table->simple_commands[++(*i)])
 	{
-printf("Entered find_redirections\n");
 		count[0] = 0;
 		count[1] = 0;
 		count[2] = 0;
 		count_redirections(table->simple_commands[i[0]], count);
-printf("\tCounted %d %d %d redirections\n", count[0], count[1], count[2]);
 		init_redirection_arr(table, i, count);
 		set_redirection_arr(table, i);
 		if ((check_redirection_error(table, i)))
@@ -147,7 +145,6 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 				remove_empty_str(tab[i].simple_commands[j]);
 		}
 	}
-printf("Ended the parsing\n");
 	full_free((void **)lines, ft_arrlen(lines));
 	return (0);
 }

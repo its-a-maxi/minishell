@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/06 17:49:37 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/07 11:46:22 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void		free_triple_ptrs(t_command_table *tab)
 {
-printf("Freeing triple pointers\n");
 			free(tab->simple_commands);
 			free(tab->input_files);
 			free(tab->output_files);
@@ -33,7 +32,6 @@ void			free_cmd_table(t_command_table *tab, int table_num)
 			j = -1;
 			while (++j < tab[i].simple_commands_num)
 			{
-printf("Freeing arrays\n");
 				full_free((void **)tab[i].simple_commands[j],
 					ft_arrlen(tab[i].simple_commands[j]));
 				full_free((void **)tab[i].input_files[j],

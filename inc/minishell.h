@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/06 16:35:07 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/07 11:14:59 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ void			save_env(int argc, char **argv, char **envp);
 void			exit_minishell(void);
 char			*env_selector(char *env);
 int				envp_len(char **envp);
+/*
+** error_handler.c
+*/
+void			fork_error(void);
 /*
 ** cmd_cd.c
 */
