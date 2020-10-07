@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 17:23:46 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/06 16:43:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,25 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 		{
 			int j = -1;
 			while (table[h].simple_commands[i][++j])
-				printf("\tsimple command %d arg %d: %s\n", i, j, table[h].simple_commands[i][j]);
+			{
+				printf("\tsimple command %d arg %d: %s\n", i, j,
+					table[h].simple_commands[i][j]);
+			}
+			int k = -1;
+			while ((table[h].input_files[i][++k]))
+				printf("input [%d] of simple_command %d: %s\n", k, i, table[h].input_files[i][k]);
+			k = -1;
+			while ((table[h].output_files[i][++k]))
+				printf("output [%d] of simple_command %d: %s\n", k, i, table[h].output_files[i][k]);
+			k = -1;
+			while ((table[h].append_files[i][++k]))
+				printf("append [%d] of simple_command %d: %s\n", k, i, table[h].append_files[i][k]);
+			k = -1;
+			while ((table[h].dummy_files[i][++k]))
+				printf("dummy [%d] of simple_command %d: %s\n", k, i, table[h].dummy_files[i][k]);
 		}
-		int k = -1;
-		while (++k < ft_arrlen(table[h].output_file))
-printf("\tout[%d]: %s", k, table[h].output_file[k]);
-		k = -1;
-		while (++k < ft_arrlen(table[h].input_file))
-printf("\tin[%d]: %s", k, table[h].input_file[k]);
-		k = -1;
-		while (++k < ft_arrlen(table[h].append_file))
-printf("\tapp[%d]: %s", k, table[h].append_file[k]);
-printf("\n");
 	}
-	freetb(table, table_num);
+	free_cmd_table(table, table_num);
 }
 
 

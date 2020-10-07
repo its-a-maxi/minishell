@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 17:26:13 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/06 16:35:07 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #include <libc.h>
 
 # define EREDIR "minishell: parse error near a redirection.\n"
+
 /*
 ** The t_command_table struct contains the information of a set of
 ** input commands, i.e, some input line of the form:
@@ -39,106 +40,99 @@
 ** which we will use to stablish the correct pipe and redirection relations
 ** between commands.
 ** The simple_commands contain the name and arguments of
-** an input command:
+** an input command, while input_file its input redirections and so on:
 **
-** simple_commands[][] = {name, argument #1, ... argument #n, NULL}
+** simple_commands[i][] = {name, argument #1, ... argument #n, NULL}
+** input_files[i][] = {input #1, ... input #n, NULL}
 */
 
-typedef struct			s_command_table
+typedef struct	s_command_table
 {
-	char				***simple_commands;
-	int					simple_commands_num;
-	char				**input_file;
-	char				**output_file;
-	char				**append_file;
-}						t_command_table;
+	char		***simple_commands;
+	int			simple_commands_num;
+	char		***input_files;
+	char		***output_files;
+	char		***append_files;
+	char		***dummy_files;
+}				t_command_table;
 
 /*
 ** General Env variables
 */
-char					**g_env;
+char			**g_env;
 /*
 ** parser_error.c
 */
-int					free_errpars(t_command_table *t, int i);
-int					check_redirection_error(char *str);
+int				free_errpars(t_command_table *t, int n);
+int				check_redirection_error(t_command_table *tab, int *i);
 /*
-** parser_input.c
+** parser_redirections_utils.c
 */
-int					setin(t_command_table *t, int j, int n);
-void					rmin(t_command_table *t, int j, int n);
+void			redir_files_updt(t_command_table *ta, int *i, char *str, int t);
+void			count_redirections(char **arr, int *count);
+void			init_redirection_arr(t_command_table *tab, int *i, int *count);
+void			resize_arr_skip_pos(char ***arr, int pos);
+char			*dup_till_symbol(char *str);
 /*
-** parser_output.c
+** parser_redirections.c
 */
-int					stout(t_command_table *t, int j, int n);
-void					rmout(t_command_table *t, int j, int n);
-/*
-** parser_append.c
-*/
-int					stapp(t_command_table *t, int j, int n);
-void					rmapp(t_command_table *t, int j, int n);
-
-/*
-** parser_utils4.c
-*/
-int					uptin(t_command_table *t, int j, int n);
-int					upout(t_command_table *t, int j, int n);
-int					upapp(t_command_table *t, int j, int n);
+void			set_redirection_arr(t_command_table *tab, int *i);
 /*
 ** parser_utils3.c
 */
-void					replace_env_var(t_command_table *table);
-void					arr_swap(char ***dst,  char ***src);
-void					initr(t_command_table *t, int i, int *n);
+void			replace_env_var(t_command_table *table);
+void			arr_swap(char ***dst, char ***src);
+void			initr(t_command_table *t, int i, int *n);
 /*
 ** parser_utils2.c
 */
-char					**remove_empty_str(char **arr);
-char					**ft_split__quots(char *str, char c);
+void			remove_quots(char ***str);
+char			**remove_empty_str(char **arr);
+char			**ft_split__quots(char *str, char c);
 /*
 ** parser_utils.c
 */
-void					freetb(t_command_table *table, int num);
-char					*ft_str2chr(char *str, char c);
-char					*ft_add_char(char *str, char c);
-void					read_input(char **input);
+void			free_cmd_table(t_command_table *table, int num);
+char			*ft_str2chr(char *str, char c);
+char			*ft_add_char(char *str, char c);
+void			read_input(char **input);
 /*
 ** parser.c
 */
-int					tk(char **a, t_command_table *t, int n);
+int				tokenize(char **a, t_command_table *t, int n);
 /*
 ** executor.c
 */
-void					executor(t_command_table *table, int table_num);
+void			executor(t_command_table *table, int table_num);
 /*
 ** env_handler.c
 */
-void					save_env(int argc, char **argv, char **envp);
-void					exit_minishell(void);
-char					*env_selector(char *env);
-int						envp_len(char **envp);
+void			save_env(int argc, char **argv, char **envp);
+void			exit_minishell(void);
+char			*env_selector(char *env);
+int				envp_len(char **envp);
 /*
 ** cmd_cd.c
 */
-int						cmd_cd(char **arg);
+int				cmd_cd(char **arg);
 /*
 ** cmd_env.c
 */
-void    				cmd_env(char **arg);
+void			cmd_env(char **arg);
 /*
 ** cmd_echo.c
 */
-void					cmd_echo(char **argv);
+void			cmd_echo(char **argv);
 /*
 ** cmd_pwd.c
 */
-void					cmd_pwd(char **arg);
+void			cmd_pwd(char **arg);
 /*
 ** cmd_export.c
 */
-void					cmd_export(char **arg);
+void			cmd_export(char **arg);
 /*
 ** cmd_unset.c
 */
-void            		cmd_unset(char **arg);
+void			cmd_unset(char **arg);
 #endif

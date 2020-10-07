@@ -6,11 +6,34 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/09/30 17:50:11 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/06 17:30:50 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		resize_arr_skip_pos(char ***arr, int pos)
+{
+	int		i;
+	int		j;
+	int		arr_size;
+	char	**temp;
+
+	arr_size = ft_arrlen(*arr);
+	temp = malloc(sizeof(char *) * (arr_size));
+	temp[arr_size - 1] = NULL;
+	i = -1;
+	j = -1;
+	while (*((*arr) + ++i))
+	{
+		if (i == pos)
+			continue;
+		else
+			temp[++j] = ft_strdup(*((*arr) + i));
+	}
+	full_free((void **)*arr, arr_size);
+	*arr = temp;
+}
 
 /*
 ** Removes the possible empty strings after a ft_split call. Also removes
@@ -22,21 +45,21 @@
 ** parameter #1:	an array of strings
 */
 
-static void	remove_quots(char **arr)
+void		remove_quots(char ***arr)
 {
 	int		i;
 	char	*quotpos;
 	char	*temp;
 
 	i = -1;
-	while (arr[++i])
+	while (*(*arr + ++i))
 	{
-		while ((quotpos = ft_strchr(arr[i], '"')))
+		while ((quotpos = ft_strchr(*(*arr + i), '"')))
 		{
 			*quotpos = '\0';
-			temp = ft_strjoin(arr[i], quotpos + 1);
-			free(arr[i]);
-			arr[i] = temp;
+			temp = ft_strjoin(*(*arr + i), quotpos + 1);
+			free(*(*arr + i));
+			*(*arr + i) = temp;
 		}
 	}
 }
@@ -64,7 +87,6 @@ char		**remove_empty_str(char **arr)
 			result[++count] = ft_strdup(arr[i]);
 	}
 	full_free((void **)arr, ft_arrlen(arr));
-	remove_quots(result);
 	arr = result;
 	return (arr);
 }
@@ -73,7 +95,9 @@ char		**remove_empty_str(char **arr)
 ** Like ft_split but it considers a '"'-encapsulated sentence as a
 ** whole "character" when splitting, v. g.,
 **	ft_split__quots("echo '"'Oye chico!'"'");
-**	returns arr[] = {echo, Oye chico!, NULL}
+**	returns arr[] = {echo, "Oye chico!, NULL}
+** the first '"' stays to signal the redirection parser not to consider
+** any redirection in that string.
 */
 
 static void	loop_table(char **tab, char *str, char c, char **quotpos)
@@ -93,7 +117,7 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 		else
 		{
 			*(*(quotpos + 1)) = '\0';
-			tab[++i] = ft_strdup(quotpos[0] + 1);
+			tab[++i] = ft_strdup(quotpos[0]);
 			str = quotpos[1] + 1;
 			while ((*str) && (*str == c))
 				str++;
@@ -102,7 +126,7 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 	if ((str > quotpos[1]) && (*str))
 		tab[++i] = ft_strdup(str);
 	else if ((*str))
-		tab[++i] = ft_strdup(quotpos[0] + 1);
+		tab[++i] = ft_strdup(quotpos[0]);
 }
 
 char		**ft_split__quots(char *str, char c)

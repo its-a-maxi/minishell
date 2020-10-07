@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 17:25:43 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/05 13:07:11 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			main(int argc, char **argv, char **envp)
 		if (!(command_table = malloc(sizeof(t_command_table) *
 			ft_arrlen(commands))))
 			return (EXIT_FAILURE);
-		if (!(tk(commands, command_table, ft_arrlen(commands))))
+		if (!(tokenize(commands, command_table, ft_arrlen(commands))))
 			executor(command_table, ft_arrlen(commands));
 		free(input);
 	}

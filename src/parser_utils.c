@@ -6,13 +6,23 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 17:24:20 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/06 17:49:37 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			freetb(t_command_table *tab, int table_num)
+static void		free_triple_ptrs(t_command_table *tab)
+{
+printf("Freeing triple pointers\n");
+			free(tab->simple_commands);
+			free(tab->input_files);
+			free(tab->output_files);
+			free(tab->append_files);
+			free(tab->dummy_files);
+}
+
+void			free_cmd_table(t_command_table *tab, int table_num)
 {
 		int		i;
 		int		j;
@@ -22,18 +32,20 @@ void			freetb(t_command_table *tab, int table_num)
 		{
 			j = -1;
 			while (++j < tab[i].simple_commands_num)
+			{
+printf("Freeing arrays\n");
 				full_free((void **)tab[i].simple_commands[j],
 					ft_arrlen(tab[i].simple_commands[j]));
-			free(tab[i].simple_commands);
-			if (tab[i].input_file)
-				full_free((void **)tab[i].input_file,
-					ft_arrlen(tab[i].input_file));
-			if (tab[i].output_file)
-				full_free((void **)tab[i].output_file,
-					ft_arrlen(tab[i].output_file));
-			if (tab[i].append_file)
-				full_free((void **)tab[i].append_file,
-					ft_arrlen(tab[i].append_file));
+				full_free((void **)tab[i].input_files[j],
+					ft_arrlen(tab[i].input_files[j]));
+				full_free((void **)tab[i].output_files[j],
+					ft_arrlen(tab[i].output_files[j]));
+				full_free((void **)tab[i].append_files[j],
+					ft_arrlen(tab[i].append_files[j]));
+				full_free((void **)tab[i].dummy_files[j],
+					ft_arrlen(tab[i].dummy_files[j]));
+			}
+			free_triple_ptrs(tab + i);
 		}
 		free(tab);
 }

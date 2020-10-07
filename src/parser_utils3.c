@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:03:05 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/01 13:14:40 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/05 12:56:10 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,6 @@ void		replace_env_var(t_command_table *table)
 			}
 		}
 	}
-}
-
-void		initr(t_command_table *tab, int i, int *count)
-{
-	i = 0;
-	tab->input_file/*[i]*/ = NULL;
-	count[0] = 0;
-	tab->output_file/*[i]*/ = NULL;
-	count[1] = 0;
-	tab->append_file/*[i]*/ = NULL;
-	count[2] = 0;
 }
 
 void		arr_swap(char ***new, char ***old)

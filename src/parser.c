@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/01 17:30:08 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/06 16:43:46 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,37 +77,42 @@ static void	find_simple_commands(t_command_table *table, char *command_line)
 ** returns:	void
 **
 ** parameter #1:	t_command_table		the command table
-** parameter #2:	char *				the ';'-terminated line of the table
 */
 
-static void	find_redirect(char *ptr, int *count)
+static void	create_redirection_ptr(t_command_table *tab)
 {
-	if ((ft_strchr(ptr, '<')))
-		++count[0];
-	else if ((ft_str2chr(ptr, '>')))
-		++count[2];
-	else if ((ft_strchr(ptr, '>')))
-		++count[1];
+	tab->input_files = malloc(sizeof(char **)
+		* (tab->simple_commands_num + 1));
+	tab->input_files[tab->simple_commands_num] = NULL;
+	tab->output_files = malloc(sizeof(char **)
+		* (tab->simple_commands_num + 1));
+	tab->output_files[tab->simple_commands_num] = NULL;
+	tab->append_files = malloc(sizeof(char **)
+		* (tab->simple_commands_num + 1));
+	tab->append_files[tab->simple_commands_num] = NULL;
+	tab->dummy_files = malloc(sizeof(char **)
+		* (tab->simple_commands_num + 1));
+	tab->dummy_files[tab->simple_commands_num] = NULL;
 }
 
-static int	set_redirections(t_command_table *table)
+static int	find_redirections(t_command_table *table)
 {
-	char	*ptr;
 	int		i[2];
 	int		count[3];
 
-	i[1] = -1;
-	initr(table, i[1], count);
-	while (table->simple_commands[++i[1]])
-	{//init_redirect irá aquí cuando se ponga ***input_file
+	create_redirection_ptr(table);
+	i[0] = -1;
+	while (table->simple_commands[++(*i)])
+	{
+printf("Entered find_redirections\n");
 		count[0] = 0;
 		count[1] = 0;
 		count[2] = 0;
-		i[0] = -1;
-		while ((ptr = table->simple_commands[i[1]][++i[0]]))
-			find_redirect(ptr, count);
-		if ((setin(table, i[1], count[0])) || (stout(table, i[1],
-			count[1])) || (stapp(table, i[1], count[2])))
+		count_redirections(table->simple_commands[i[0]], count);
+printf("\tCounted %d %d %d redirections\n", count[0], count[1], count[2]);
+		init_redirection_arr(table, i, count);
+		set_redirection_arr(table, i);
+		if ((check_redirection_error(table, i)))
 			return (1);
 	}
 	return (0);
@@ -122,17 +127,25 @@ static int	set_redirections(t_command_table *table)
 ** parameter #2:	int			number of ';'-terminated sentences
 */
 
-int		tk(char **lines, t_command_table *tab, int table_num)
+int			tokenize(char **lines, t_command_table *tab, int table_num)
 {
-	int					i;
+	int		i;
+	int		j;
 
 	i = -1;
 	while (++i < table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
-		if ((set_redirections(tab + i)))
+		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, table_num));
 		replace_env_var(tab + i);
+		j = -1;
+		while ((tab[i].simple_commands[++j]))
+		{
+			remove_quots(&tab[i].simple_commands[j]);
+			tab[i].simple_commands[j] =
+				remove_empty_str(tab[i].simple_commands[j]);
+		}
 	}
 printf("Ended the parsing\n");
 	full_free((void **)lines, ft_arrlen(lines));
