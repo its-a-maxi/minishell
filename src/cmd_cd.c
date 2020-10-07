@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/07 12:03:23 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/07 12:53:19 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		cmd_cd(char **arg)
 	int i;
 	char *path;
 
-	if (!arg[1] || arg[1] == '~')
+	if (!arg[1] || arg[1][0] == '~')
 	{
 		path = env_selector("HOME");
 		chdir(path);

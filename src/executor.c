@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/07 12:30:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/07 13:04:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ static void	choose_and_execute(char **arr)
 
 void		executor(t_command_table *table, int table_num)
 {
-	/*int		h = -1;
+	int		h = -1;
 	while (++h < table_num)
 	{
 printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_num);
 		int i = -1;
 		while (++i < table[h].simple_commands_num)
 		{
+choose_and_execute(table[h].simple_commands[i]);
 			int j = -1;
 			while (table[h].simple_commands[i][++j])
 			{
@@ -81,9 +82,9 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 			while ((table[h].dummy_files[i][++k]))
 				printf("dummy [%d] of simple_command %d: %s\n", k, i, table[h].dummy_files[i][k]);
 		}
-	}*/
+	}
 	//Aqui empieza el executor de verdad
-	int		i[2];
+/*	int		i[2];
 	int		fd_tmp[2];
 	int		fd_pipe[2];
 	int		fd_std[2];
@@ -126,7 +127,7 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 		close(fd_tmp[0]);
 		close(fd_tmp[1]);
 		waitpid(-1, NULL, 0);
-	}
+	}*/
 	//Liberar al final lo guardado.
 	free_cmd_table(table, table_num);
 }
