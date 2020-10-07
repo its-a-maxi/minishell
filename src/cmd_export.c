@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/05 11:57:16 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/07 12:08:35 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void     new_g_env(char *str)
 
     i = -1;
     j = -1;
-    temp = (char**)ft_calloc(envp_len(g_env) + 4, sizeof(char*));
+    temp = (char**)ft_calloc(envp_len(g_env) + 2, sizeof(char*));
     while (g_env[++i] && ft_strncmp("_=", g_env[i], 2) != 0)
 	    if(!(temp[i] = ft_strdup(g_env[i])))
 		    exit_minishell();
