@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:09:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/06 17:47:46 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/07 10:14:18 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,26 @@ static void	dummy_update(t_command_table *tab, int *i, char *str, int type)
 	temp[ft_arrlen(tab->dummy_files[i[0]]) + 1] = NULL;
 	j = -1;
 	while ((tab->dummy_files[i[0]][++j]))
-		temp[j] = tab->dummy_files[i[0]][j];
+		temp[j] = ft_strdup(tab->dummy_files[i[0]][j]);
 	if ((tab->output_files[i[0]][0]))
 	{
 		temp[j] = ft_strdup(tab->output_files[i[0]][0]);
 		free(tab->output_files[i[0]][0]);
+		tab->output_files[i[0]][0] = NULL;
 	}
 	if ((tab->append_files[i[0]][0]))
 	{
 		temp[j] = ft_strdup(tab->append_files[i[0]][0]);
 		free(tab->append_files[i[0]][0]);
+		tab->append_files[i[0]][0] = NULL;
 	}
 	if (type == 'O')
 		tab->output_files[i[0]][0] = ft_strdup(str);
 	if (type == 'A')
 		tab->append_files[i[0]][0] = ft_strdup(str);
-printf("freeing old dummies\n");
 	full_free((void **)tab->dummy_files[i[0]],
 		ft_arrlen(tab->dummy_files[i[0]]));
 	tab->dummy_files[i[0]] = temp;
-int k = -1; while ((tab->dummy_files[i[0]][++k])){printf("dummy[%d]: %s\n", k, tab->dummy_files[i[0]][k]);}
 }
 
 void		redir_files_updt(t_command_table *tab, int *i, char *str, int type)
@@ -56,6 +56,11 @@ void		redir_files_updt(t_command_table *tab, int *i, char *str, int type)
 		dummy_update(tab, i, str, type);
 	else if ((type == 'I') && !(tab->input_files[i[0]][0]))
 		tab->input_files[i[0]][0] = ft_strdup(str);
+	else if ((type == 'I') && ((tab->input_files[i[0]][0])))
+	{
+		free(tab->input_files[i[0]][0]);
+		tab->input_files[i[0]][0] = ft_strdup(str);
+	}
 	free(str);
 }
 
