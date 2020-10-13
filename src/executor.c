@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 11:51:47 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 12:21:46 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,17 +112,17 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 		i[1] = -1;
 		while (++(i[1]) < table[i[0]].simple_commands_num)
 		{
-			if (is_cmd_cd(table[i[0]].simple_commands[i[1]],
-				table[i[0]].simple_commands_num))
+			if ((is_cmd_cd(table[i[0]].simple_commands[i[1]],
+				table[i[0]].simple_commands_num)))
 				continue;
 			redirect_input(table + i[0], i, fd_tmp, fd_std);
 			redirect_output(table + i[0], i, fd_tmp, fd_std);	
 			create_dummy_files(table[i[0]].dummy_files[i[1]]);
 			if (!(fork_and_check_error()))
 				choose_and_execute(table[i[0]].simple_commands[i[1]]);
+			waitpid(-1, NULL, 0);
 		}
 		restore_stdio(fd_tmp);
-		waitpid(-1, NULL, 0);
 	}
 	free_cmd_table(table, table_num);
 }

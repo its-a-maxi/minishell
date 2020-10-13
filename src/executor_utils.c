@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 11:52:19 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 12:22:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	choose_and_execute(char **arr)
 {
 	if (!(ft_strcmp(arr[0], "echo")))
 		cmd_echo(arr);
-	else if (!(ft_strcmp(arr[0], "cd")))
-		cmd_cd(arr);
 	else if (!(ft_strcmp(arr[0], "pwd")))
 		cmd_pwd(arr);
 	else if (!(ft_strcmp(arr[0], "export")))
@@ -49,15 +47,20 @@ void	choose_and_execute(char **arr)
 	else if ((is_start_executable_path(arr[0])))	
 		execute_executable(arr);
 	else
-		write(2, "minishell: %s: command not found\n", 34);
+	{
+		write(2, "minishell: ", 11); 
+		write(2, arr[0], ft_strlen(arr[0]));
+		write(2, " command not found.\n", 20); 
+		exit(0);
+	}
 }
 
 int		is_cmd_cd(char **arr, int simple_commands_num)
 {
-	if (!(ft_strcmp(arr[0], "cd")) && !(ft_arrlen(arr) == 1)
-		&& (simple_commands_num != 1))
+	if (!(ft_strcmp(arr[0], "cd")) && !((ft_arrlen(arr) == 1)
+		&& (simple_commands_num != 1)))
 	{
-		choose_and_execute(arr);
+		cmd_cd(arr);
 		return (1);
 	}
 	else
