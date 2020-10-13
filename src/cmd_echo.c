@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/09 10:49:18 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:43:25 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	cmd_echo(char **arg)
 	{
 		if (!arg[2])
 			return ;
-		write(1, "%", 1);
 	}
-	write(1, "\n", 1);
+	else
+		write(1, "\n", 1);
+	exit(0);
 	return ;
 }

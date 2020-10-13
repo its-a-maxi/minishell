@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 10:39:56 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/09 10:50:49 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:46:10 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	cmd_env(char **arg)
 	i = -1;
 	if (arg[1])
 	{
-		write(1, "env: ", 5);
-		write(1, arg[1], ft_strlen(arg[1]));
-		write(1, ": No such file or directory\n", 28);
+		write(2, "env: ", 5);
+		write(2, arg[1], ft_strlen(arg[1]));
+		write(2, ": No such file or directory\n", 28);
 		return ;
 	}
 	while (g_env[++i])
@@ -29,5 +29,6 @@ void	cmd_env(char **arg)
 		write(1, g_env[i], ft_strlen(g_env[i]));
 		write(1, "\n", 1);
 	}
+	exit(0);
 	return ;
 }

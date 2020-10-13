@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 13:19:28 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/09 10:50:08 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:44:33 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	cmd_pwd(char **arg)
 	char	buff[4096 + 1];
 
 	buff[4096] = '\0';
-	if (!arg[1])
-	{
-		getcwd(buff, 4096);
-		write(1, buff, ft_strlen(buff));
-	}
-	else
-		write(1, "pwd: too many arguments", 23);
+	(void)arg;
+	getcwd(buff, 4096);
+	write(1, buff, ft_strlen(buff));
 	write(1, "\n", 1);
+	exit(0);
 	return ;
 }

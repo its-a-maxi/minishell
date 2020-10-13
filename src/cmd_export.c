@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/09 12:03:08 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:43:13 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void			cmd_export(char **arg)
 	{
 		while (g_env[i])
 		{
+			write(1, "declare -x ", 11);
 			write(1, g_env[i], ft_strlen(g_env[i]));
 			write(1, "\n", 1);
 			if (ft_strncmp("__CF", g_env[i++], 4) == 0)
@@ -102,5 +103,6 @@ void			cmd_export(char **arg)
 	}
 	while (arg[++i])
 		new_g_env(arg[i]);
+	exit(0);
 	return ;
 }

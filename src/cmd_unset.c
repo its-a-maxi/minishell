@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/09 11:36:01 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:43:30 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static int		ft_check(char *str)
 	len = ft_strlen(str);
 	if (ft_find_char(str, '=') != -1)
 	{
-		write(1, "unset: ", 7);
-		write(1, str, len);
-		write(1, ": invalid parameter name\n", 25);
+		write(2, "unset: ", 7);
+		write(2, str, len);
+		write(2, ": invalid parameter name\n", 25);
 		return (0);
 	}
 	i = -1;
@@ -82,9 +82,10 @@ void			cmd_unset(char **arg)
 
 	i = 0;
 	if (!arg[1])
-		write(1, "unset: not enough arguments\n", 28);
+		write(2, "unset: not enough arguments\n", 28);
 	while (arg[++i])
 		if (ft_check(arg[i]))
 			del_g_env(arg[i]);
+	exit(0);
 	return ;
 }
