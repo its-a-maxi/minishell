@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 12:42:36 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:46:22 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,14 @@ void			read_input(char **input);
 */
 int				tokenize(char **a, t_command_table *t, int n);
 /*
+** executor_redirections.c
+*/
+void			advance_ptr_eof(int fd);
+void			overwrite_ptr_begin(int fd);
+/*
 ** executor_utils.c
 */
+int				is_built_in(char **arr);
 int				is_start_executable_path(char *str);
 void			choose_and_execute(char **arr);
 int				is_cmd_cd(char **arr, int num);

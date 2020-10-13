@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 12:41:23 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:43:51 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,32 @@ int		is_start_executable_path(char *str)
 	return (0);
 }
 
+int		is_built_in(char **arr)
+{
+	if (!(ft_strcmp(arr[0], "echo")))
+		return (1);
+	else if (!(ft_strcmp(arr[0], "cd")))
+		return (1);
+	else if (!(ft_strcmp(arr[0], "pwd")))
+		return (1);
+	else if (!(ft_strcmp(arr[0], "export")))
+		return (1);
+	else if (!(ft_strcmp(arr[0], "unset")))
+		return (1);
+	else if (!(ft_strcmp(arr[0], "env")))
+		return (1);
+	else if (!(ft_strcmp(arr[0], "exit")))
+		return (1);
+	else
+		return (0);
+}
+
 void	choose_and_execute(char **arr)
 {
 	if (!(ft_strcmp(arr[0], "echo")))
 		cmd_echo(arr);
+	else if (!(ft_strcmp(arr[0], "cd")))
+		cmd_cd(arr);
 	else if (!(ft_strcmp(arr[0], "pwd")))
 		cmd_pwd(arr);
 	else if (!(ft_strcmp(arr[0], "export")))
@@ -44,15 +66,6 @@ void	choose_and_execute(char **arr)
 		cmd_env(arr);
 	else if (!(ft_strcmp(arr[0], "exit")))
 		cmd_exit();
-	else if ((is_start_executable_path(arr[0])))	
-		execute_executable(arr);
-	else
-	{
-		write(2, "minishell: ", 11); 
-		write(2, arr[0], ft_strlen(arr[0]));
-		write(2, " command not found.\n", 20); 
-		exit(0);
-	}
 }
 
 int		is_cmd_cd(char **arr, int simple_commands_num)

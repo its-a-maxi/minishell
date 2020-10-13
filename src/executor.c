@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 12:21:46 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:49:39 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void	redirect_output(t_command_table *t, int *i, int *fd_tmp, int *std)
 	else if ((t->append_files[i[1]][0]))
 	{
 		std[1] = open(t->append_files[i[1]][0], O_WRONLY);
-		//Avanzar fd pointer hasta el final del archivo
+		advance_ptr_eof(std[1]);
 	}
 	else if ((t->output_files[i[1]][0]))
 	{
 		std[1] = open(t->output_files[i[1]][0], O_WRONLY);
-		//Borrar contenido del archivo y poner el fd pointer al ppo.
+		overwrite_ptr_begin(std[1]);
 	}
 	if (i[1] != (t->simple_commands_num - 1))
 	{
@@ -112,15 +112,26 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 		i[1] = -1;
 		while (++(i[1]) < table[i[0]].simple_commands_num)
 		{
-			if ((is_cmd_cd(table[i[0]].simple_commands[i[1]],
-				table[i[0]].simple_commands_num)))
-				continue;
 			redirect_input(table + i[0], i, fd_tmp, fd_std);
 			redirect_output(table + i[0], i, fd_tmp, fd_std);	
 			create_dummy_files(table[i[0]].dummy_files[i[1]]);
-			if (!(fork_and_check_error()))
+			if ((is_built_in(table[i[0]].simple_commands[i[1]])))
 				choose_and_execute(table[i[0]].simple_commands[i[1]]);
-			waitpid(-1, NULL, 0);
+			else if ((is_start_executable_path
+						(table[i[0]].simple_commands[i[1]][0])))
+			{
+				if (!(fork_and_check_error()))
+					execute_executable(table[i[0]].simple_commands[i[1]]);
+				waitpid(-1, NULL, 0);
+			}
+			else
+			{
+				write(2, "minishell: ", 11); 
+				write(2, table[i[0]].simple_commands[i[1]],
+					ft_strlen(table[i[0]].simple_commands[i[1]][0]));
+				write(2, " command not found.\n", 20); 
+				exit(0);
+			}
 		}
 		restore_stdio(fd_tmp);
 	}
