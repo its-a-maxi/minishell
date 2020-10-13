@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/09 11:25:19 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 10:41:32 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,8 @@ void			cmd_export(char **arg);
 */
 int				ft_find_char(char *str, char c);
 void			cmd_unset(char **arg);
+/*
+** cmd_execute.c
+*/
+void			execute_executable(char **arr);
 #endif

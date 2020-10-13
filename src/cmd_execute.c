@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   cmd_execute.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 11:13:17 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 11:02:40 by aleon-ca         ###   ########.fr       */
+/*   Created: 2020/10/13 10:11:38 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/10/13 10:40:45 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		fork_error(void)
+void			execute_executable(char **arr)
 {
-	write(2, "Fork error.\n", 15);
-	exit_minishell();
+	execve(arr[0], arr + 1, g_env);
 }

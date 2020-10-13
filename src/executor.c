@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/07 13:04:14 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 11:07:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static void	choose_and_execute(char **arr)
 	else if (!(ft_strcmp(arr[0], "exit")))
 		exit_minishell();
 	else if ((is_start_executable_path(arr[0])))	
-		ft_printf("Executable path\n");
-		//execute_executable(arr);
+		execute_executable(arr);
 	else
 		ft_printf("minishell: %s: command not found\n", arr[0]);
 }
@@ -62,7 +61,6 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 		int i = -1;
 		while (++i < table[h].simple_commands_num)
 		{
-choose_and_execute(table[h].simple_commands[i]);
 			int j = -1;
 			while (table[h].simple_commands[i][++j])
 			{
@@ -84,7 +82,7 @@ choose_and_execute(table[h].simple_commands[i]);
 		}
 	}
 	//Aqui empieza el executor de verdad
-/*	int		i[2];
+	int		i[2];
 	int		fd_tmp[2];
 	int		fd_pipe[2];
 	int		fd_std[2];
@@ -96,26 +94,44 @@ choose_and_execute(table[h].simple_commands[i]);
 		fd_tmp[0] = dup(0);
 		fd_tmp[1] = dup(1);
 		i[1] = -1;
-		while (table->simple_commands[++(i[1])])
+		while (++(i[1]) < table->simple_commands_num)
 		{
-			if (!(table->input_files[i[1]]))
+			if (!(ft_strcmp(table->simple_commands[i[1]][0], "cd"))
+				&& !((ft_arrlen(table->simple_commands[i[1]]) == 1)
+					&& (table->simple_commands_num != 1)))
+			{
+				choose_and_execute(table->simple_commands[i[1]]);
+				continue;
+			}
+printf("Executor for:");
+int k = -1; while (table->simple_commands[i[1]][++k]){printf(" %s", table->simple_commands[i[1]][k]);} printf("\n");
+			if (!(table->input_files[i[1]][0]))
 				fd_std[0] = dup(fd_tmp[0]);
 			else
 				fd_std[0] = open(table->input_files[i[1]][0], O_RDONLY);
+char file_path[PATH_MAX]; fcntl(fd_std[0], F_GETPATH, file_path);
+printf("\tAssigned %s to input of %d\n", file_path, getpid());
 			dup2(fd_std[0], 0);
 			close(fd_std[0]);
-			if (!(table->output_files[i[1]]))
+			if (!(table->output_files[i[1]][0]))
+				fd_std[1] = dup(fd_tmp[1]);
+			else
+				fd_std[1] = open(table->output_files[i[1]][0], O_WRONLY);
+fcntl(fd_std[1], F_GETPATH, file_path);
+printf("\tAssigned %s to output of %d\n", file_path, getpid());
+			if (i[1] != (table->simple_commands_num - 1))
 			{
 				pipe(fd_pipe);
 				fd_std[1] = fd_pipe[1];
 				fd_std[0] = fd_pipe[0];	
 			}
-			else
-				fd_std[1] = open(table->output_files[i[1]][0], O_WRONLY);
 			dup2(fd_std[1], 1);
 			close(fd_std[1]);
 			if ((ret = fork()) < 0)
+			{
+				write(fd_tmp[1], "Fork error.\n", 15);
 				fork_error();
+			}
 			else if (ret == 0)
 			{
 				choose_and_execute(table->simple_commands[i[1]]);
@@ -127,7 +143,7 @@ choose_and_execute(table[h].simple_commands[i]);
 		close(fd_tmp[0]);
 		close(fd_tmp[1]);
 		waitpid(-1, NULL, 0);
-	}*/
+	}
 	//Liberar al final lo guardado.
 	free_cmd_table(table, table_num);
 }

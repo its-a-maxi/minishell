@@ -1,3 +1,8 @@
 - Falta meter out y append correcto
 - Falta ejecutables
 - Fixear redirecciones
+
+
+
+- Ignoran input: cd, echo, unset, pwd, export, env, exit.
+- Ignoran output: 
