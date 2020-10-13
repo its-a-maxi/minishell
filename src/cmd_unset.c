@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/13 11:43:30 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:36:45 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,5 @@ void			cmd_unset(char **arg)
 	while (arg[++i])
 		if (ft_check(arg[i]))
 			del_g_env(arg[i]);
-	exit(0);
 	return ;
 }

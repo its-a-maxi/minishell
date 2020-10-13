@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/13 11:43:13 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:36:49 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ void			cmd_export(char **arg)
 	}
 	while (arg[++i])
 		new_g_env(arg[i]);
-	exit(0);
 	return ;
 }
