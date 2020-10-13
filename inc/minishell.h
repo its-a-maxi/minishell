@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 11:50:38 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 12:42:36 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,4 +151,8 @@ void			cmd_unset(char **arg);
 ** cmd_execute.c
 */
 void			execute_executable(char **arr);
+/*
+** cmd_exit
+*/
+void			cmd_exit(void);
 #endif

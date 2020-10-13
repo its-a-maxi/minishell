@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 12:22:14 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 12:41:23 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	choose_and_execute(char **arr)
 	else if (!(ft_strcmp(arr[0], "env")))
 		cmd_env(arr);
 	else if (!(ft_strcmp(arr[0], "exit")))
-		exit_minishell();
+		cmd_exit();
 	else if ((is_start_executable_path(arr[0])))	
 		execute_executable(arr);
 	else
@@ -63,6 +63,8 @@ int		is_cmd_cd(char **arr, int simple_commands_num)
 		cmd_cd(arr);
 		return (1);
 	}
+	else if (!(ft_strcmp(arr[0], "cd")))
+		return (1);
 	else
 		return (0);
 }
