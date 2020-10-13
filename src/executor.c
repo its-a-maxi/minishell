@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 13:49:39 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 14:00:12 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void	redirect_output(t_command_table *t, int *i, int *fd_tmp, int *std)
 	else if ((t->append_files[i[1]][0]))
 	{
 		std[1] = open(t->append_files[i[1]][0], O_WRONLY);
-		advance_ptr_eof(std[1]);
+		//advance_ptr_eof(std[1]);
 	}
 	else if ((t->output_files[i[1]][0]))
 	{
 		std[1] = open(t->output_files[i[1]][0], O_WRONLY);
-		overwrite_ptr_begin(std[1]);
+		//overwrite_ptr_begin(std[1]);
 	}
 	if (i[1] != (t->simple_commands_num - 1))
 	{
