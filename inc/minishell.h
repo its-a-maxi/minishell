@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/14 12:30:20 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/14 13:52:31 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 
-#include <libc.h>
+# include <libc.h>
 
 # define EPARSE "minishell: parse error.\n"
 
