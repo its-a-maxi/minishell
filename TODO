@@ -1,6 +1,3 @@
-- Falta meter out y append de forma correcta.
-	redirecction parece rota para un simple echo hola> out
-
 - cmd's como en bash (su uso o no según pipes).
 	¿Solucionado?
 
