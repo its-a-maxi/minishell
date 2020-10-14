@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/06 17:30:50 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/14 12:07:29 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,13 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 
 char		**ft_split__quots(char *str, char c)
 {
-	char	*quotpos[2];
+	char	*quotpos[3];
 	char	**table;
 	int		count;
 
+	quotpos[2] = 0;
 	quotpos[0] = ft_strchr(str, '"');
+//	quotpos[1] = 
 	if ((quotpos[0]))
 		quotpos[1] = ft_strchr(quotpos[0] + 1, '"');
 	if (!(ft_strchr(str, c)) || !(quotpos[0]) || !(quotpos[1])

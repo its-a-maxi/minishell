@@ -4,6 +4,9 @@
 - Leaks para los parse errors.
 
 - Añadir quotes para ''' tambien;
+	El split_quots no funciona como deberia para: echo "hola" "k> ase"
+	echo 'hi' "hello"
+	echo 'hi" -> stdin empezando con hi" hasta '
 
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 
