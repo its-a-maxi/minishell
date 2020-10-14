@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 13:08:21 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/14 10:24:56 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/14 11:41:25 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,13 @@ void		set_redirection_arr(t_command_table *tab, int *i)
 	i[1] = -1;
 	while ((str = tab->simple_commands[i[0]][++(*(i + 1))]))
 	{
-printf("Checking %d...\n", i[1]);
+//printf("Checking %d...\n", i[1]);
 		if ((ft_strchr(str, '"')))
 			continue;
 		ptr[0] = ft_strchr(str, '<');
 		ptr[1] = ft_str1chr(str, '>');
 		ptr[2] = ft_str2chr(str, '>');
-printf("Symbols: %d %d %d\n", (ptr[0] > 0), (ptr[1] > 0), (ptr[2] > 0));
+//printf("Symbols: %d %d %d\n", (ptr[0] > 0), (ptr[1] > 0), (ptr[2] > 0));
 		if ((ptr[0]) || (ptr[1]) || (ptr[2]))
 		{
 			len = ft_strlen(str);
@@ -136,11 +136,11 @@ printf("Symbols: %d %d %d\n", (ptr[0] > 0), (ptr[1] > 0), (ptr[2] > 0));
 				lone_symbol_found(tab, i, ptr);
 			else
 				redirect_word_found(tab, i, ptr);
-	printf("command is now:\n");
+/*	printf("command is now:\n");
 int k = -1; while (tab->simple_commands[i[0]][++k])
 	printf("\t%s\n", tab->simple_commands[i[0]][k]);
 	printf("in: %s; out: %s; app: %s;\n", tab->input_files[i[0]][0]
-		, tab->output_files[i[0]][0], tab->append_files[i[0]][0]);
+		, tab->output_files[i[0]][0], tab->append_files[i[0]][0]);*/
 			if ((is_parser_error(tab, i[0])))
 				return ;
 			i[1] = -1;

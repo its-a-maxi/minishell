@@ -3,5 +3,7 @@
 
 - Leaks para los parse errors.
 
+- Añadir quotes para ''' tambien;
+
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 
