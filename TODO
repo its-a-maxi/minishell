@@ -1,11 +1,12 @@
-- Falta meter out y append de forma correcta.
-
 - cmd's como en bash (su uso o no según pipes).
 	¿Solucionado?
 
-- echo >out     >    > segfault en set_redirection_arr
-- echo >                alla        >        > segfault en set_redirection_arr
-- echo > >  > segfault en check_redirection_err
+- Leaks para los parse errors.
+
+- Añadir quotes para ''' tambien;
+	El split_quots no funciona como deberia para: echo "hola" "k> ase"
+	echo 'hi' "hello"
+	echo 'hi" -> stdin empezando con hi" hasta '
 
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 

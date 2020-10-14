@@ -6,7 +6,11 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/10/14 12:20:45 by mmonroy-         ###   ########.fr       */
+=======
+/*   Updated: 2020/10/14 11:58:57 by aleon-ca         ###   ########.fr       */
+>>>>>>> 46dcb71b14616caff59d9b106ceee6cb5181a040
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +67,9 @@ char			**g_env;
 /*
 ** parser_error.c
 */
-int				free_errpars(t_command_table *t, int n);
+int				free_errpars(t_command_table *t, int n, char **cmd_lines);
 int				check_redirection_error(t_command_table *tab, int *i);
+int				is_parser_error(t_command_table *tan, int i);
 /*
 ** parser_redirections_utils.c
 */
@@ -100,11 +105,6 @@ void			read_input(char **input);
 ** parser.c
 */
 int				tokenize(char **a, t_command_table *t, int n);
-/*
-** executor_redirections.c
-*/
-void			advance_ptr_eof(int fd);
-void			overwrite_ptr_begin(int fd);
 /*
 ** executor_utils.c
 */
