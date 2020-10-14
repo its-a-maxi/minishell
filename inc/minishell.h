@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/14 09:49:02 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/14 10:49:41 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,6 @@ void			read_input(char **input);
 ** parser.c
 */
 int				tokenize(char **a, t_command_table *t, int n);
-/*
-** executor_redirections.c
-*/
-void			advance_ptr_eof(int fd);
-void			overwrite_ptr_begin(int fd);
 /*
 ** executor_utils.c
 */

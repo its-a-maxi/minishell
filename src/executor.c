@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 19:48:05 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/14 10:51:46 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,11 @@ static void	redirect_output(t_command_table *t, int *i, int *fd, int *fd_pipe)
 		&& !(t->append_files[i[1]][0]))
 		fd[3] = dup(fd[1]);
 	else if ((t->append_files[i[1]][0]))
-	{
-		fd[3] = open(t->append_files[i[1]][0], O_WRONLY);
-		//advance_ptr_eof(std[1]);
-	}
+		fd[3] = open(t->append_files[i[1]][0], O_CREAT | O_WRONLY | O_APPEND,
+			S_IWUSR | S_IRUSR);
 	else if ((t->output_files[i[1]][0]))
-	{
-		fd[3] = open(t->output_files[i[1]][0], O_WRONLY);
-		//overwrite_ptr_begin(std[1]);
-	}
+		fd[3] = open(t->output_files[i[1]][0], O_CREAT | O_WRONLY | O_TRUNC,
+			S_IWUSR | S_IRUSR);
 	if (i[1] != (t->simple_commands_num - 1))
 	{
 		pipe(fd_pipe);
@@ -54,7 +50,7 @@ static void	create_dummy_files(char **arr)
 	i = -1;
 	while (arr[++i])
 	{
-		if (open(arr[i], O_CREAT) < 0)
+		if (open(arr[i], O_CREAT, S_IWUSR | S_IRUSR) < 0)
 			write(2, strerror(errno), ft_strlen(strerror(errno)));
 	}
 }
