@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/07 11:58:21 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 19:45:59 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ static int	find_redirections(t_command_table *table)
 		count[2] = 0;
 		count_redirections(table->simple_commands[i[0]], count);
 		init_redirection_arr(table, i, count);
+printf("Calling set_redirection...\n");
 		set_redirection_arr(table, i);
+printf("Calling check_redirection_error...\n");
 		if ((check_redirection_error(table, i)))
 			return (1);
 	}
@@ -143,8 +145,12 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 			remove_quots(&tab[i].simple_commands[j]);
 			tab[i].simple_commands[j] =
 				remove_empty_str(tab[i].simple_commands[j]);
+			if ((tab[i].simple_commands[j][0] == NULL)
+			&& (tab[i].simple_commands_num > 1))
+				return (free_errpars(tab, table_num));
 		}
 	}
+printf("Parse ended.\n");
 	full_free((void **)lines, ft_arrlen(lines));
 	return (0);
 }

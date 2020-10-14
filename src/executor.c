@@ -6,47 +6,45 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 14:00:12 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 19:48:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	redirect_input(t_command_table *t, int *i, int *fd_tmp, int *fd_std)
+static void	redirect_input(t_command_table *t, int *i, int *fd)
 {
 	if (!(t->input_files[i[1]][0]))
-		fd_std[0] = dup(fd_tmp[0]);
+		fd[2] = dup(fd[0]);
 	else
-		fd_std[0] = open(t->input_files[i[1]][0], O_RDONLY);
-	dup2(fd_std[0], 0);
-	close(fd_std[0]);
+		fd[2] = open(t->input_files[i[1]][0], O_RDONLY);
+	dup2(fd[2], 0);
+	close(fd[2]);
 }
 
-static void	redirect_output(t_command_table *t, int *i, int *fd_tmp, int *std)
+static void	redirect_output(t_command_table *t, int *i, int *fd, int *fd_pipe)
 {
-	int		fd_pipe[2];
-
 	if (!(t->output_files[i[1]][0])
 		&& !(t->append_files[i[1]][0]))
-		std[1] = dup(fd_tmp[1]);
+		fd[3] = dup(fd[1]);
 	else if ((t->append_files[i[1]][0]))
 	{
-		std[1] = open(t->append_files[i[1]][0], O_WRONLY);
+		fd[3] = open(t->append_files[i[1]][0], O_WRONLY);
 		//advance_ptr_eof(std[1]);
 	}
 	else if ((t->output_files[i[1]][0]))
 	{
-		std[1] = open(t->output_files[i[1]][0], O_WRONLY);
+		fd[3] = open(t->output_files[i[1]][0], O_WRONLY);
 		//overwrite_ptr_begin(std[1]);
 	}
 	if (i[1] != (t->simple_commands_num - 1))
 	{
 		pipe(fd_pipe);
-		std[1] = fd_pipe[1];
-		std[0] = fd_pipe[0];	
+		fd[3] = fd_pipe[1];
+		fd[2] = fd_pipe[0];	
 	}
-	dup2(std[1], 1);
-	close(std[1]);
+	dup2(fd[3], 1);
+	close(fd[3]);
 }
 
 static void	create_dummy_files(char **arr)
@@ -62,12 +60,13 @@ static void	create_dummy_files(char **arr)
 }
 
 
-static void	restore_stdio(int *fd_tmp)
+static void	restore_stdio(int *fd)
 {
-	dup2(fd_tmp[0], 0);
-	dup2(fd_tmp[1], 1);
-	close(fd_tmp[0]);
-	close(fd_tmp[1]);
+	//fd[0] es tmp[0]; fd[1] es tmp[1]; fd[2] es std[0]; fd[3] std[1]
+	dup2(fd[0], 0);
+	dup2(fd[1], 1);
+	close(fd[0]);
+	close(fd[1]);
 }
 
 void		executor(t_command_table *table, int table_num)
@@ -101,39 +100,28 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 	}
 	//Aqui empieza el executor de verdad
 	int		i[2];
-	int		fd_tmp[2];
-	int		fd_std[2];
+	int		fd_pipe[2];
+	int		fd[4];
 
 	i[0] = -1;
 	while (++(i[0]) < table_num)
 	{
-		fd_tmp[0] = dup(0);
-		fd_tmp[1] = dup(1);
+		fd[0] = dup(0);
+		fd[1] = dup(1);
 		i[1] = -1;
-		while (++(i[1]) < table[i[0]].simple_commands_num)
+		while ((table[i[0]].simple_commands[++(i[1])]))
 		{
-			redirect_input(table + i[0], i, fd_tmp, fd_std);
-			redirect_output(table + i[0], i, fd_tmp, fd_std);	
+			redirect_input(table + i[0], i, fd);
+			redirect_output(table + i[0], i, fd, fd_pipe);	
 			create_dummy_files(table[i[0]].dummy_files[i[1]]);
 			if ((is_built_in(table[i[0]].simple_commands[i[1]])))
-				choose_and_execute(table[i[0]].simple_commands[i[1]]);
-			else if ((is_start_executable_path
-						(table[i[0]].simple_commands[i[1]][0])))
-			{
-				if (!(fork_and_check_error()))
-					execute_executable(table[i[0]].simple_commands[i[1]]);
-				waitpid(-1, NULL, 0);
-			}
-			else
-			{
-				write(2, "minishell: ", 11); 
-				write(2, table[i[0]].simple_commands[i[1]],
-					ft_strlen(table[i[0]].simple_commands[i[1]][0]));
-				write(2, " command not found.\n", 20); 
-				exit(0);
-			}
+				choose__exec(table[i[0]].simple_commands[i[1]], table + i[0]);
+			else if ((is_start_exec_path(table[i[0]].simple_commands[i[1]][0])))
+				launch_exec(table[i[0]].simple_commands[i[1]]);
+			else if ((table[i[0]].simple_commands[i[1]][0] != NULL))
+				cmd_not_found(table[i[0]].simple_commands[i[1]][0]);
 		}
-		restore_stdio(fd_tmp);
+		restore_stdio(fd);
 	}
 	free_cmd_table(table, table_num);
 }

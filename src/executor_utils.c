@@ -6,14 +6,17 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 13:43:51 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 19:51:30 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_start_executable_path(char *str)
+int		is_start_exec_path(char *str)
 {
+//printf("entered is_start_exec...\n");
+	if (!str)
+		return (0);
 	if (ft_strlen(str) <= 2)
 		return (0);
 	if (str[0] == '.')
@@ -32,7 +35,9 @@ int		is_start_executable_path(char *str)
 
 int		is_built_in(char **arr)
 {
-	if (!(ft_strcmp(arr[0], "echo")))
+	if (!arr[0])
+		return (0);
+	else if (!(ft_strcmp(arr[0], "echo")))
 		return (1);
 	else if (!(ft_strcmp(arr[0], "cd")))
 		return (1);
@@ -50,17 +55,19 @@ int		is_built_in(char **arr)
 		return (0);
 }
 
-void	choose_and_execute(char **arr)
+void	choose__exec(char **arr, t_command_table *tab)
 {
+//printf("Entered choose__exec...\n");
 	if (!(ft_strcmp(arr[0], "echo")))
 		cmd_echo(arr);
-	else if (!(ft_strcmp(arr[0], "cd")))
+	else if (!(ft_strcmp(arr[0], "cd")) && !((tab->simple_commands_num != 1)
+		&& (ft_arrlen(arr) == 1)))
 		cmd_cd(arr);
 	else if (!(ft_strcmp(arr[0], "pwd")))
 		cmd_pwd(arr);
-	else if (!(ft_strcmp(arr[0], "export")))
+	else if (!(ft_strcmp(arr[0], "export")) && (tab->simple_commands_num == 1))
 		cmd_export(arr);
-	else if (!(ft_strcmp(arr[0], "unset")))
+	else if (!(ft_strcmp(arr[0], "unset")) && (tab->simple_commands_num == 1))
 		cmd_unset(arr);
 	else if (!(ft_strcmp(arr[0], "env")))
 		cmd_env(arr);
@@ -81,15 +88,23 @@ int		is_cmd_cd(char **arr, int simple_commands_num)
 	else
 		return (0);
 }
-int		fork_and_check_error(void)
+
+void	launch_exec(char **arr)
 {
 	int		ret;
 
 	if ((ret = fork()) < 0)
 		fork_error();
 	else if (ret == 0)
-		return (0);
-	else
-		return (1);
-	return (1);
+	{
+		if ((execve(arr[0], arr, g_env) < 0))
+		{
+			write(2, strerror(errno), ft_strlen(strerror(errno)));
+			write(2, "\n", 1);
+			exit(1);
+		}
+		else
+			exit(0);
+	}
+	waitpid(-1, NULL, 0);
 }

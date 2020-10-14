@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 13:46:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 19:31:22 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 #include <libc.h>
 
-# define EREDIR "minishell: parse error near a redirection.\n"
+# define EPARSE "minishell: parse error.\n"
 
 /*
 ** The t_command_table struct contains the information of a set of
@@ -109,10 +109,10 @@ void			overwrite_ptr_begin(int fd);
 ** executor_utils.c
 */
 int				is_built_in(char **arr);
-int				is_start_executable_path(char *str);
-void			choose_and_execute(char **arr);
+int				is_start_exec_path(char *str);
+void			choose__exec(char **arr, t_command_table *tab);
 int				is_cmd_cd(char **arr, int num);
-int				fork_and_check_error(void);
+void			launch_exec(char **arr);
 /*
 ** executor.c
 */
@@ -128,6 +128,7 @@ int				envp_len(char **envp);
 ** error_handler.c
 */
 void			fork_error(void);
+void			cmd_not_found(char *str);
 /*
 ** cmd_cd.c
 */
@@ -153,10 +154,6 @@ void			cmd_export(char **arg);
 */
 int				ft_find_char(char *str, char c);
 void			cmd_unset(char **arg);
-/*
-** cmd_execute.c
-*/
-void			execute_executable(char **arr);
 /*
 ** cmd_exit
 */

@@ -1,9 +1,8 @@
 - Falta meter out y append de forma correcta.
-- Reparar las redirecciones de los fds.
-- Comprobar exectables.
 
-- cmd's como en bash.
+- cmd's como en bash (su uso o no según pipes).
+	¿Solucionado?
+- echo > > > segfault en set_redirection_arr
 
-
-- Ignoran input: cd, echo, unset, pwd, export, env, exit.
-- Ignoran output: 
+Ignoran input: cd, echo, unset, pwd, export, env, exit.
+Ignoran output: 
