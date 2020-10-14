@@ -1,11 +1,10 @@
 - Falta meter out y append de forma correcta.
+	redirecction parece rota para un simple echo hola> out
 
 - cmd's como en bash (su uso o no según pipes).
 	¿Solucionado?
 
-- echo >out     >    > segfault en set_redirection_arr
-- echo >                alla        >        > segfault en set_redirection_arr
-- echo > >  > segfault en check_redirection_err
+- Leaks para los parse errors.
 
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 

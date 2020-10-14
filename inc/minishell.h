@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 19:31:22 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/14 09:49:02 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ char			**g_env;
 /*
 ** parser_error.c
 */
-int				free_errpars(t_command_table *t, int n);
+int				free_errpars(t_command_table *t, int n, char **cmd_lines);
 int				check_redirection_error(t_command_table *tab, int *i);
+int				is_parser_error(t_command_table *tan, int i);
 /*
 ** parser_redirections_utils.c
 */
