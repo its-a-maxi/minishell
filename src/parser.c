@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 19:45:59 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/13 20:07:39 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
 		if ((find_redirections(tab + i)))
-			return (free_errpars(tab, table_num));
+			return (free_errpars(tab, i));
 		replace_env_var(tab + i);
 		j = -1;
 		while ((tab[i].simple_commands[++j]))
@@ -147,7 +147,7 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 				remove_empty_str(tab[i].simple_commands[j]);
 			if ((tab[i].simple_commands[j][0] == NULL)
 			&& (tab[i].simple_commands_num > 1))
-				return (free_errpars(tab, table_num));
+				return (free_errpars(tab, i));
 		}
 	}
 printf("Parse ended.\n");

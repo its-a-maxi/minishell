@@ -2,7 +2,10 @@
 
 - cmd's como en bash (su uso o no según pipes).
 	¿Solucionado?
-- echo > > > segfault en set_redirection_arr
+
+- echo >out     >    > segfault en set_redirection_arr
+- echo >                alla        >        > segfault en set_redirection_arr
+- echo > >  > segfault en check_redirection_err
 
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 

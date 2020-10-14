@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:09:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/07 10:14:18 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/13 20:03:47 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	dummy_update(t_command_table *tab, int *i, char *str, int type)
 
 void		redir_files_updt(t_command_table *tab, int *i, char *str, int type)
 {
+	if (!str)
+		return ;
 	if ((type == 'A') && (!(tab->output_files[i[0]][0])
 		&& !(tab->append_files[i[0]][0])))
 		tab->append_files[i[0]][0] = ft_strdup(str);
