@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/13 13:36:45 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/14 12:18:51 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int				ft_find_char(char *str, char c)
 	return (-1);
 }
 
-static void		free_double(char **str)
+void			free_double(char **str)
 {
 	int i;
 
@@ -64,9 +64,9 @@ static int		ft_check(char *str)
 	len = ft_strlen(str);
 	if (ft_find_char(str, '=') != -1)
 	{
-		write(2, "unset: ", 7);
+		write(2, "minishell: `", 12);
 		write(2, str, len);
-		write(2, ": invalid parameter name\n", 25);
+		write(2, "': invalid parameter name\n", 26);
 		return (0);
 	}
 	i = -1;
@@ -81,8 +81,6 @@ void			cmd_unset(char **arg)
 	int i;
 
 	i = 0;
-	if (!arg[1])
-		write(2, "unset: not enough arguments\n", 28);
 	while (arg[++i])
 		if (ft_check(arg[i]))
 			del_g_env(arg[i]);
