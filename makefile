@@ -6,7 +6,7 @@
 #    By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 12:56:13 by alejandro         #+#    #+#              #
-#    Updated: 2020/10/14 12:11:10 by aleon-ca         ###   ########.fr        #
+#    Updated: 2020/10/14 12:34:26 by mmonroy-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ RM = rm -f
 $(NAME):
 	make -C $(LIB_PATH)
 	$(GCC) $(LIB_FLAGS) $(SRCS) -o $(NAME)
-	bash
 
 all:		$(NAME)
 
