@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 15:17:35 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/14 09:30:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/14 11:11:45 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ char		*ft_str1chr(char *str, char c)
 	i = -1;
 	while (str[++i])
 	{
-		if (!(str[i + 1]) && (str[i] == c))
+		if (!(str[i + 1]) && (str[i] == c) && (i != 0) && (str[i - 1] != c))
 			return (str + i);
-		else if (!(str[i + 1]) && (str[i] != c))
+		else if (!(str[i + 1]) && (i != 0) && ((str[i] != c)
+			|| (str[i - 1] == c)))
 			return (0);
 		else if ((i == 0) && (str[i + 1] != c) && (str[i] == c))
 			return (str + i);

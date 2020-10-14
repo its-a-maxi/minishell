@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/14 10:51:46 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/14 11:04:50 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	restore_stdio(int *fd)
 }
 
 void		executor(t_command_table *table, int table_num)
-{
+{/*
 	int		h = -1;
 	while (++h < table_num)
 	{
@@ -93,7 +93,7 @@ printf("table[%d] with simple_commands_num: %d\n", h, table[h].simple_commands_n
 			while ((table[h].dummy_files[i][++k]))
 				printf("dummy [%d] of simple_command %d: %s\n", k, i, table[h].dummy_files[i][k]);
 		}
-	}
+	}*/
 	//Aqui empieza el executor de verdad
 	int		i[2];
 	int		fd_pipe[2];
