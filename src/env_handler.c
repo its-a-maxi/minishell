@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/14 13:49:22 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/15 11:17:27 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int				envp_len(char **envp)
 {
 	int len;
 
-	len = 0;
-	while (envp[len])
-		len++;
+	len = -1;
+	while (envp[++len])
+		;
 	return (len);
 }
 
@@ -40,20 +40,19 @@ void			save_env(int argc, char **argv, char **envp)
 	int count;
 
 	i = -1;
-	j = 0;
+	j = -1;
 	count = envp_len(envp) + 1;
-	if (ft_strncmp("_=", envp[count - 2], 2) != 0)
-	{
-		count++;
-		j = 1;
-	}
 	(void)argc;
 	(void)argv;
 	g_env = (char**)ft_calloc(count, sizeof(char*));
-	while (envp[++i])
-		if (!(g_env[i] = ft_strdup(envp[i])))
+	while (envp[++j])
+	{
+		if ((ft_strncmp("_=", envp[j], 2) == 0) && envp[j + 1])
+			j++;
+		if (!(g_env[++i] = ft_strdup(envp[j])))
 			exit_minishell();
-	if (j == 1 && !(g_env[i] = ft_strdup("_=./minishell")))
+	}
+	if (j - 1 > i && !(g_env[i + 1] = ft_strdup("_=./minishell")))
 		exit_minishell();
 }
 
