@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 11:33:39 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:06:07 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include <stdlib.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
-
-# include <libc.h>
 
 # define EPARSE "minishell: parse error.\n"
 
@@ -64,7 +62,6 @@ char			**g_env;
 ** parser_error.c
 */
 int				free_errpars(t_command_table *t, int n, char **cmd_lines);
-int				check_redirection_error(t_command_table *tab, int *i);
 int				is_parser_error(t_command_table *tan, int i);
 /*
 ** parser_redirections_utils.c
@@ -77,12 +74,15 @@ char			*dup_till_symbol(char *str);
 /*
 ** parser_redirections.c
 */
-void			set_redirection_arr(t_command_table *tab, int *i);
+int				set_redirection_arr(t_command_table *tab, int *i);
 /*
 ** parser_utils4.c
 */
 char			*smallest_non_zero(char *s1, char *s2);
 void			ft_add_str(char ***arrdir, char *str);
+void			remove_quots(char **strdir);
+char			**remove_empty_str(char **arr);
+void			remove_dummy_quots(char **table);
 /*
 ** parser_utils3.c
 */
@@ -92,8 +92,6 @@ void			initr(t_command_table *t, int i, int *n);
 /*
 ** parser_utils2.c
 */
-void			remove_quots(char **strdir);
-char			**remove_empty_str(char **arr);
 char			**ft_split__quots(char *str, char c);
 /*
 ** parser_utils.c

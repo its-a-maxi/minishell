@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 10:14:03 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:36:00 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,25 @@ static int	count_not_quoted_char(char **quotpos, char *str, char c)
 	int		count;
 
 	count = 0;
-	i = -1;
-	while (quotpos[++i])
+	i = 0;
+	while (quotpos[i])
 	{
 		temp = *quotpos[i];
 		*quotpos[i] = '\0';
 		count += ft_strnchr(str, c);
-		if ((quotpos[i + 1]))
-			str = quotpos[i + 1] + 1;
 		*quotpos[i] = temp;
+		if ((quotpos[i + 1]))
+		{
+			str = quotpos[i + 1] + 1;
+			i += 2;
+		}
+		else
+		{
+			str = quotpos[i] + 1;
+			break;
+		}
 	}
+	count += ft_strnchr(str, c);
 	return (count);
 }
 
@@ -89,7 +98,6 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 		else
 		{
 			*quotpos[j + 1] = '\0';
-			//quotpos[j] o str o k
 			tab[++i] = ft_strdup(smallest_non_zero(str, quotpos[j]));
 			str = quotpos[j + 1] + 1;
 			tab[i] = ft_add_char(tab[i], *quotpos[j]);
@@ -121,9 +129,8 @@ char		**ft_split__quots(char *str, char c)
 	count = count_not_quoted_char(quotpos, str, c);
 	table = malloc(sizeof(char *) * (count + 2));
 	table[count + 1] = NULL;
-printf("Entering loop_table...\n");
 	loop_table(table, str, c, quotpos);
-printf("Exited loop_table.\n");
+	remove_dummy_quots(table);
 	free(quotpos);
 	return (table);
 }
