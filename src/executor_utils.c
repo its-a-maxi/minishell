@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/13 19:51:30 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/19 12:44:01 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	launch_exec(char **arr)
 	{
 		if ((execve(arr[0], arr, g_env) < 0))
 		{
+			write(2, "\U0001F633 ", 5);
 			write(2, strerror(errno), ft_strlen(strerror(errno)));
 			write(2, "\n", 1);
 			exit(1);

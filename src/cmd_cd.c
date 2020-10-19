@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 12:37:23 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:07:39 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	cd_path_error(char **arr)
 {
-	write(2, "minishell: cd: ", 15);
+	write(2, "\U0001F633 minishell: cd: ", 20);
 	write(2, *arr, ft_strlen(*arr));
 	write(2, ": ", 2);
 	write(2, strerror(errno), ft_strlen(strerror(errno)));

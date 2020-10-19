@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 11:49:30 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:43:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static void	create_dummy_files(char **arr)
 	while (arr[++i])
 	{
 		if (open(arr[i], O_CREAT, S_IWUSR | S_IRUSR) < 0)
+		{
+			write(2, "\U0001F633 ", 5);
 			write(2, strerror(errno), ft_strlen(strerror(errno)));
+		}
 	}
 }
 

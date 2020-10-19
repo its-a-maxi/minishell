@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 12:58:02 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:06:13 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int		ft_check(char *str)
 	len = ft_strlen(str);
 	if (ft_strchr(str, '\n') || ft_find_char(str, '=') != -1)
 	{
-		write(2, "minishell: `", 12);
+		write(2, "\U0001F633 minishell: `", 17);
 		write(2, str, len);
 		write(2, "': not a valid identifier\n", 26);
 		errno = 1;

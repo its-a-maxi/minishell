@@ -2,5 +2,7 @@
 palabras quoted:
 	echo >>B">>B2 < in" hola -> escribe "hola" en el archivo "B>>B2 < in"
 
+- Actualizar separadores en ';' y '|' para tener en cuenta las quotes.
+
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 

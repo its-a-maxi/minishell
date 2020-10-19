@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 12:57:36 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:04:53 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void			cmd_export(char **arg)
 			return ;
 		if (arg[i][0] == '=' || ft_strchr(arg[i], '\n'))
 		{
-			write(2, "minishell: export: `", 20);
+			write(2, "\U0001F633 minishell: export: `", 25);
 			write(2, arg[i], ft_strlen(arg[i]));
 			write(2, "': not a valid identifier\n", 26);
 			errno = 1;
