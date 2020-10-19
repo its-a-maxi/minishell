@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 12:52:32 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:02:55 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int			main(int argc, char **argv, char **envp)
 		signal(SIGQUIT, signal_handler);
 		read_input(&input);
 		commands = ft_split__quots(input, ';');
-int k = -1; while (commands[++k])
-	ft_printf("command tables: %s\n", commands[k]);
+/*int k = -1; while (commands[++k])
+	ft_printf("command tables: %s\n", commands[k]);*/
 		if (!(command_table = malloc(sizeof(t_command_table) *
 			ft_arrlen(commands))))
 			return (EXIT_FAILURE);
