@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 10:39:56 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/13 13:35:59 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:40:58 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cmd_env(char **arg)
 	i = -1;
 	if (arg[1])
 	{
-		write(2, "env: ", 5);
+		write(2, "\U0001F633 env: ", 10);
 		write(2, arg[1], ft_strlen(arg[1]));
 		write(2, ": No such file or directory\n", 28);
 		return ;

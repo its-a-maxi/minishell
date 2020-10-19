@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:39:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 12:13:05 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:45:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int			read_input_subshell(char **input, char c, char *ptr)
 	while ((bytes_read = read(0, buff, 1)) && buff[0] != c)
 		*input = ft_add_char(*input, buff[0]);
 	if (!bytes_read)
-		write(2, "minishell: unexpected EOF while looking for matching quote\n",
-			60);
+		write(2, ESUBEOF, ft_strlen(ESUBEOF));
 	return (bytes_read);
 }
 

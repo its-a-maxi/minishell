@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 12:06:07 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:47:45 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 
-# define EPARSE "minishell: parse error.\n"
-
+# define EPARSE "\U0001F633 minishell: parse error.\n"
+# define ESUBEOF "\U0001F633 minishell: EOF while looking for matching quote\n"
+ 
 /*
 ** The t_command_table struct contains the information of a set of
 ** input commands, i.e, some input line of the form:
