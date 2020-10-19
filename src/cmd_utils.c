@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:39:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 11:58:20 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:13:05 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			quotes_handler(char **arg, int i)
 	return (1);
 }
 
-void			export_no_arg(char **temp)
+void		export_no_arg(char **temp)
 {
 	int i;
 

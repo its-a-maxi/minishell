@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 11:58:17 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:12:41 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int		ft_check(char *str)
 	{
 		write(2, "minishell: `", 12);
 		write(2, str, len);
-		write(2, "': invalid parameter name\n", 26);
+		write(2, "': not a valid identifier\n", 26);
 		return (0);
 	}
 	i = -1;
