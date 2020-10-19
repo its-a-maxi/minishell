@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 17:32:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/19 09:51:52 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:28:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ void		ft_add_str(char ***arrdir, char *str)
 	*arrdir = temp;
 }
 
-/*
-** Removes the '"' or '\'' from possible remaining quot-encapsulated sentences.
-**
-** returns:		the array of strings resulted from the split call, minus any
-**				remaining quotation character couple.
-**
-** parameter #1:	the address of an array of strings, which is modified.
-*/
-
-
 char		*smallest_non_zero(char *ptr1, char *ptr2)
 {
 	if (!ptr1 && !ptr2)
@@ -50,6 +40,15 @@ char		*smallest_non_zero(char *ptr1, char *ptr2)
 	else
 		return ((ptr1 < ptr2) ? ptr1 : ptr2);
 }
+
+/*
+** Removes the '"' or '\'' from possible remaining quot-encapsulated sentences.
+**
+** returns:		the array of strings resulted from the split call, minus any
+**				remaining quotation character couple.
+**
+** parameter #1:	the address of an array of strings, which is modified.
+*/
 
 void		remove_quots(char **strdir)
 {
@@ -69,6 +68,30 @@ void		remove_quots(char **strdir)
 			temp = ft_strjoin(*strdir, quotpos[0] + 1);
 			free(*strdir);
 			*strdir = temp;
+		}
+	}
+}
+
+void		remove_dummy_quots(char **table)
+{
+	int		i;
+	char	*quotpos[2];
+	char	*temp;
+
+	i = -1;
+printf("Entered remove_dummy_quotes... \n");
+	while (table[++i])
+	{
+		if ((quotpos[0] = smallest_non_zero(ft_strchr(table[i], '"'),
+			ft_strchr(table[i], '\'')))
+			&& (quotpos[1] = ft_strchr(quotpos[0] + 1, *quotpos[0]))
+			&& ((quotpos[1] - quotpos[0]) == 1))
+		{
+			*quotpos[0] = '\0';
+			*quotpos[1] = '\0';
+			temp = ft_strdup(quotpos[1] + 1);
+			free(table[i]);
+			table[i] = temp;
 		}
 	}
 }

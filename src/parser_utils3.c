@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:03:05 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/18 17:25:25 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/19 11:46:56 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	replace_var_in_str(char **strdir, char *ptr)
 		free(*strdir);
 		*strdir = str;
 	}
+	else if (!(ft_strcmp(str, "")))
+		return ;
 	else
 	{
 		ptr[-1] = '\0';
