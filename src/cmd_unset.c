@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 12:41:38 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:06:13 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int		ft_check(char *str)
 		write(2, "\U0001F633 minishell: `", 17);
 		write(2, str, len);
 		write(2, "': not a valid identifier\n", 26);
+		errno = 1;
 		return (0);
 	}
 	i = -1;
@@ -81,6 +82,7 @@ void			cmd_unset(char **arg)
 	int i;
 
 	i = 0;
+	errno = 0;
 	while (arg[++i])
 	{
 		if (!quotes_handler(arg, i))
