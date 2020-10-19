@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 17:32:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/18 18:03:25 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/19 09:51:52 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_add_str(char ***arrdir, char *str)
 	i = -1;
 	while (*(*arrdir + ++i))
 		temp[i] = *(*arrdir + i);
-	full_free((void **)*arrdir, arrlen);
+	free(*arrdir);
 	*arrdir = temp;
 }
 
@@ -39,7 +39,7 @@ void		ft_add_str(char ***arrdir, char *str)
 */
 
 
-static char	*smallest_non_zero(char *ptr1, char *ptr2)
+char		*smallest_non_zero(char *ptr1, char *ptr2)
 {
 	if (!ptr1 && !ptr2)
 		return (NULL);
@@ -51,24 +51,24 @@ static char	*smallest_non_zero(char *ptr1, char *ptr2)
 		return ((ptr1 < ptr2) ? ptr1 : ptr2);
 }
 
-void		remove_quots(char ***arr)
+void		remove_quots(char **strdir)
 {
 	int		i;
 	char	*quotpos[2];
 	char	*temp;
 
 	i = -1;
-	while (*(*arr + ++i))
+	while (*(*strdir + ++i))
 	{
-		if ((quotpos[0] = smallest_non_zero(ft_strchr(*(*arr + i), '"'),
-			ft_strchr(*(*arr + i), '\'')))
+		if ((quotpos[0] = smallest_non_zero(ft_strchr(*strdir, '"'),
+			ft_strchr(*strdir, '\'')))
 			&& (quotpos[1] = ft_strchr(quotpos[0] + 1, *quotpos[0])))
 		{
 			*quotpos[0] = '\0';
 			*quotpos[1] = '\0';
-			temp = ft_strjoin(*(*arr + i), quotpos[0] + 1);
-			free(*(*arr + i));
-			*(*arr + i) = temp;
+			temp = ft_strjoin(*strdir, quotpos[0] + 1);
+			free(*strdir);
+			*strdir = temp;
 		}
 	}
 }
@@ -81,7 +81,6 @@ void		remove_quots(char ***arr)
 **
 ** parameter #1:	an array of strings
 */
-
 
 char		**remove_empty_str(char **arr)
 {

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/17 11:41:54 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/19 10:06:33 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	find_redirections(t_command_table *table)
 		count[2] = 0;
 		count_redirections(table->simple_commands[i[0]], count);
 		init_redirection_arr(table, i, count);
-//printf("Calling set_redirection...\n");
+printf("Calling set_redirection...\n");
 		set_redirection_arr(table, i);
 //printf("Calling check_redirection_error...\n");
 		if ((check_redirection_error(table, i)))
@@ -136,26 +136,23 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 	while (++i < table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
+int k = -1; while (tab[i].simple_commands[++k])
+{
+	int l = -1; while (tab[i].simple_commands[k][++l])
+		printf("\t cmd [%d] arg [%d]: %s\n", k, l, tab[i].simple_commands[k][l]);
+}
 		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, i, lines));
 		replace_env_var(tab + i);
-		printf("===Before removing quotes===\n");
-		printf("table [%d] with simple_commands_num %d\n", i, tab[i].simple_commands_num);
 		j = -1;
 		while ((tab[i].simple_commands[++j]))
 		{
-int k = -1; while (tab[i].simple_commands[j][++k])
-printf("\t command [%d] arg [%d]: %s\n", j, k, tab[i].simple_commands[j][k]);
-			remove_quots(&tab[i].simple_commands[j]);
-			tab[i].simple_commands[j] =
-				remove_empty_str(tab[i].simple_commands[j]);
 			if ((tab[i].simple_commands[j][0] == NULL)
 			&& (tab[i].simple_commands_num > 1))
 				return (free_errpars(tab, i, lines));
 		}
 	}
 printf("Parse ended.\n");
-printf("===After removing quotes===\n");
 	full_free((void **)lines, ft_arrlen(lines));
 	return (0);
 }

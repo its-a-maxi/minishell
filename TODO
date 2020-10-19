@@ -14,8 +14,8 @@
 		(split)		-> {echo, >here, blabla, '"y >here2'} 
 		(redirect)	-> {echo, blabla, '"y >here2'}
 	>A echo >>B>out2">> B2 < in "blabla "y >here'2'
-		(split)		-> {>A, echo, >>B>out2, ">> B2 < in ", blabla, "y >here'2'}
-		(redirect)	-> {echo, ">> B2 < in ", blabla, "y >here'2'}
+		(split)		-> {>A, echo, >>B>out2">> B2 < in ", blabla, "y >here'2'}
+		(redirect)	-> {echo, blabla, "y >here'2'}
 
 	Si hay pareja de quotes, se trata todo entre ellas, ellas inclusive como un
 	único char.
@@ -23,6 +23,13 @@
 
 	Las quotes no se quitan, simplemente no se imprimen si hay que imprimirlas.
 		Entonces remove_quotes parece inútil ya. ¿Sirve en otro caso?
+			Sí, hay que quitar las quotes si forman parte de una de redirección.
+- Añadir al parser_redirections.c el tratamiento de redirecciones con 
+palabras quoted:
+	echo >>B">>B2 < in" hola -> escribe "hola" en el archivo "B>>B2 < in"
+
+- Poner tambien en export y unset, (ya está en cd y echo) el trato de frases
+quoted. SUDANDO por Normie?
 
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 

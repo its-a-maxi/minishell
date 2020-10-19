@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/14 13:52:31 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 09:43:05 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ char			*dup_till_symbol(char *str);
 */
 void			set_redirection_arr(t_command_table *tab, int *i);
 /*
+** parser_utils4.c
+*/
+char			*smallest_non_zero(char *s1, char *s2);
+void			ft_add_str(char ***arrdir, char *str);
+/*
 ** parser_utils3.c
 */
 void			replace_env_var(t_command_table *table);
@@ -87,7 +92,7 @@ void			initr(t_command_table *t, int i, int *n);
 /*
 ** parser_utils2.c
 */
-void			remove_quots(char ***str);
+void			remove_quots(char **strdir);
 char			**remove_empty_str(char **arr);
 char			**ft_split__quots(char *str, char c);
 /*
@@ -152,7 +157,11 @@ int				ft_find_char(char *str, char c);
 void			free_double(char **str);
 void			cmd_unset(char **arg);
 /*
-** cmd_exit
+** cmd_exit.c
 */
 void			cmd_exit(void);
+/*
+** cmd_utils.c
+*/
+int				read_input_subshell(char **input, char c, char *ptr);
 #endif
