@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 11:59:26 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:06:07 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include <stdlib.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
-
-# include <libc.h>
 
 # define EPARSE "minishell: parse error.\n"
 
@@ -164,4 +162,6 @@ void			cmd_exit(void);
 ** cmd_utils.c
 */
 int				read_input_subshell(char **input, char c, char *ptr);
+int	    		quotes_handler(char **arg, int i);
+void			export_no_arg(char **temp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 09:47:11 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:34:10 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,7 @@ int			cmd_cd(char **arg)
 {
 	int		i;
 	char	*path;
-	char	*ptr;
-	int		ret;
 
-	ret = 1;
-	if ((ptr = smallest_non_zero(ft_strchr(arg[1], '"'),
-		ft_strchr(arg[1], '\''))) && !(ft_strchr(ptr + 1, *ptr)))
-		ret = read_input_subshell(arg + 1, *ptr, ptr);
-	else
-		remove_quots(arg + 1);
-	if (!ret)
-		return (0);
 	if (!arg[1] || arg[1][0] == '~')
 	{
 		path = env_selector("HOME");
@@ -44,6 +34,8 @@ int			cmd_cd(char **arg)
 		free(path);
 		return (0);
 	}
+	if (!quotes_handler(arg, 1))
+		return (0);
 	i = chdir(arg[1]);
 	if (i != 0)
 		return (cd_path_error(arg + 1));
