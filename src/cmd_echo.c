@@ -6,19 +6,20 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/14 11:42:57 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/17 12:44:31 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	read_input_subshell(char **input, char c)
+static int	read_input_subshell(char **input, char c, char *ptr)
 {
 	char		buff[1];
 	int			bytes_read;
 	char		*temp;
 
-	temp = ft_strdup(ft_strchr(*input, c) + 1);
+	*ptr = '\0';
+	temp = ft_strjoin(*input, ptr + 1);
 	free(*input);
 	*input = temp;
 	while ((bytes_read = read(0, buff, 1)) && buff[0] != c)
@@ -42,7 +43,7 @@ void		cmd_echo(char **arg)
 	{
 		ret = 1;
 		if ((ptr = ft_strchr(arg[i], '"')))
-			ret = read_input_subshell(arg + i, *ptr);
+			ret = read_input_subshell(arg + i, ptr, *ptr);
 		else if ((ptr = ft_strchr(arg[i], '\'')))
 			ret = read_input_subshell(arg + i, *ptr);
 		if (!ret)

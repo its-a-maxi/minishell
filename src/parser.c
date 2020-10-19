@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/14 12:08:08 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/17 11:41:54 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,13 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, i, lines));
 		replace_env_var(tab + i);
+		printf("===Before removing quotes===\n");
+		printf("table [%d] with simple_commands_num %d\n", i, tab[i].simple_commands_num);
 		j = -1;
 		while ((tab[i].simple_commands[++j]))
 		{
+int k = -1; while (tab[i].simple_commands[j][++k])
+printf("\t command [%d] arg [%d]: %s\n", j, k, tab[i].simple_commands[j][k]);
 			remove_quots(&tab[i].simple_commands[j]);
 			tab[i].simple_commands[j] =
 				remove_empty_str(tab[i].simple_commands[j]);
@@ -150,7 +154,8 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 				return (free_errpars(tab, i, lines));
 		}
 	}
-//printf("Parse ended.\n");
+printf("Parse ended.\n");
+printf("===After removing quotes===\n");
 	full_free((void **)lines, ft_arrlen(lines));
 	return (0);
 }

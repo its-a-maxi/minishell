@@ -7,9 +7,22 @@
 - Leaks para los parse errors.
 
 - Añadir quotes para ''' tambien;
-	El split_quots no funciona como deberia para: echo "hola" "k> ase"
 	echo 'hi' "hello"
-	echo 'hi" -> stdin empezando con hi" hasta '
+		(split)		-> {echo, 'hi', "hello"}
+		(redirect)	-> {echo, 'hi', "hello"}
+	echo >here blabla '"y >here2'
+		(split)		-> {echo, >here, blabla, '"y >here2'} 
+		(redirect)	-> {echo, blabla, '"y >here2'}
+	>A echo >>B>out2">> B2 < in "blabla "y >here'2'
+		(split)		-> {>A, echo, >>B>out2, ">> B2 < in ", blabla, "y >here'2'}
+		(redirect)	-> {echo, ">> B2 < in ", blabla, "y >here'2'}
+
+	Si hay pareja de quotes, se trata todo entre ellas, ellas inclusive como un
+	único char.
+	Si hay una quote suelta, se trata todo lo posterior como un único char.
+
+	Las quotes no se quitan, simplemente no se imprimen si hay que imprimirlas.
+		Entonces remove_quotes parece inútil ya. ¿Sirve en otro caso?
 
 Ignoran input: cd, echo, unset, pwd, export, env, exit.
 Ignoran output: 

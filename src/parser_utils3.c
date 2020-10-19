@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:03:05 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/05 12:56:10 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/18 17:25:25 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,27 @@ void		arr_swap(char ***new, char ***old)
 {
 	full_free((void **)*old, ft_arrlen(*old));
 	*old = *new;
+}
+
+void		resize_arr_skip_pos(char ***arr, int pos)
+{
+	int		i;
+	int		j;
+	int		arr_size;
+	char	**temp;
+
+	arr_size = ft_arrlen(*arr);
+	temp = malloc(sizeof(char *) * (arr_size));
+	temp[arr_size - 1] = NULL;
+	i = -1;
+	j = -1;
+	while (*((*arr) + ++i))
+	{
+		if (i == pos)
+			continue;
+		else
+			temp[++j] = ft_strdup(*((*arr) + i));
+	}
+	full_free((void **)*arr, arr_size);
+	*arr = temp;
 }
