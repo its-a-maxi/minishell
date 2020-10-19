@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 11:33:49 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:57:36 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,12 @@ static void		new_g_env(char *str)
 void			cmd_export(char **arg)
 {
 	int		i;
-	char	**temp;
 
 	i = 0;
+	errno = 0;
 	if (!arg[1])
 	{
-		temp = no_arg();
-		export_no_arg(temp);
+		export_no_arg(no_arg());
 		return ;
 	}
 	while (arg[++i])
@@ -133,6 +132,7 @@ void			cmd_export(char **arg)
 			write(2, "minishell: export: `", 20);
 			write(2, arg[i], ft_strlen(arg[i]));
 			write(2, "': not a valid identifier\n", 26);
+			errno = 1;
 		}
 		else if (ft_strchr(arg[i], '='))
 			new_g_env(arg[i]);
