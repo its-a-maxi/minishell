@@ -1,6 +1,6 @@
 ![alt text](https://github.com/ElHuaco/minishell/blob/master/show.gif)
-- [ ] `make`
-- [ ] `./minishell`
+-  `make`
+-  `./minishell`
 ## Architecture
 - [ ] tokenize: builds the Command Table (simple commands, IO files) from command line input. Handles input syntax errors.
 - [ ] executor: redirects IO and creates pipes if needed. Forks if launching an executable. Handles built-in commands errors.
