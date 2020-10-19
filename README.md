@@ -1,31 +1,22 @@
 ![alt text](https://github.com/ElHuaco/minishell/blob/master/show.gif)
-## Getting started
+- [ ] ```make
+- [ ] ```./minishell
+## Arquitecture
+- [ ] tokenize: builds the Command Table (simple commands, IO files) from command line input. Handles input syntax errors.
+- [ ] executor: redirects IO and creates pipes if needed. Forks if launching an executable. Handles built-in commands errors.
+## Bash Peculiarities
+- We don't have a MULTIOS option enabled by default, as is the case in [zsh.](https://thoughtbot.com/blog/input-output-redirection-in-the-shell#zsh-users-take-note)
+## Useful info
 - There is a [github repository](https://github.com/Swoorup/mysh) that obeys the order of proceedings pretty nicely. 
 - Please make sure to do a `lexer` -> `parser` -> `expander` -> `executor` to make your life easier. [Here](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) is a solid start.
 - Make sure that you understand the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 - [Making your own shell](https://www.geeksforgeeks.org/making-linux-shell-c/)
 - [Subject](https://cdn.intra.42.fr/pdf/pdf/10992/en.subject.pdf)
-- [Reference](https://github.com/pankratdodo/minishell-42)
-- [Otro](https://github.com/R4meau/minishell) minishell que tiene buena pinta.
-- [Uso de arg ****envp** en el main](https://www.quora.com/What-is-the-3rd-parameter-in-the-main-function-char-envp#:~:text=The%20non%2Dportable%2Dbut%2D,As%20always%2C%20I%20recommend%20experimenting.)
-- [Algoritmo](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) pipes para A|B|C|D > outfile < infile 
-## Partes del Proyecto
-- [ ] Lexer: tokenizes input.
-- [ ] Parser: builds Command Table from tokens.
-- [ ] Executor: generates processes for each command, creates pipes, redirects.
-## Peculiaridades de bash
-- Si un command tiene más de un input asociado, usa sólo el último.
-- De la misma manera, si tiene más de un output y/o append asociado, usa sólo el último.
-- Lo que sí que hace es esos casos es crear todos los outputs puestos, pero vacios salvo
-el último.
-- Si un command tiene un output redirection y además es una pipe, su output 
-va a la redirection y la pipe se queda sin input.
-## Roadmap
-1. Entender sintáxis y funcionamiento de bash que nos piden.
-2. Idear arquitectura **LPEE** que no nos haga _espaguetificar_ el asunto.
-3. ???
-4. Profit
-## Funciones a utilizar
+- [A reference.](https://github.com/pankratdodo/minishell-42)
+- [Another one.](https://github.com/R4meau/minishell)
+- [Use of ****envp** in main](https://www.quora.com/What-is-the-3rd-parameter-in-the-main-function-char-envp#:~:text=The%20non%2Dportable%2Dbut%2D,As%20always%2C%20I%20recommend%20experimenting.)
+- [Pipe and redirection algorithm](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) for A|B|C|D > outfile < infile
+## Allowed Functions
 - **malloc**
 - **free**
 - **write**
