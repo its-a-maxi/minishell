@@ -1,4 +1,4 @@
-![](inc/show.gif)
+![](show.mp4)
 ## Getting started
 - There is a [github repository](https://github.com/Swoorup/mysh) that obeys the order of proceedings pretty nicely. 
 - Please make sure to do a `lexer` -> `parser` -> `expander` -> `executor` to make your life easier. [Here](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) is a solid start.
