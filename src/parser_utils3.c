@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 13:03:05 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/19 11:46:56 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:12:41 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ static void	replace_var_in_str(char **strdir, char *ptr)
 	char	*temp;
 	char	*temp2;
 
-	if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
+	if (*ptr == '?')
+	{
+		free(*strdir);
+		*strdir = ft_itoa(errno);
+	}
+	else if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
 	{
 		free(*strdir);
 		*strdir = str;
