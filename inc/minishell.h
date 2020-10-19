@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 09:43:05 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:33:39 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,4 +164,6 @@ void			cmd_exit(void);
 ** cmd_utils.c
 */
 int				read_input_subshell(char **input, char c, char *ptr);
+int	    		quotes_handler(char **arg, int i);
+void			export_no_arg(char **temp);
 #endif

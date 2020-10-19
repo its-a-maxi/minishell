@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/14 12:18:51 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:58:17 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int		ft_check(char *str)
 
 	i = -1;
 	len = ft_strlen(str);
-	if (ft_find_char(str, '=') != -1)
+	if (ft_strchr(str, '\n') || ft_find_char(str, '=') != -1)
 	{
 		write(2, "minishell: `", 12);
 		write(2, str, len);
@@ -82,7 +82,11 @@ void			cmd_unset(char **arg)
 
 	i = 0;
 	while (arg[++i])
+	{
+		if (!quotes_handler(arg, i))
+			return ;
 		if (ft_check(arg[i]))
 			del_g_env(arg[i]);
+	}
 	return ;
 }
