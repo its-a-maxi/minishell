@@ -6,9 +6,11 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:07:54 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 19:08:12 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 10:51:02 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 char		**set_quotpos_arr(char *str)
 {

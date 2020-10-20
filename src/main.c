@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 18:46:52 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 11:49:51 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ void		signal_handler(int sig)
 	}
 }
 
+static int	any_command_table_empty(char **table, char **input)
+{
+	int		i;
+
+	i = -1;
+	while (table[++i])
+	{
+		if ((table[i][0] == '\0') && (i > 1))
+		{
+			write(2, "\U0001F633 minishell: syntax error.\n", 31);
+			free(*input);
+			*input = NULL;
+			full_free((void **)table, ft_arrlen(table));
+			return (1);
+		}
+	}
+	return (0);
+}
+
 /*
 ** Initializes minishell
 **
@@ -57,6 +76,7 @@ int			main(int argc, char **argv, char **envp)
 	char				**commands;
 	t_command_table		*command_table;
 
+	signal(SIGQUIT, signal_handler);
 	save_env(argc, argv, envp);
 	while (1)
 	{
@@ -64,11 +84,11 @@ int			main(int argc, char **argv, char **envp)
 			return (EXIT_FAILURE);
 		show_prompt();
 		signal(SIGINT, signal_handler);
-		signal(SIGQUIT, signal_handler);
 		read_input(&input);
-		commands = remove_empty_str(ft_split__quots(input, ';'));
-int k = -1; while (commands[++k])
-	ft_printf("command tables: %s\n", commands[k]);
+		commands = ft_split__quots(input, ';');
+		if (any_command_table_empty(commands, &input))
+			continue;
+		commands = remove_empty_str(commands);
 		if (!(command_table = malloc(sizeof(t_command_table) *
 			ft_arrlen(commands))))
 			return (EXIT_FAILURE);
