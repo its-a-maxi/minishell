@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 11:49:51 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:24:39 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ int			main(int argc, char **argv, char **envp)
 		commands = ft_split__quots(input, ';');
 		if (any_command_table_empty(commands, &input))
 			continue;
+		free(input);
 		commands = remove_empty_str(commands);
 		if (!(command_table = malloc(sizeof(t_command_table) *
 			ft_arrlen(commands))))
 			return (EXIT_FAILURE);
 		if (!(tokenize(commands, command_table, ft_arrlen(commands))))
 			executor(command_table, ft_arrlen(commands));
-		free(input);
 	}
 	return (0);
 }

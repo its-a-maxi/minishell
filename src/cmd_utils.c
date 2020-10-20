@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:39:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 13:05:05 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:24:20 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int			read_input_subshell(char **input, char c, char *ptr)
 	free(*input);
 	*input = temp;
 	*input = ft_add_char(*input, '\n');
-	while ((bytes_read = read(0, buff, 1)) && buff[0] != c)
+	while ((bytes_read = read(0, buff, 1)) && (buff[0] != c))
 		*input = ft_add_char(*input, buff[0]);
+	read(0, buff, 1);
 	if (!bytes_read)
 		write(2, ESUBEOF, ft_strlen(ESUBEOF));
 	return (bytes_read);
@@ -38,9 +39,9 @@ int			quotes_handler(char **arg, int i)
 	ret = 1;
 	if ((ptr = smallest_non_zero(ft_strchr(arg[i], '"'),
 		ft_strchr(arg[i], '\''))) && !(ft_strchr(ptr + 1, *ptr)))
-		ret = read_input_subshell(arg + 1, *ptr, ptr);
+		ret = read_input_subshell(arg + i, *ptr, ptr);
 	else
-		remove_quots(arg + 1);
+		remove_quots(arg + i);
 	if (!ret)
 		return (0);
 	return (1);
