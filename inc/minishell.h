@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 19:09:14 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:04:07 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void			initr(t_command_table *t, int i, int *n);
 /*
 ** parser_utils2.c
 */
+int				is_inside_jth_quote_pair(char **quotpos, char *pos);
 char			**ft_split__quots(char *str, char c);
 /*
 ** parser_utils.c
@@ -109,6 +110,7 @@ void			read_input(char **input);
 /*
 ** parser.c
 */
+char			*ft_strchr__quots(char **quotpos, char *str, char c);
 int				tokenize(char **a, t_command_table *t, int n);
 /*
 ** executor_utils.c

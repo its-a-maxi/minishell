@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:07:54 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 10:51:02 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:50:18 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,18 @@ char		**set_quotpos_arr(char *str)
 int			count_not_quoted_char(char **quotpos, char *str, char c)
 {
 	int		i;
-	char	temp;
 	int		count;
+	int		size;
 
+	size = ft_arrlen(quotpos);
 	count = 0;
-	i = 0;
-	while (quotpos[i])
+	i = -1;
+	while (str[++i])
 	{
-		temp = *quotpos[i];
-		*quotpos[i] = '\0';
-		count += ft_strnchr(str, c);
-		*quotpos[i] = temp;
-		if ((quotpos[i + 1]))
-		{
-			str = quotpos[i + 1] + 1;
-			i += 2;
-		}
-		else
-		{
-			str = quotpos[i] + 1;
-			break;
-		}
+		if ((str[i] == c)
+		&& ((!(size % 2) && (is_inside_jth_quote_pair(quotpos, str + i) == -1))
+			|| ((size % 2) && ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+			count++;
 	}
-	count += ft_strnchr(str, c);
 	return (count);
 }

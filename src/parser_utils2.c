@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 11:24:44 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:06:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	no_char_between_quotes(char **quotpos, char c)
 	return (1);
 }
 
-static int	is_inside_jth_quote_pair(char **quotpos, char *pos)
+int			is_inside_jth_quote_pair(char **quotpos, char *pos)
 {
 	int		j;
 
@@ -58,36 +58,17 @@ static int	is_inside_jth_quote_pair(char **quotpos, char *pos)
 static void	loop_table(char **tab, char *str, char c, char **quotpos)
 {
 	int		i;
-	int		j;
 	int		size;
 	char	*pos;
 
 	size = ft_arrlen(quotpos);
-	j = 0;
 	i = -1;
-	while ((pos = ft_strchr(str, c)))
+	while ((pos = ft_strchr__quots(quotpos, str, c)))
 	{
 //ft_printf("pos: ->%s<-\n", pos);
-		if ((size % 2) && (pos > quotpos[size - 1]))
-		{
-			tab[++i] = ft_strdup(str);
-			str += ft_strlen(str);
-		}
-		else if ((j = is_inside_jth_quote_pair(quotpos, pos)) != -1)
-		{
-			*quotpos[j + 1] = '\0';
-			tab[++i] = ft_strdup(smallest_non_zero(str, quotpos[j]));
-			str = quotpos[j + 1] + 1;
-			tab[i] = ft_add_char(tab[i], *quotpos[j]);
-			while ((*str) && ((*str == ' ') || (*str == c)))
-				str++;
-		}
-		else
-		{
-			*pos = '\0';
-			tab[++i] = ft_strdup(str);
-			str = pos + 1;
-		}
+		*pos = '\0';
+		tab[++i] = ft_strdup(str);
+		str = pos + 1;
 //ft_printf("str: ->%s<-\n", str);
 //ft_printf("Saved tab [%d]: ->%s<-\n", i, tab[i]);
 	}

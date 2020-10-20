@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 19:02:43 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:03:38 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,40 @@
 
 /*
 ** In this file we try to parse a general command line of the form:
-** 		cmd args | cmd args ... | ... > outfile < infile >> appendfile;
+** 		cmd args | cmd args ... | ... ;
 ** 		... ;
 **		.
 **		.
 **		.
 **		... ;
-** 		cmd args | cmd args ... | ... > outfile < infile >> appendfile;
-** into a command table for each ';'-terminated sentence.
+** 		cmd args | cmd args ... | ... ;
+** with any redirection > outfile < infile >> appendfile, before or after
+** a command name or argument, for each simple command.
+** We parse into a command table for each ';'-terminated sentence.
 */
+
+char		*ft_strchr__quots(char **quotpos, char *str, char c)
+{
+	int		i;
+	int		size;
+
+	if (!str)
+		return (0);
+	if (!quotpos[0])
+		return (ft_strchr(str, c));
+	size = ft_arrlen(quotpos);
+	i = -1;
+	while (str[++i])
+	{
+		if ((str[i] == c)
+			&& ((!(size % 2)
+				&& (is_inside_jth_quote_pair(quotpos, str + i) == -1))
+			|| ((size % 2)
+					&& ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+			return (str + i);
+	}
+	return (0);
+}
 
 /*
 ** Finds and sets the simple commands in the command table.
@@ -33,44 +58,32 @@
 ** parameter #2:		char *				the ';'-terminated line of the table
 */
 
-static void	find_next_simple_command(t_command_table *tab, char *str)
+static void	find_simple_commands(t_command_table *table, char *command_line)
 {
-	//Hacer tmp = 0 si no está entre quotes
+	char	**quotpos;
+	int		count;
 	int		i;
 	char	*tmp;
 
-	i = -1;
-	tmp = str;
-	while ((tmp = ft_strchr(str, '|')))
-	{
-		*tmp = '\0';
-		tab->simple_commands[++i] = remove_empty_str(
-			ft_split__quots(str, ' '));
-		str = tmp + 1;
-	}
-	tab->simple_commands[++i] = remove_empty_str(
-			ft_split__quots(str, ' '));
-}
-
-/*
-** Finds the total number of simple commands in the command table
-**
-** returns:	void
-**
-** parameter #1:	t_command_table		the command table
-** parameter #2:	char *				the ';'-terminated line of the table
-*/
-
-static void	find_simple_commands(t_command_table *table, char *command_line)
-{
-	//Contar aqui como en count_not_quoted_char
-	//Encontrar entonces las quotpos de la linea
-	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
+	quotpos = set_quotpos_arr(command_line);
+	count = count_not_quoted_char(quotpos, command_line, '|');
+	table->simple_commands_num = count + 1;
 	if (!(table->simple_commands = malloc(sizeof(char **)
 		* (table->simple_commands_num + 1))))
 		exit_minishell();
 	table->simple_commands[table->simple_commands_num] = NULL;
-	find_next_simple_command(table, command_line);
+	i = -1;
+	tmp = command_line;
+	while ((tmp = ft_strchr__quots(quotpos, command_line, '|')))
+	{
+		*tmp = '\0';
+		table->simple_commands[++i] = remove_empty_str(
+			ft_split__quots(command_line, ' '));
+		command_line = tmp + 1;
+	}
+	table->simple_commands[++i] = remove_empty_str(
+			ft_split__quots(command_line, ' '));
+	free(quotpos);
 }
 
 /*
@@ -137,6 +150,13 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 	while (++i < table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
+int k = -1; while(tab[i].simple_commands[++k])
+{
+	int l = -1;
+	while (tab[i].simple_commands[k][++l])
+		ft_printf("tab [%d] cmd [%d] arg [%d]: %s\n", i, k, l,
+			tab[i].simple_commands[k][l]);
+}
 		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, table_num, lines));
 		replace_env_var(tab + i);
@@ -145,7 +165,10 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 		{
 			if ((tab[i].simple_commands[j][0] == NULL)
 			&& (tab[i].simple_commands_num > 1))
+			{
+			ft_printf("error de cadena vacia.\n");
 				return (free_errpars(tab, table_num, lines));
+			}
 		}
 	}
 //printf("Parse ended.\n");
