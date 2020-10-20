@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 12:03:06 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 19:02:43 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 static void	find_next_simple_command(t_command_table *tab, char *str)
 {
+	//Hacer tmp = 0 si no está entre quotes
 	int		i;
 	char	*tmp;
 
@@ -51,7 +52,6 @@ static void	find_next_simple_command(t_command_table *tab, char *str)
 			ft_split__quots(str, ' '));
 }
 
-
 /*
 ** Finds the total number of simple commands in the command table
 **
@@ -63,6 +63,8 @@ static void	find_next_simple_command(t_command_table *tab, char *str)
 
 static void	find_simple_commands(t_command_table *table, char *command_line)
 {
+	//Contar aqui como en count_not_quoted_char
+	//Encontrar entonces las quotpos de la linea
 	table->simple_commands_num = ft_strnchr(command_line, '|') + 1;
 	if (!(table->simple_commands = malloc(sizeof(char **)
 		* (table->simple_commands_num + 1))))

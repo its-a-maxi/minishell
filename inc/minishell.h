@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 12:47:45 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 19:09:14 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ char			*dup_till_symbol(char *str);
 ** parser_redirections.c
 */
 int				set_redirection_arr(t_command_table *tab, int *i);
+/*
+** parser_utils5.c
+*/
+char			**set_quotpos_arr(char *str);
+int				count_not_quoted_char(char **quotpos, char *str, char c);
 /*
 ** parser_utils4.c
 */

@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 11:36:00 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/19 19:07:33 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,59 +21,24 @@
 ** any redirection in that string.
 */
 
-static char	**set_quotpos_arr(char *str)
-{
-	char	*ptr;
-	char	**quotpos;
-
-	quotpos = malloc(sizeof(char *) * 1);
-	*quotpos = NULL;
-	while ((ptr = smallest_non_zero(ft_strchr(str, '"'), ft_strchr(str, '\''))))
-	{
-		if ((str = ft_strchr(ptr + 1, *ptr)))
-		{
-			ft_add_str(&quotpos, ptr);
-			ft_add_str(&quotpos, str);
-			str++;
-		}
-		else
-		{
-			ft_add_str(&quotpos, ptr);
-			break;
-		}
-	}
-	return (quotpos);
-}
-
-static int	count_not_quoted_char(char **quotpos, char *str, char c)
+static int	no_char_between_quotes(char **quotpos, char c)
 {
 	int		i;
-	char	temp;
-	int		count;
+	char	*ptr;
 
-	count = 0;
 	i = 0;
-	while (quotpos[i])
+	while ((quotpos[i]) && (quotpos[i + 1]))
 	{
-		temp = *quotpos[i];
-		*quotpos[i] = '\0';
-		count += ft_strnchr(str, c);
-		*quotpos[i] = temp;
-		if ((quotpos[i + 1]))
-		{
-			str = quotpos[i + 1] + 1;
-			i += 2;
-		}
+		*quotpos[i + 1] = '\0';
+		ptr = ft_strchr(quotpos[i], c);
+		*quotpos[i + 1] = *quotpos[i];
+		if ((ptr))
+			return (0);
 		else
-		{
-			str = quotpos[i] + 1;
-			break;
-		}
+			i += 2;
 	}
-	count += ft_strnchr(str, c);
-	return (count);
+	return (1);
 }
-
 static void	loop_table(char **tab, char *str, char c, char **quotpos)
 {
 	int		i;
@@ -84,6 +49,10 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 	i = -1;
 	while ((pos = ft_strchr(str, c)))
 	{
+//Cambiar condiciones a
+//Estar a la dcha de la comilla aislada
+//Estar entre una pareja de comillas
+//Cualquier otro caso
 		if (!(quotpos[j + 1]) && (pos > quotpos[j]))
 		{
 			tab[++i] = ft_strdup(str);
@@ -101,8 +70,8 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 			tab[++i] = ft_strdup(smallest_non_zero(str, quotpos[j]));
 			str = quotpos[j + 1] + 1;
 			tab[i] = ft_add_char(tab[i], *quotpos[j]);
-			j += 2;
-			while ((*str) && (*str == c))
+			j += 1;
+			while ((*str) && ((*str == ' ') || (*str == c)))
 				str++;
 		}
 	}
@@ -121,7 +90,7 @@ char		**ft_split__quots(char *str, char c)
 	int		count;
 
 	quotpos = set_quotpos_arr(str);
-	if (!(quotpos[0]))
+	if (!(quotpos[0]) || (no_char_between_quotes(quotpos, c)))
 	{
 		free(quotpos);
 		return (ft_split(str, c));
