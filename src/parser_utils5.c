@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:07:54 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 12:50:18 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:47:08 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,49 @@ int			count_not_quoted_char(char **quotpos, char *str, char c)
 			count++;
 	}
 	return (count);
+}
+
+char			*ft_str2chr__quots(char **quotpos, char *str, char c)
+{
+	int		i;
+	int		size;
+
+	size = ft_arrlen(quotpos);
+	i = -1;
+	while ((str[++i]) && (str[i + 1]))
+	{
+		if ((str[i] == c) && (str[i + 1] == c)
+		&& ((!(size % 2) && (is_inside_jth_quote_pair(quotpos, str + i) == -1))
+			|| ((size % 2) && ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+			return (str + i + 1);
+	}
+	return (0);
+}
+
+char		*ft_str1chr__quots(char **quotpos, char *str, char c)
+{
+	int		i;
+	int		size;
+
+	size = ft_arrlen(quotpos);
+	i = -1;
+	while (str[++i])
+	{
+		if (((!(size % 2) && (is_inside_jth_quote_pair(quotpos, str + i) == -1))
+			|| ((size % 2) && ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+			continue;
+		else if (!(str[i + 1]) && (str[i] == c) && (i) && (str[i - 1] != c))
+			return (str + i);
+		else if (!(str[i + 1]) && (i) && ((str[i] != c)
+			|| (str[i - 1] == c)))
+			return (0);
+		else if ((i == 0) && (str[i + 1] != c) && (str[i] == c))
+			return (str + i);
+		else if (i == 0)
+			continue;
+		else if ((i != 0) && (str[i] == c) && (str[i + 1] != c)
+			&& (str[i - 1] != c))
+			return (str + i);
+	}
+	return (0);
 }

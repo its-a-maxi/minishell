@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/07 11:46:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:33:06 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ void			free_cmd_table(t_command_table *tab, int table_num)
 		}
 		free(tab);
 }
-
-char			*ft_str2chr(char *str, char c)
-{
-	int		i;
-
-	i = -1;
-	while ((str[++i]) && (str[i + 1]))
-	{
-		if ((str[i] == c) && (str[i + 1] == c))
-			return (str + i + 1);
-	}
-	return (0);
-}
-
-
 
 char			*ft_add_char(char *str, char c)
 {

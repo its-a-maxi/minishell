@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:38:15 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/05 15:19:35 by alejandro        ###   ########.fr       */
+/*   Updated: 2020/10/20 13:34:34 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ int				digit_number(int n, int basesize);
 void			full_free(void **buff, int arr_len);
 int				ft_strnchr(char *str, int c);
 int				ft_isspace_not_nl(int c);
-char			*ft_str1chr(char *str, char c);
 #endif
