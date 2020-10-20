@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 12:33:27 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:38:01 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,11 @@ void		cmd_echo(char **arg)
 	if (arg[i] && (arg[1][0] == '-' && arg[1][1] == 'n' && arg[1][2] == 0))
 		i++;
 	j = i;
-	while (arg[i])
-		if (!quotes_handler(arg, i++))
+	while (arg[j])
+		if (!quotes_handler(arg, j++))
 			return ;
-	i = j;
 	while (arg[i])
 	{
-		if (!quotes_handler(arg, i))
-			return ;
 		write(1, arg[i], ft_strlen(arg[i]));
 		if (arg[++i])
 			write(1, " ", 1);
