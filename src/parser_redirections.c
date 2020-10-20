@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 13:08:21 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/19 12:01:03 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:52:09 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,17 +117,18 @@ int			set_redirection_arr(t_command_table *tab, int *i)
 	int		len;
 	char	*str;
 	char	*ptr[3];
+	char	**quotpos;
 
 	i[1] = -1;
 	while ((str = tab->simple_commands[i[0]][++(*(i + 1))]))
 	{
 //printf("Checking %d...\n", i[1]);
-		if ((ft_strchr(str, '"')) || (ft_strchr(str, '\'')))
-			continue ;
-		ptr[0] = ft_strchr(str, '<');
-		ptr[1] = ft_str1chr(str, '>');
-		ptr[2] = ft_str2chr(str, '>');
+		quotpos = set_quotpos_arr(str);
+		ptr[0] = ft_strchr__quots(quotpos, str, '<');
+		ptr[1] = ft_str1chr__quots(quotpos, str, '>');
+		ptr[2] = ft_str2chr__quots(quotpos, str, '>');
 //printf("Symbols: %d %d %d\n", (ptr[0] > 0), (ptr[1] > 0), (ptr[2] > 0));
+		free(quotpos);
 		if ((ptr[0]) || (ptr[1]) || (ptr[2]))
 		{
 			len = ft_strlen(str);

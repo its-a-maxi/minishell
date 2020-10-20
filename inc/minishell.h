@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:04:07 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:35:32 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int				set_redirection_arr(t_command_table *tab, int *i);
 /*
 ** parser_utils5.c
 */
+char			*ft_str2chr__quots(char **quotpos, char *str, char c);
+char			*ft_str1chr__quots(char **quotpos, char *str, char c);
 char			**set_quotpos_arr(char *str);
 int				count_not_quoted_char(char **quotpos, char *str, char c);
 /*

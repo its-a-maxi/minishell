@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:09:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/19 10:22:03 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:52:33 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,26 @@ void		redir_files_updt(t_command_table *tab, int *i, char *str, int type)
 void		count_redirections(char **arr, int *count)
 {
 	int		i;
+	char	**quotpos;
 	char	*ptr[2];
 
 	i = -1;
 	while (arr[++i])
 	{
-		if ((ft_strchr(arr[i], '"')))
-			continue;
+		quotpos = set_quotpos_arr(arr[i]);
 		ptr[1] = arr[i];
-		while ((ptr[0] = ft_strchr(ptr[1], '<'))
+		while ((ptr[0] = ft_strchr__quots(quotpos, ptr[1], '<'))
 			&& (ptr[1] = ptr[0] + 1))
 			count[0]++;
 		ptr[1] = arr[i];
-		while ((ptr[0] = ft_strchr(ptr[1], '>')) && (ptr[0][1] != '>')
-				&& (ptr[1] = ptr[0] + 1))
+		while ((ptr[0] = ft_strchr__quots(quotpos, ptr[1], '>'))
+		&& (ptr[0][1] != '>') && (ptr[1] = ptr[0] + 1))
 			count[1]++;
 		ptr[1] = arr[i];
-		while ((ptr[0] = ft_str2chr(ptr[1], '>'))
+		while ((ptr[0] = ft_str2chr__quots(quotpos, ptr[1], '>'))
 				&& (ptr[1] = ptr[0] + 1))
 			count[2]++;
+		free(quotpos);
 	}
 }
 
@@ -111,6 +112,7 @@ void		init_redirection_arr(t_command_table *tab, int *i, int *count)
 
 char		*dup_till_symbol(char *str)
 {
+	//Busca quotes y solo se para en unquoted symbols.
 	int		i;
 	char	*result;
 
