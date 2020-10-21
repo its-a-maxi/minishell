@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:30:53 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:30:55 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:35:55 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ static void	redirect_word_found(t_command_table *tab, int *i, char **ptr)
 	first_ptr = find_smallest_non_zero(ptr);
 	temp = dup_till_symbol(first_ptr + 1);
 	len = ft_strlen(temp);
-	if (first_ptr == ptr[2])
-		first_ptr[-1] = '\0';
+	first_ptr == ptr[2] ? first_ptr[-1] = '\0' : 0;
 	first_ptr[0] = '\0';
 	if ((len == 0) && !(first_ptr[1]))
 		lone_symbol_in_word(tab, i, temp, (first_ptr == ptr[2]) * 'A'
@@ -111,7 +110,6 @@ static void	redirect_word_found(t_command_table *tab, int *i, char **ptr)
 
 int			set_redirection_arr(t_command_table *tab, int *i)
 {
-	int		len;
 	char	*str;
 	char	*ptr[3];
 	char	**quotpos;
@@ -126,9 +124,8 @@ int			set_redirection_arr(t_command_table *tab, int *i)
 		free(quotpos);
 		if ((ptr[0]) || (ptr[1]) || (ptr[2]))
 		{
-			len = ft_strlen(str);
-			if (((len == 1) && ((ptr[0]) || (ptr[1])))
-				|| ((len == 2) && (ptr[2])))
+			if (((ft_strlen(str) == 1) && ((ptr[0]) || (ptr[1])))
+				|| ((ft_strlen(str) == 2) && (ptr[2])))
 				lone_symbol_found(tab, i, ptr);
 			else
 				redirect_word_found(tab, i, ptr);

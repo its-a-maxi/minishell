@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:44:49 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:25:44 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int				is_parser_error(t_command_table *tan, int i);
 void			redir_files_updt(t_command_table *ta, int *i, char *str, int t);
 void			count_redirections(char **arr, int *count);
 void			init_redirection_arr(t_command_table *tab, int *i, int *count);
-void			resize_arr_skip_pos(char ***arr, int pos);
 char			*dup_till_symbol(char *str);
 /*
 ** parser_redirections.c
@@ -107,6 +106,7 @@ char			**ft_split__quots(char *str, char c);
 */
 char			*ft_add_char(char *str, char c);
 void			read_input(char **input);
+void			resize_arr_skip_pos(char ***arr, int pos);
 /*
 ** parser.c
 */
