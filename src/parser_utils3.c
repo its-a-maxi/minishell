@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:25:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:25:37 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:45:50 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static void	remove_backslash(char **strdir, char *slashpos)
 	}
 }
 
+static void	errno_updt(char **strdir)
+{
+	free(*strdir);
+	*strdir = ft_itoa(errno);
+}
+
 static void	replace_var_in_str(char **strdir, char *ptr)
 {
 	char	*str;
@@ -39,10 +45,7 @@ static void	replace_var_in_str(char **strdir, char *ptr)
 	char	*temp2;
 
 	if (*ptr == '?')
-	{
-		free(*strdir);
-		*strdir = ft_itoa(errno);
-	}
+		errno_updt(strdir);
 	else if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
 	{
 		free(*strdir);
@@ -86,12 +89,6 @@ void		replace_env_var(t_command_table *table)
 			}
 		}
 	}
-}
-
-void		arr_swap(char ***new, char ***old)
-{
-	full_free((void **)*old, ft_arrlen(*old));
-	*old = *new;
 }
 
 void		resize_arr_skip_pos(char ***arr, int pos)
