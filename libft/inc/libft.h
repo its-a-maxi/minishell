@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 15:38:15 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:34:34 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:21:52 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char			*ft_strndup(char *src, int n);
 char			*ft_strunichr(int len, int c);
 void			ft_strrep(char *str, int changed, int replacer);
 char			*ft_itoabase(int n, char *base);
-char			*ft_ultoabase(unsigned long  n, char *base);
+char			*ft_ultoabase(unsigned long n, char *base);
 int				ft_arrlen(char **arr);
 int				ft_strcmp(char *s1, char *s2);
 int				digit_number(int n, int basesize);

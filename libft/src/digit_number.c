@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   digit_number.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 10:35:53 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/07/06 10:37:29 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:21:13 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int		digit_number(int n, int basesize)
 	int i;
 
 	if (n < 0)
-			n *= -1;
+		n *= -1;
 	i = 1;
 	while ((n / basesize) > 0)
 	{
 		n = n / basesize;
 		i++;
 	}
-	return(i);
+	return (i);
 }

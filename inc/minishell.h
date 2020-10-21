@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:49:17 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:20:10 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define EPARSE "\U0001F633 minishell: parse error.\n"
 # define ESUBEOF "\U0001F633 minishell: EOF while looking for matching quote\n"
- 
+
 /*
 ** The t_command_table struct contains the information of a set of
 ** input commands, i.e, some input line of the form:
@@ -170,6 +170,6 @@ void			cmd_exit(void);
 ** cmd_utils.c
 */
 int				read_input_subshell(char **input, char c, char *ptr);
-int	    		quotes_handler(char **arg, int i);
+int				quotes_handler(char **arg, int i);
 void			export_no_arg(char **temp);
 #endif
