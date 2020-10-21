@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:16:55 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:49:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int k = -1; while(tab[i].simple_commands[++k])
 			tab[i].simple_commands[k][l]);
 }
 		if ((find_redirections(tab + i)))
-			return (free_errpars(tab, table_num, lines));
+			return (free_errpars(tab, i, lines));
 ft_printf("Parsed redirections of table [%d]:\n", i);
 k = -1; while(tab[i].simple_commands[++k])
 {
@@ -167,7 +167,7 @@ k = -1; while(tab[i].simple_commands[++k])
 			&& (tab[i].simple_commands_num > 1))
 			{
 			ft_printf("error de cadena vacia.\n");
-				return (free_errpars(tab, table_num, lines));
+				return (free_errpars(tab, i, lines));
 			}
 		}
 	}

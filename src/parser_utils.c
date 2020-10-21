@@ -6,47 +6,11 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:33:06 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:31:26 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void		free_triple_ptrs(t_command_table *tab)
-{
-			free(tab->simple_commands);
-			free(tab->input_files);
-			free(tab->output_files);
-			free(tab->append_files);
-			free(tab->dummy_files);
-}
-
-void			free_cmd_table(t_command_table *tab, int table_num)
-{
-		int		i;
-		int		j;
-
-		i = -1;
-		while (++i < table_num)
-		{
-			j = -1;
-			while (++j < tab[i].simple_commands_num)
-			{
-				full_free((void **)tab[i].simple_commands[j],
-					ft_arrlen(tab[i].simple_commands[j]));
-				full_free((void **)tab[i].input_files[j],
-					ft_arrlen(tab[i].input_files[j]));
-				full_free((void **)tab[i].output_files[j],
-					ft_arrlen(tab[i].output_files[j]));
-				full_free((void **)tab[i].append_files[j],
-					ft_arrlen(tab[i].append_files[j]));
-				full_free((void **)tab[i].dummy_files[j],
-					ft_arrlen(tab[i].dummy_files[j]));
-			}
-			free_triple_ptrs(tab + i);
-		}
-		free(tab);
-}
 
 char			*ft_add_char(char *str, char c)
 {

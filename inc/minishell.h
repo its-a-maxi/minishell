@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:09:33 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:49:17 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char			**g_env;
 /*
 ** parser_error.c
 */
-int				free_errpars(t_command_table *t, int n, char **cmd_lines);
+void			free_cmd_table(t_command_table *table, int num);
+int				free_errpars(t_command_table *t, int n, char **lines);
 int				is_parser_error(t_command_table *tan, int i);
 /*
 ** parser_redirections_utils.c
@@ -105,7 +106,6 @@ char			**ft_split__quots(char *str, char c);
 /*
 ** parser_utils.c
 */
-void			free_cmd_table(t_command_table *table, int num);
 char			*ft_add_char(char *str, char c);
 void			read_input(char **input);
 /*
