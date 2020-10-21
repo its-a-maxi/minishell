@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_redirections_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:24:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:24:59 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:42:50 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static void	dummy_update(t_command_table *tab, int *i, char *str, int type)
 		free(tab->append_files[i[0]][0]);
 		tab->append_files[i[0]][0] = NULL;
 	}
-	if (type == 'O')
-		tab->output_files[i[0]][0] = ft_strdup(str);
-	if (type == 'A')
-		tab->append_files[i[0]][0] = ft_strdup(str);
+	type == 'O' ? tab->output_files[i[0]][0] = ft_strdup(str) : 0;
+	type == 'A' ? tab->append_files[i[0]][0] = ft_strdup(str) : 0;
 	full_free((void **)tab->dummy_files[i[0]],
 		ft_arrlen(tab->dummy_files[i[0]]));
 	tab->dummy_files[i[0]] = temp;
