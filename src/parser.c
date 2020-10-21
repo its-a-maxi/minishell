@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:08:41 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:16:55 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,18 @@ int k = -1; while(tab[i].simple_commands[++k])
 }
 		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, table_num, lines));
+ft_printf("Parsed redirections of table [%d]:\n", i);
+k = -1; while(tab[i].simple_commands[++k])
+{
+	int	l = -1;
+	while (tab[i].simple_commands[k][++l])
+		ft_printf("tab [%d] cmd [%d] arg [%d]: %s\n", i, k, l,
+			tab[i].simple_commands[k][l]);
+	ft_printf("\tin: %s; out: %s; app: %s;\n", tab[i].input_files[k][0],
+			tab[i].output_files[k][0], tab[i].append_files[k][0]);
+	int m = -1; while(tab[i].dummy_files[k][++m])
+		ft_printf("\tdummt[%d]: %s\n", m, tab[i].dummy_files[k][m]);
+}
 		replace_env_var(tab + i);
 		j = -1;
 		while ((tab[i].simple_commands[++j]))
