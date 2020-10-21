@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:32:45 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:44:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void			remove_dummy_quots(char **table);
 ** parser_utils3.c
 */
 void			replace_env_var(t_command_table *table);
-void			arr_swap(char ***dst, char ***src);
 char			**remove_empty_str(char **arr);
 /*
 ** parser_utils2.c
