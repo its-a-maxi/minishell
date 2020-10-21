@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:49:31 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:06:12 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	find_simple_commands(t_command_table *table, char *command_line)
 	table->simple_commands[++i] = remove_empty_str(
 			ft_split__quots(command_line, ' '));
 	remove_quots_from_cmd_name(table);
+ft_printf("Find simple commands finished.\n");
 	free(quotpos);
 }
 
@@ -106,6 +107,8 @@ static int	find_redirections(t_command_table *table)
 	i[0] = -1;
 	while (table->simple_commands[++(*i)])
 	{
+		if (!(table->simple_commands[i[0]]))
+			continue ;
 		count[0] = 0;
 		count[1] = 0;
 		count[2] = 0;

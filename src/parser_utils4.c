@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 17:32:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/19 12:13:06 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:08:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void		remove_quots(char **strdir)
 	char	*quotpos[2];
 	char	*temp;
 
+	if (!*strdir)
+		return ;
 	i = -1;
 	while (*(*strdir + ++i))
 	{
