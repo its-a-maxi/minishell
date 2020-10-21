@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 13:08:21 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/20 13:52:09 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:38:46 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static void	redirect_word_found(t_command_table *tab, int *i, char **ptr)
 			resize_arr_skip_pos(&tab->simple_commands[i[0]], i[1]);
 	}
 }
-
+#include <stdio.h>
 int			set_redirection_arr(t_command_table *tab, int *i)
 {
 	int		len;
@@ -124,6 +124,7 @@ int			set_redirection_arr(t_command_table *tab, int *i)
 	{
 //printf("Checking %d...\n", i[1]);
 		quotpos = set_quotpos_arr(str);
+//printf("quotpos arr size: %d\n", ft_arrlen(quotpos));
 		ptr[0] = ft_strchr__quots(quotpos, str, '<');
 		ptr[1] = ft_str1chr__quots(quotpos, str, '>');
 		ptr[2] = ft_str2chr__quots(quotpos, str, '>');

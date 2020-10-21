@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:35:32 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:09:33 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				set_redirection_arr(t_command_table *tab, int *i);
 /*
 ** parser_utils5.c
 */
+char			*ft_strchr__quots(char **quotpos, char *str, char c);
 char			*ft_str2chr__quots(char **quotpos, char *str, char c);
 char			*ft_str1chr__quots(char **quotpos, char *str, char c);
 char			**set_quotpos_arr(char *str);
@@ -89,14 +90,13 @@ int				count_not_quoted_char(char **quotpos, char *str, char c);
 char			*smallest_non_zero(char *s1, char *s2);
 void			ft_add_str(char ***arrdir, char *str);
 void			remove_quots(char **strdir);
-char			**remove_empty_str(char **arr);
 void			remove_dummy_quots(char **table);
 /*
 ** parser_utils3.c
 */
 void			replace_env_var(t_command_table *table);
 void			arr_swap(char ***dst, char ***src);
-void			initr(t_command_table *t, int i, int *n);
+char			**remove_empty_str(char **arr);
 /*
 ** parser_utils2.c
 */
@@ -106,13 +106,11 @@ char			**ft_split__quots(char *str, char c);
 ** parser_utils.c
 */
 void			free_cmd_table(t_command_table *table, int num);
-char			*ft_str2chr(char *str, char c);
 char			*ft_add_char(char *str, char c);
 void			read_input(char **input);
 /*
 ** parser.c
 */
-char			*ft_strchr__quots(char **quotpos, char *str, char c);
 int				tokenize(char **a, t_command_table *t, int n);
 /*
 ** executor_utils.c

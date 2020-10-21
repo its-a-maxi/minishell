@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:07:54 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:47:08 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:09:10 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,36 @@ int			count_not_quoted_char(char **quotpos, char *str, char c)
 	while (str[++i])
 	{
 		if ((str[i] == c)
-		&& ((!(size % 2) && (is_inside_jth_quote_pair(quotpos, str + i) == -1))
-			|| ((size % 2) && ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+			&& ((is_inside_jth_quote_pair(quotpos, str + i) != -1)
+			|| ((size % 2) && (str + i > quotpos[size - 1]))))
+			continue ;
+		else if (str[i] == c)
 			count++;
 	}
 	return (count);
+}
+
+char		*ft_strchr__quots(char **quotpos, char *str, char c)
+{
+	int		i;
+	int		size;
+
+	if (!str)
+		return (0);
+	if (!quotpos[0])
+		return (ft_strchr(str, c));
+	size = ft_arrlen(quotpos);
+	i = -1;
+	while (str[++i])
+	{
+		if ((str[i] == c)
+			&& ((is_inside_jth_quote_pair(quotpos, str + i) != -1)
+			|| ((size % 2) && (str + i > quotpos[size - 1]))))
+			continue ;
+		else if (str[i] == c)
+			return (str + i);
+	}
+	return (0);
 }
 
 char			*ft_str2chr__quots(char **quotpos, char *str, char c)
@@ -65,8 +90,10 @@ char			*ft_str2chr__quots(char **quotpos, char *str, char c)
 	while ((str[++i]) && (str[i + 1]))
 	{
 		if ((str[i] == c) && (str[i + 1] == c)
-		&& ((!(size % 2) && (is_inside_jth_quote_pair(quotpos, str + i) == -1))
-			|| ((size % 2) && ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+			&& ((is_inside_jth_quote_pair(quotpos, str + i) != -1)
+			|| ((size % 2) && (str + i > quotpos[size - 1]))))
+			continue ;
+		else if ((str[i] == c) && (str[i + 1] == c))
 			return (str + i + 1);
 	}
 	return (0);
@@ -81,8 +108,8 @@ char		*ft_str1chr__quots(char **quotpos, char *str, char c)
 	i = -1;
 	while (str[++i])
 	{
-		if (((!(size % 2) && (is_inside_jth_quote_pair(quotpos, str + i) == -1))
-			|| ((size % 2) && ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
+		if ((is_inside_jth_quote_pair(quotpos, str + i) != -1)
+			|| ((size % 2) && (str + i > quotpos[size - 1])))
 			continue;
 		else if (!(str[i + 1]) && (str[i] == c) && (i) && (str[i - 1] != c))
 			return (str + i);

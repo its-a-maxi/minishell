@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:06:14 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:02:20 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** any redirection in that string.
 */
 
-static int	no_char_between_quotes(char **quotpos, char c)
+static int	are_char_between_quotes(char **quotpos, char c)
 {
 	int		i;
 	char	*ptr;
@@ -33,11 +33,11 @@ static int	no_char_between_quotes(char **quotpos, char c)
 		ptr = ft_strchr(quotpos[i], c);
 		*quotpos[i + 1] = *quotpos[i];
 		if ((ptr))
-			return (0);
+			return (1);
 		else
 			i += 2;
 	}
-	return (1);
+	return (0);
 }
 
 int			is_inside_jth_quote_pair(char **quotpos, char *pos)
@@ -72,10 +72,8 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 //ft_printf("str: ->%s<-\n", str);
 //ft_printf("Saved tab [%d]: ->%s<-\n", i, tab[i]);
 	}
-	if ((*str) && ((str > quotpos[size - 1]) || !(ft_strchr(str, c))))
+	if ((*str))
 		tab[++i] = ft_strdup(str);
-	else if ((*str))
-		tab[++i] = ft_strdup(quotpos[size - 2]);
 	else
 		tab[++i] = NULL;
 //ft_printf("Saved tab [%d]: ->%s<-\n", i, tab[i]);
@@ -88,13 +86,13 @@ char		**ft_split__quots(char *str, char c)
 	int		count;
 
 	quotpos = set_quotpos_arr(str);
-	if (!(quotpos[0]) || (no_char_between_quotes(quotpos, c)))
+	if (!(quotpos[0]) || !(are_char_between_quotes(quotpos, c)))
 	{
 		free(quotpos);
 		return (ft_split(str, c));
 	}
 	count = count_not_quoted_char(quotpos, str, c);
-//printf("count: %d\n", count);
+ft_printf("\tcount: %d\n", count);
 	table = malloc(sizeof(char *) * (count + 2));
 	table[count + 1] = NULL;
 //printf("Entering loop table...\n");

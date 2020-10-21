@@ -6,7 +6,7 @@
 /*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:09:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/20 13:52:33 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:21:49 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,19 +113,25 @@ void		init_redirection_arr(t_command_table *tab, int *i, int *count)
 char		*dup_till_symbol(char *str)
 {
 	//Busca quotes y solo se para en unquoted symbols.
-	int		i;
+	char	temp;
+	char	**quotpos;
+	char	*ptr;
 	char	*result;
 
 	if (!str)
 		return (0);
-	i = -1;
-	while (str[++i] && (str[i] != '>') && (str[i] != '<'))
-		;
-	if (!(result = malloc(sizeof(char) * (i + 1))))
-		return (0);
-	result[i] = '\0';
-	i = -1;
-	while (str[++i] && (str[i] != '>') && (str[i] != '<'))
-		result[i] = str[i];
+	quotpos = set_quotpos_arr(str);
+	if ((ptr = smallest_non_zero(ft_strchr__quots(quotpos, str, '>'),
+		ft_strchr__quots(quotpos, str, '<'))))
+	{
+		temp = *ptr;
+		*ptr = '\0';
+		result = ft_strdup(str);
+		*ptr = temp;
+		remove_quots(&str);
+	}
+	else
+		result = ft_strdup(str);
+	free(quotpos);
 	return (result);
 }

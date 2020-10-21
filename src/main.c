@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 16:24:39 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 10:57:06 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			main(int argc, char **argv, char **envp)
 			continue;
 		free(input);
 		commands = remove_empty_str(commands);
+int k = -1; ft_printf("Parsed command tables.:\n"); while(commands[++k])
+	ft_printf("tab [%d]: %s\n", k, commands[k]);
 		if (!(command_table = malloc(sizeof(t_command_table) *
 			ft_arrlen(commands))))
 			return (EXIT_FAILURE);

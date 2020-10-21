@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 13:03:38 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:08:41 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,13 @@
 ** We parse into a command table for each ';'-terminated sentence.
 */
 
-char		*ft_strchr__quots(char **quotpos, char *str, char c)
+static void	remove_quots_from_cmd_name(t_command_table *table)
 {
 	int		i;
-	int		size;
 
-	if (!str)
-		return (0);
-	if (!quotpos[0])
-		return (ft_strchr(str, c));
-	size = ft_arrlen(quotpos);
 	i = -1;
-	while (str[++i])
-	{
-		if ((str[i] == c)
-			&& ((!(size % 2)
-				&& (is_inside_jth_quote_pair(quotpos, str + i) == -1))
-			|| ((size % 2)
-					&& ((str + i) < quotpos[ft_arrlen(quotpos) - 1]))))
-			return (str + i);
-	}
-	return (0);
+	while (table->simple_commands[++i])
+		remove_quots(&table->simple_commands[i][0]);
 }
 
 /*
@@ -83,6 +69,7 @@ static void	find_simple_commands(t_command_table *table, char *command_line)
 	}
 	table->simple_commands[++i] = remove_empty_str(
 			ft_split__quots(command_line, ' '));
+	remove_quots_from_cmd_name(table);
 	free(quotpos);
 }
 
@@ -150,6 +137,7 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 	while (++i < table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
+ft_printf("Parsed simple commands of table [%d]:\n", i);
 int k = -1; while(tab[i].simple_commands[++k])
 {
 	int l = -1;
