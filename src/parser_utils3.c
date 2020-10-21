@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:25:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:45:50 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:18:17 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,42 @@ static void	errno_updt(char **strdir)
 	*strdir = ft_itoa(errno);
 }
 
+static void	inside_str_updt(char *ptr, char *str, char **strdir)
+{
+	char	*temp;
+	char	*temp2;
+
+	ptr[-1] = '\0';
+	temp = ft_strdup(*strdir);
+	temp2 = ft_strjoin(temp, str);
+	free(temp);
+	temp = ft_strjoin(temp2, ptr + ft_strlen(str));
+	free(str);
+	free(temp2);
+	free(*strdir);
+	*strdir = temp;
+	if ((temp = smallest_non_zero(ft_strchr(*strdir, '"'),
+		ft_strchr(*strdir, '\''))))
+		*strdir = ft_add_char(*strdir, *temp);
+}
+
 static void	replace_var_in_str(char **strdir, char *ptr)
 {
 	char	*str;
 	char	*temp;
-	char	*temp2;
 
 	if (*ptr == '?')
 		errno_updt(strdir);
-	else if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
+	if ((temp = smallest_non_zero(ft_strchr(*strdir, '"'),
+		ft_strchr(*strdir, '\''))))
+		*(ft_strchr(temp + 1, *temp)) = '\0';
+	if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
 	{
 		free(*strdir);
 		*strdir = str;
 	}
-	else if (!(ft_strcmp(str, "")))
-		return ;
 	else
-	{
-		ptr[-1] = '\0';
-		temp = ft_strdup(*strdir);
-		temp2 = ft_strjoin(temp, str);
-		free(temp);
-		temp = ft_strjoin(temp2, ptr + ft_strlen(str));
-		free(str);
-		free(temp2);
-		free(*strdir);
-		*strdir = temp;
-	}
+		inside_str_updt(ptr, str, strdir);
 }
 
 void		replace_env_var(t_command_table *table)
@@ -89,27 +98,4 @@ void		replace_env_var(t_command_table *table)
 			}
 		}
 	}
-}
-
-void		resize_arr_skip_pos(char ***arr, int pos)
-{
-	int		i;
-	int		j;
-	int		arr_size;
-	char	**temp;
-
-	arr_size = ft_arrlen(*arr);
-	temp = malloc(sizeof(char *) * (arr_size));
-	temp[arr_size - 1] = NULL;
-	i = -1;
-	j = -1;
-	while (*((*arr) + ++i))
-	{
-		if (i == pos)
-			continue;
-		else
-			temp[++j] = ft_strdup(*((*arr) + i));
-	}
-	full_free((void **)*arr, arr_size);
-	*arr = temp;
 }

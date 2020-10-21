@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:20:23 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:18:44 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,23 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 		find_simple_commands(tab + i, lines[i]);
 		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, i, lines));
+/*int k = -1; ft_printf("Before env replace:\n");
+while (tab[i].simple_commands[++k])
+{
+	int l = -1;
+	while (tab[i].simple_commands[k][++l])
+		ft_printf("tab[%d] cmd [%d] arg [%d]: %s\n", i, k, l, 
+			tab[i].simple_commands[k][l]);
+}*/
 		replace_env_var(tab + i);
 		j = -1;
 		while ((tab[i].simple_commands[++j]))
 		{
 			if ((tab[i].simple_commands[j][0] == NULL)
-			&& (tab[i].simple_commands_num > 1))
+				&& (tab[i].simple_commands_num > 1))
 				return (free_errpars(tab, i, lines));
 		}
 	}
-	full_free((void **)lines, ft_arrlen(lines));
+	free_double(lines);
 	return (0);
 }

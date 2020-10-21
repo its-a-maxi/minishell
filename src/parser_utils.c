@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:31:26 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 13:19:35 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,27 @@ void			read_input(char **input)
 		free(*input);
 		exit_minishell();
 	}
+}
+
+void			resize_arr_skip_pos(char ***arr, int pos)
+{
+	int		i;
+	int		j;
+	int		arr_size;
+	char	**temp;
+
+	arr_size = ft_arrlen(*arr);
+	temp = malloc(sizeof(char *) * (arr_size));
+	temp[arr_size - 1] = NULL;
+	i = -1;
+	j = -1;
+	while (*((*arr) + ++i))
+	{
+		if (i == pos)
+			continue;
+		else
+			temp[++j] = ft_strdup(*((*arr) + i));
+	}
+	full_free((void **)*arr, arr_size);
+	*arr = temp;
 }
