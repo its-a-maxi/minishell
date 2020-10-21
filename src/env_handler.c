@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/15 11:17:27 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:17:29 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ char			*env_selector(char *env)
 	int		i;
 
 	i = -1;
-	while (env[++i] && (env[i] != ' ') && (env[i] != '\t'))
+	write(1, "hey\n", 4);
+	while (env[++i] && (env[i] != ' ') && (env[i] != '\t') && (env[i] != '\'')
+		&& (env[i] != '"'))
 		;
 	len = i;
 	i = 0;
