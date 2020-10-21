@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:24:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:46:42 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:52:58 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static void	dummy_update(t_command_table *tab, int *i, char *str, int type)
 	}
 	type == 'O' ? tab->output_files[i[0]][0] = ft_strdup(str) : 0;
 	type == 'A' ? tab->append_files[i[0]][0] = ft_strdup(str) : 0;
-	full_free((void **)tab->dummy_files[i[0]],
-		ft_arrlen(tab->dummy_files[i[0]]));
+	free_double(tab->dummy_files[i[0]]);
 	tab->dummy_files[i[0]] = temp;
 }
 
