@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:05:18 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:02:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:21:43 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,11 @@ static void	loop_table(char **tab, char *str, char c, char **quotpos)
 	i = -1;
 	while ((pos = ft_strchr__quots(quotpos, str, c)))
 	{
-//ft_printf("pos: ->%s<-\n", pos);
 		*pos = '\0';
 		tab[++i] = ft_strdup(str);
 		str = pos + 1;
-//ft_printf("str: ->%s<-\n", str);
-//ft_printf("Saved tab [%d]: ->%s<-\n", i, tab[i]);
 	}
-	if ((*str))
-		tab[++i] = ft_strdup(str);
-	else
-		tab[++i] = NULL;
-//ft_printf("Saved tab [%d]: ->%s<-\n", i, tab[i]);
+	tab[++i] = ft_strdup(str);
 }
 
 char		**ft_split__quots(char *str, char c)
@@ -92,13 +85,10 @@ char		**ft_split__quots(char *str, char c)
 		return (ft_split(str, c));
 	}
 	count = count_not_quoted_char(quotpos, str, c);
-ft_printf("\tcount: %d\n", count);
 	table = malloc(sizeof(char *) * (count + 2));
 	table[count + 1] = NULL;
-//printf("Entering loop table...\n");
 	loop_table(table, str, c, quotpos);
 	remove_dummy_quots(table);
-//printf("Removed dummy quotes.\n");
 	free(quotpos);
 	return (table);
 }

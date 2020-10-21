@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:07:54 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 11:09:10 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:24:16 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char		**set_quotpos_arr(char *str)
 		else
 		{
 			ft_add_str(&quotpos, ptr);
-			break;
+			break ;
 		}
 	}
 	return (quotpos);
@@ -80,7 +80,7 @@ char		*ft_strchr__quots(char **quotpos, char *str, char c)
 	return (0);
 }
 
-char			*ft_str2chr__quots(char **quotpos, char *str, char c)
+char		*ft_str2chr__quots(char **quotpos, char *str, char c)
 {
 	int		i;
 	int		size;

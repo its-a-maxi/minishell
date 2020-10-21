@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
+/*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 13:08:21 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/20 19:38:46 by aleon-ca         ###   ########.fr       */
+/*   Created: 2020/10/21 12:30:53 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/10/21 12:30:55 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ static void	lone_symbol_found(t_command_table *tab, int *i, char **ptr)
 	char	*first_ptr;
 	int		len;
 	char	*temp;
-//printf("Entering lone_symbol_found...\n");
+
 	first_ptr = find_smallest_non_zero(ptr);
 	temp = dup_till_symbol(tab->simple_commands[i[0]][i[1] + 1]);
-//printf("dup_till_symbol:%s\n", temp);
 	len = ft_strlen(temp);
 	redir_files_updt(tab, i, temp, (first_ptr == ptr[2]) * 'A'
 		+ (first_ptr == ptr[0]) * 'I' + (first_ptr == ptr[1]) * 'O');
@@ -65,10 +64,9 @@ static void	lone_symbol_found(t_command_table *tab, int *i, char **ptr)
 static void	lone_symbol_in_word(t_command_table *tab, int *i, char *str, int t)
 {
 	int		len;
-//printf("Entering lone_symbol_in_word...\n");
+
 	free(str);
 	str = dup_till_symbol(tab->simple_commands[i[0]][i[1] + 1]);
-//printf("dup_till_symbol:%s\n", str);
 	len = ft_strlen(str);
 	redir_files_updt(tab, i, str, t);
 	if ((size_t)len == ft_strlen(tab->simple_commands[i[0]][i[1] + 1]))
@@ -86,10 +84,9 @@ static void	redirect_word_found(t_command_table *tab, int *i, char **ptr)
 	char	*first_ptr;
 	int		len;
 	char	*temp;
-//printf("Entering redirect_word_found...\n");
+
 	first_ptr = find_smallest_non_zero(ptr);
 	temp = dup_till_symbol(first_ptr + 1);
-//printf("dup_till_symbol:%s\n", temp);
 	len = ft_strlen(temp);
 	if (first_ptr == ptr[2])
 		first_ptr[-1] = '\0';
@@ -111,7 +108,7 @@ static void	redirect_word_found(t_command_table *tab, int *i, char **ptr)
 			resize_arr_skip_pos(&tab->simple_commands[i[0]], i[1]);
 	}
 }
-#include <stdio.h>
+
 int			set_redirection_arr(t_command_table *tab, int *i)
 {
 	int		len;
@@ -122,13 +119,10 @@ int			set_redirection_arr(t_command_table *tab, int *i)
 	i[1] = -1;
 	while ((str = tab->simple_commands[i[0]][++(*(i + 1))]))
 	{
-//printf("Checking %d...\n", i[1]);
 		quotpos = set_quotpos_arr(str);
-//printf("quotpos arr size: %d\n", ft_arrlen(quotpos));
 		ptr[0] = ft_strchr__quots(quotpos, str, '<');
 		ptr[1] = ft_str1chr__quots(quotpos, str, '>');
 		ptr[2] = ft_str2chr__quots(quotpos, str, '>');
-//printf("Symbols: %d %d %d\n", (ptr[0] > 0), (ptr[1] > 0), (ptr[2] > 0));
 		free(quotpos);
 		if ((ptr[0]) || (ptr[1]) || (ptr[2]))
 		{
@@ -138,11 +132,6 @@ int			set_redirection_arr(t_command_table *tab, int *i)
 				lone_symbol_found(tab, i, ptr);
 			else
 				redirect_word_found(tab, i, ptr);
-/*printf("command is now:\n");
-int k = -1; while (tab->simple_commands[i[0]][++k])
-	printf("\t%s\n", tab->simple_commands[i[0]][k]);
-	printf("in: %s; out: %s; app: %s;\n", tab->input_files[i[0]][0]
-		, tab->output_files[i[0]][0], tab->append_files[i[0]][0]);*/
 			if ((is_parser_error(tab, i[0])))
 				return (1);
 			i[1] = -1;

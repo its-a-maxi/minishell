@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
+/*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/18 17:32:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/21 12:08:11 by aleon-ca         ###   ########.fr       */
+/*   Created: 2020/10/21 12:24:27 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/10/21 12:24:36 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void		remove_dummy_quots(char **table)
 	char	*temp;
 
 	i = -1;
-//printf("Entered remove_dummy_quotes... \n");
 	while (table[++i])
 	{
 		if ((quotpos[0] = smallest_non_zero(ft_strchr(table[i], '"'),

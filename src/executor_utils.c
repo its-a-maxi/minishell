@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/19 12:44:01 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:29:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		is_start_exec_path(char *str)
 {
-//printf("entered is_start_exec...\n");
 	if (!str)
 		return (0);
 	if (ft_strlen(str) <= 2)
@@ -57,7 +56,6 @@ int		is_built_in(char **arr)
 
 void	choose__exec(char **arr, t_command_table *tab)
 {
-//printf("Entered choose__exec...\n");
 	if (!(ft_strcmp(arr[0], "echo")))
 		cmd_echo(arr);
 	else if (!(ft_strcmp(arr[0], "cd")) && !((tab->simple_commands_num != 1)

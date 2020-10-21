@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_redirections_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
+/*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 17:09:42 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/20 19:21:49 by aleon-ca         ###   ########.fr       */
+/*   Created: 2020/10/21 12:24:57 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/10/21 12:24:59 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void		init_redirection_arr(t_command_table *tab, int *i, int *count)
 
 char		*dup_till_symbol(char *str)
 {
-	//Busca quotes y solo se para en unquoted symbols.
 	char	temp;
 	char	**quotpos;
 	char	*ptr;

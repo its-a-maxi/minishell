@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:13:35 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:06:12 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:20:23 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static void	find_simple_commands(t_command_table *table, char *command_line)
 	table->simple_commands[++i] = remove_empty_str(
 			ft_split__quots(command_line, ' '));
 	remove_quots_from_cmd_name(table);
-ft_printf("Find simple commands finished.\n");
 	free(quotpos);
 }
 
@@ -114,9 +113,7 @@ static int	find_redirections(t_command_table *table)
 		count[2] = 0;
 		count_redirections(table->simple_commands[i[0]], count);
 		init_redirection_arr(table, i, count);
-//printf("Calling set_redirection...\n");
 		if (set_redirection_arr(table, i))
-//printf("Calling check_redirection_error...\n");
 			return (1);
 	}
 	return (0);
@@ -140,41 +137,17 @@ int			tokenize(char **lines, t_command_table *tab, int table_num)
 	while (++i < table_num)
 	{
 		find_simple_commands(tab + i, lines[i]);
-ft_printf("Parsed simple commands of table [%d]:\n", i);
-int k = -1; while(tab[i].simple_commands[++k])
-{
-	int l = -1;
-	while (tab[i].simple_commands[k][++l])
-		ft_printf("tab [%d] cmd [%d] arg [%d]: %s\n", i, k, l,
-			tab[i].simple_commands[k][l]);
-}
 		if ((find_redirections(tab + i)))
 			return (free_errpars(tab, i, lines));
-ft_printf("Parsed redirections of table [%d]:\n", i);
-k = -1; while(tab[i].simple_commands[++k])
-{
-	int	l = -1;
-	while (tab[i].simple_commands[k][++l])
-		ft_printf("tab [%d] cmd [%d] arg [%d]: %s\n", i, k, l,
-			tab[i].simple_commands[k][l]);
-	ft_printf("\tin: %s; out: %s; app: %s;\n", tab[i].input_files[k][0],
-			tab[i].output_files[k][0], tab[i].append_files[k][0]);
-	int m = -1; while(tab[i].dummy_files[k][++m])
-		ft_printf("\tdummt[%d]: %s\n", m, tab[i].dummy_files[k][m]);
-}
 		replace_env_var(tab + i);
 		j = -1;
 		while ((tab[i].simple_commands[++j]))
 		{
 			if ((tab[i].simple_commands[j][0] == NULL)
 			&& (tab[i].simple_commands_num > 1))
-			{
-			ft_printf("error de cadena vacia.\n");
 				return (free_errpars(tab, i, lines));
-			}
 		}
 	}
-//printf("Parse ended.\n");
 	full_free((void **)lines, ft_arrlen(lines));
 	return (0);
 }

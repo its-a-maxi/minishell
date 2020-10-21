@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandroleon <aleon-ca@student.42.fr      +#+  +:+       +#+        */
+/*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/01 17:17:34 by alejandro         #+#    #+#             */
-/*   Updated: 2020/10/21 11:49:01 by aleon-ca         ###   ########.fr       */
+/*   Created: 2020/10/21 12:26:53 by aleon-ca          #+#    #+#             */
+/*   Updated: 2020/10/21 12:30:37 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 static void		free_triple_ptrs(t_command_table *tab)
 {
-			free(tab->simple_commands);
-			free(tab->input_files);
-			free(tab->output_files);
-			free(tab->append_files);
-			free(tab->dummy_files);
+	free(tab->simple_commands);
+	free(tab->input_files);
+	free(tab->output_files);
+	free(tab->append_files);
+	free(tab->dummy_files);
 }
 
 void			free_cmd_table(t_command_table *tab, int table_num)
 {
-		int		i;
-		int		j;
+	int		i;
+	int		j;
 
-		i = -1;
-		while (++i < table_num)
+	i = -1;
+	while (++i < table_num)
+	{
+		j = -1;
+		while (++j < tab[i].simple_commands_num)
 		{
-			j = -1;
-			while (++j < tab[i].simple_commands_num)
-			{
-				full_free((void **)tab[i].simple_commands[j],
-					ft_arrlen(tab[i].simple_commands[j]));
-				full_free((void **)tab[i].input_files[j],
-					ft_arrlen(tab[i].input_files[j]));
-				full_free((void **)tab[i].output_files[j],
-					ft_arrlen(tab[i].output_files[j]));
-				full_free((void **)tab[i].append_files[j],
-					ft_arrlen(tab[i].append_files[j]));
-				full_free((void **)tab[i].dummy_files[j],
-					ft_arrlen(tab[i].dummy_files[j]));
-			}
-			free_triple_ptrs(tab + i);
+			full_free((void **)tab[i].simple_commands[j],
+				ft_arrlen(tab[i].simple_commands[j]));
+			full_free((void **)tab[i].input_files[j],
+				ft_arrlen(tab[i].input_files[j]));
+			full_free((void **)tab[i].output_files[j],
+				ft_arrlen(tab[i].output_files[j]));
+			full_free((void **)tab[i].append_files[j],
+				ft_arrlen(tab[i].append_files[j]));
+			full_free((void **)tab[i].dummy_files[j],
+				ft_arrlen(tab[i].dummy_files[j]));
 		}
-		free(tab);
+		free_triple_ptrs(tab + i);
+	}
+	free(tab);
 }
 
-int		free_errpars(t_command_table *tab, int n, char **lines)
+int				free_errpars(t_command_table *tab, int n, char **lines)
 {
 	int		i;
 	int		j;
@@ -70,10 +70,10 @@ int		free_errpars(t_command_table *tab, int n, char **lines)
 		free_triple_ptrs(tab + i);
 	}
 	free(tab);
-	return (1);	
+	return (1);
 }
 
-int		is_parser_error(t_command_table *tab, int i)
+int				is_parser_error(t_command_table *tab, int i)
 {
 	if (((tab->input_files[i][0]) && !(tab->input_files[i][0][0]))
 		|| ((tab->output_files[i][0])
