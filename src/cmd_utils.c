@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:39:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/20 16:24:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 16:21:12 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int			read_input_subshell(char **input, char c, char *ptr)
 	read(0, buff, 1);
 	if (!bytes_read)
 		write(2, ESUBEOF, ft_strlen(ESUBEOF));
+	if ((temp = ft_strchr(*input, '$')))
+	{
+		if (((temp - *input) != 0) && (temp[-1] == '\\'))
+			remove_backslash(input, temp - 1);
+		else
+			replace_var_in_str(input, temp + 1);
+	}
 	return (bytes_read);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 13:25:44 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 16:23:43 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void			remove_dummy_quots(char **table);
 /*
 ** parser_utils3.c
 */
+void			remove_backslash(char **strdir, char *slashpos);
+void			replace_var_in_str(char **strdir, char *ptr);
 void			replace_env_var(t_command_table *table);
 char			**remove_empty_str(char **arr);
 /*

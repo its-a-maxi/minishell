@@ -6,13 +6,13 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:25:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 13:18:17 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:13:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	remove_backslash(char **strdir, char *slashpos)
+void		remove_backslash(char **strdir, char *slashpos)
 {
 	char	*str;
 	char	*temp;
@@ -47,27 +47,33 @@ static void	inside_str_updt(char *ptr, char *str, char **strdir)
 	temp = ft_strdup(*strdir);
 	temp2 = ft_strjoin(temp, str);
 	free(temp);
-	temp = ft_strjoin(temp2, ptr + ft_strlen(str));
+	while (*(ptr++) && (ptr[0] != ' ') && (ptr[0] != '\t') && (ptr[0] != '\n'))
+		;
+	temp = ft_strjoin(temp2, ptr);
 	free(str);
 	free(temp2);
 	free(*strdir);
 	*strdir = temp;
-	if ((temp = smallest_non_zero(ft_strchr(*strdir, '"'),
-		ft_strchr(*strdir, '\''))))
-		*strdir = ft_add_char(*strdir, *temp);
 }
 
-static void	replace_var_in_str(char **strdir, char *ptr)
+void		replace_var_in_str(char **strdir, char *ptr)
 {
 	char	*str;
 	char	*temp;
+	char	*temp2;
 
 	if (*ptr == '?')
 		errno_updt(strdir);
 	if ((temp = smallest_non_zero(ft_strchr(*strdir, '"'),
-		ft_strchr(*strdir, '\''))))
-		*(ft_strchr(temp + 1, *temp)) = '\0';
-	if (ft_strlen((str = env_selector(ptr))) == ft_strlen(*strdir))
+		ft_strchr(*strdir, '\''))) && (temp2 = ft_strchr(temp + 1, *temp)))
+	{
+		*temp2 = '\0';
+		str = env_selector(ptr);
+		*temp2 = *temp;
+	}
+	else
+		str = env_selector(ptr);
+	if (ft_strlen(str) == ft_strlen(*strdir))
 	{
 		free(*strdir);
 		*strdir = str;
