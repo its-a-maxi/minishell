@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:17:15 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:39:08 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ void		signal_handler(int sig)
 	}
 }
 
-static int	any_command_table_empty(char **table, char **input)
+static int	check_command_table_empty_error(char **table, char **input)
 {
 	int		i;
 
 	i = -1;
 	while (table[++i])
 	{
-		if ((table[i][0] == '\0') && (i > 1))
+		if ((table[i][0] == '\0') && (((i >= 1) && ((table[i - 1][0] == '\0')
+			|| (ft_isspace_not_nl(table[i - 1][0])))) || (i == 0)))
 		{
 			write(2, "\U0001F633 minishell: syntax error.\n", 31);
 			free(*input);
@@ -86,7 +87,7 @@ int			main(int argc, char **argv, char **envp)
 		signal(SIGINT, signal_handler);
 		read_input(&input);
 		commands = ft_split__quots(input, ';');
-		if (any_command_table_empty(commands, &input))
+		if (check_command_table_empty_error(commands, &input))
 			continue;
 		free(input);
 		commands = remove_empty_str(commands);
