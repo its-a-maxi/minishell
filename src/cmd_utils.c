@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 09:39:50 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 16:21:12 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/22 09:16:04 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			read_input_subshell(char **input, char c, char *ptr)
 	{
 		if (((temp - *input) != 0) && (temp[-1] == '\\'))
 			remove_backslash(input, temp - 1);
-		else
+		else if (c == '"')
 			replace_var_in_str(input, temp + 1);
 	}
 	return (bytes_read);
