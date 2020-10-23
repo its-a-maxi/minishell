@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:24:48 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 13:04:53 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/23 18:02:57 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void			cmd_export(char **arg)
 	{
 		if (!quotes_handler(arg, i))
 			return ;
+		remove_quots(arg + i);
 		if (arg[i][0] == '=' || ft_strchr(arg[i], '\n'))
 		{
 			write(2, "\U0001F633 minishell: export: `", 25);

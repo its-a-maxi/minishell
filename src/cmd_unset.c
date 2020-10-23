@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 10:13:01 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/19 13:06:13 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/23 18:04:26 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			cmd_unset(char **arg)
 	{
 		if (!quotes_handler(arg, i))
 			return ;
+		remove_quots(arg + i);
 		if (ft_check(arg[i]))
 			del_g_env(arg[i]);
 	}
