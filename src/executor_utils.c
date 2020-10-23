@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:29:11 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:46:20 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ int		is_start_exec_path(char *str)
 {
 	if (!str)
 		return (0);
-	if (ft_strlen(str) <= 2)
+	if (ft_strlen(str) <= 1)
 		return (0);
+	if (is_absolute_path(str))
+	{
+		ft_printf("in -is_start_exec_path- = \"%s\"\n", str);
+		return (1);
+	}
 	if (str[0] == '.')
 	{
 		if ((str[1] == '.') && (str[2] == '/'))
@@ -95,6 +100,7 @@ void	launch_exec(char **arr)
 		fork_error();
 	else if (ret == 0)
 	{
+		ft_printf("in -launch_exec- = \"%s\"\n", arr[0]);
 		if ((execve(arr[0], arr, g_env) < 0))
 		{
 			write(2, "\U0001F633 ", 5);

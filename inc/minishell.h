@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 16:23:43 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:32:22 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,9 @@ void			cmd_exit(void);
 int				read_input_subshell(char **input, char c, char *ptr);
 int				quotes_handler(char **arg, int i);
 void			export_no_arg(char **temp);
+/*
+** absolute_path.c
+*/
+int				is_absolute_path(char *str);
+
 #endif
