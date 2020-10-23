@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 12:26:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/20 14:38:01 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/23 18:02:25 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		cmd_echo(char **arg)
 			return ;
 	while (arg[i])
 	{
+		remove_quots(arg + i);
 		write(1, arg[i], ft_strlen(arg[i]));
 		if (arg[++i])
 			write(1, " ", 1);

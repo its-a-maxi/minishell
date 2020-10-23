@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:25:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 17:13:11 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/23 18:17:58 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,26 @@ static void	errno_updt(char **strdir)
 	*strdir = ft_itoa(errno);
 }
 
-static void	inside_str_updt(char *ptr, char *str, char **strdir)
+static void	inside_str_updt(char *ptr, char *str, char **strdir, char *quot)
 {
 	char	*temp;
 	char	*temp2;
 
+	if (!quot)
+		quot = ft_calloc(1, sizeof(char));
 	ptr[-1] = '\0';
 	temp = ft_strdup(*strdir);
 	temp2 = ft_strjoin(temp, str);
 	free(temp);
-	while (*(ptr++) && (ptr[0] != ' ') && (ptr[0] != '\t') && (ptr[0] != '\n'))
+	while (*(ptr++) && (ptr[0] != ' ') && (ptr[0] != '\t') && (ptr[0] != '\n')
+	 && (ptr[0] != *quot))
 		;
 	temp = ft_strjoin(temp2, ptr);
 	free(str);
 	free(temp2);
 	free(*strdir);
+	if (quot[0] == '\0')
+		free(quot);
 	*strdir = temp;
 }
 
@@ -62,24 +67,24 @@ void		replace_var_in_str(char **strdir, char *ptr)
 	char	*temp;
 	char	*temp2;
 
+	temp2 = NULL;
 	if (*ptr == '?')
 		errno_updt(strdir);
 	if ((temp = smallest_non_zero(ft_strchr(*strdir, '"'),
-		ft_strchr(*strdir, '\''))) && (temp2 = ft_strchr(temp + 1, *temp)))
+		ft_strchr(*strdir, '\''))))
 	{
-		*temp2 = '\0';
-		str = env_selector(ptr);
-		*temp2 = *temp;
+		if ((temp2 = ft_strchr(temp + 1, *temp)))
+		{
+			*temp2 = '\0';
+			str = (*temp == '"') ? env_selector(ptr) : ft_strdup(ptr - 1);
+			*temp2 = *temp;
+		}
+		else
+			str = (*temp == '"') ? env_selector(ptr) : ft_strdup(ptr - 1);
 	}
 	else
 		str = env_selector(ptr);
-	if (ft_strlen(str) == ft_strlen(*strdir))
-	{
-		free(*strdir);
-		*strdir = str;
-	}
-	else
-		inside_str_updt(ptr, str, strdir);
+	inside_str_updt(ptr, str, strdir, temp2);
 }
 
 void		replace_env_var(t_command_table *table)
