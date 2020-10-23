@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/23 18:03:42 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/23 18:23:58 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,22 @@ int			cmd_cd(char **arg)
 {
 	int		i;
 	char	*path;
+	char	*temp;
 
+	if (!quotes_handler(arg, 1))
+		return (0);
 	if (!arg[1] || arg[1][0] == '~')
 	{
 		path = env_selector("HOME");
-		chdir(path);
+		if (!arg[1] || !arg[1][1])
+			i = chdir(path);
+		else
+		{
+			temp = ft_substr(arg[1], 1, ft_strlen(arg[1]));
+			i = chdir(ft_strjoin(path, temp));
+			free(temp);
+		}
 		free(path);
-		return (0);
 	}
 	if (!quotes_handler(arg, 1))
 		return (0);
