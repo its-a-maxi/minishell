@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 17:39:08 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/23 13:16:11 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,31 @@ void		signal_handler(int sig)
 	}
 }
 
+static int	is_all_spaces(char *str)
+{
+	int		i;
+	int		len;
+
+	len = ft_strlen(str);
+	i = -1;
+	while ((++i < len) && (ft_isspace_not_nl(str[i])))
+		;
+	if (i == len)
+		return (1);
+	else
+		return (0);
+}
+
 static int	check_command_table_empty_error(char **table, char **input)
 {
 	int		i;
+	int		size;
 
+	size = ft_arrlen(table);
 	i = -1;
 	while (table[++i])
 	{
-		if ((table[i][0] == '\0') && (((i >= 1) && ((table[i - 1][0] == '\0')
-			|| (ft_isspace_not_nl(table[i - 1][0])))) || (i == 0)))
+		if (((table[i][0] == '\0') || is_all_spaces(table[i])) && (size != 1))
 		{
 			write(2, "\U0001F633 minishell: syntax error.\n", 31);
 			free(*input);
