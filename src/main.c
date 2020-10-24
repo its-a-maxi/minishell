@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/23 13:16:11 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/24 20:22:13 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		show_prompt(void)
 
 void		signal_handler(int sig)
 {
-	if ((sig == SIGINT) || (sig == SIGQUIT))
+	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
 		show_prompt();
@@ -99,8 +99,8 @@ int			main(int argc, char **argv, char **envp)
 	{
 		if (!(input = ft_calloc(1, sizeof(char))))
 			return (EXIT_FAILURE);
-		show_prompt();
 		signal(SIGINT, signal_handler);
+		show_prompt();
 		read_input(&input);
 		commands = ft_split__quots(input, ';');
 		if (check_command_table_empty_error(commands, &input))

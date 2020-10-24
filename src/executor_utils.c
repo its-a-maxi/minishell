@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/24 19:20:22 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/24 20:12:31 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		is_cmd_cd(char **arr, int simple_commands_num)
 
 void	launch_exec(char **arr)
 {
-	int		ret;
+	int			ret;
 
 	if ((ret = fork()) < 0)
 		fork_error();
