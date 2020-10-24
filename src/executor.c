@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/21 12:28:56 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/24 19:19:20 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		executor(t_command_table *table, int table_num)
 			create_dummy_files(table[i[0]].dummy_files[i[1]]);
 			if ((is_built_in(table[i[0]].simple_commands[i[1]])))
 				choose__exec(table[i[0]].simple_commands[i[1]], table + i[0]);
-			else if ((is_start_exec_path(table[i[0]].simple_commands[i[1]][0])))
+			else if ((is_start_exec_path(table[i[0]].simple_commands[i[1]])))
 				launch_exec(table[i[0]].simple_commands[i[1]]);
 			else if ((table[i[0]].simple_commands[i[1]][0] != NULL))
 				cmd_not_found(table[i[0]].simple_commands[i[1]][0]);

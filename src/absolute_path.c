@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 17:02:21 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/23 19:47:37 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/24 19:21:43 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ char    **save_absolute_path()
     return(path);
 }
 
-int       is_absolute_path(char *str)
+int       is_absolute_path(char **strdir)
 {
     struct stat sb;
     char **path;
     char *temp;
     int i;
-
+//¿Tiene que ejecutar ls con /bin/ls ó con /ls?
     path = save_absolute_path();
     i = -1;
     while(path[++i])
     {
-        temp = ft_strjoin(path[i], str);
+        temp = ft_strjoin(path[i], *strdir + 1);
         if(stat(temp, &sb) == 0)
         {
-            str = temp;
-            ft_printf("in -is_absolute_path- = \"%s\"\n", str);
+			free(*strdir);
+            *strdir = temp;
             return (1);
         }
         free(temp);

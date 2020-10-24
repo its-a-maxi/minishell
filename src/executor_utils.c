@@ -6,33 +6,30 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/23 19:46:20 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/24 19:20:22 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_start_exec_path(char *str)
+int		is_start_exec_path(char **strdir)
 {
-	if (!str)
+	if (!*strdir)
 		return (0);
-	if (ft_strlen(str) <= 1)
+	if (ft_strlen(*strdir) <= 1)
 		return (0);
-	if (is_absolute_path(str))
-	{
-		ft_printf("in -is_start_exec_path- = \"%s\"\n", str);
+	if (is_absolute_path(strdir))
 		return (1);
-	}
-	if (str[0] == '.')
+	if (*(*strdir) == '.')
 	{
-		if ((str[1] == '.') && (str[2] == '/'))
+		if ((*(*strdir + 1) == '.') && (*(*strdir + 2) == '/'))
 			return (1);
-		else if (str[1] == '/')
+		else if (*(*strdir + 1) == '/')
 			return (1);
 		else
 			return (0);
 	}
-	else if ((str[0] == '~') && (str[1] == '/'))
+	else if ((*(*strdir) == '~') && (*(*strdir + 1) == '/'))
 		return (1);
 	return (0);
 }
@@ -100,7 +97,6 @@ void	launch_exec(char **arr)
 		fork_error();
 	else if (ret == 0)
 	{
-		ft_printf("in -launch_exec- = \"%s\"\n", arr[0]);
 		if ((execve(arr[0], arr, g_env) < 0))
 		{
 			write(2, "\U0001F633 ", 5);

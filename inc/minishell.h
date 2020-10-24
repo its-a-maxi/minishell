@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/23 19:50:47 by mmonroy-         ###   ########.fr       */
+/*   Updated: 2020/10/24 19:19:41 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int				tokenize(char **a, t_command_table *t, int n);
 ** executor_utils.c
 */
 int				is_built_in(char **arr);
-int				is_start_exec_path(char *str);
+int				is_start_exec_path(char **strdir);
 void			choose__exec(char **arr, t_command_table *tab);
 int				is_cmd_cd(char **arr, int num);
 void			launch_exec(char **arr);
@@ -176,6 +176,6 @@ void			export_no_arg(char **temp);
 /*
 ** absolute_path.c
 */
-int				is_absolute_path(char *str);
+int				is_absolute_path(char **strdir);
 
 #endif
