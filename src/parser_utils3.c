@@ -6,7 +6,7 @@
 /*   By: aleon-ca <aleon-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 12:25:34 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/23 18:17:58 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/24 19:44:50 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	inside_str_updt(char *ptr, char *str, char **strdir, char *quot)
 	temp2 = ft_strjoin(temp, str);
 	free(temp);
 	while (*(ptr++) && (ptr[0] != ' ') && (ptr[0] != '\t') && (ptr[0] != '\n')
-	 && (ptr[0] != *quot))
+		&& (ptr[0] != *quot))
 		;
 	temp = ft_strjoin(temp2, ptr);
 	free(str);

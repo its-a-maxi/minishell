@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/23 18:23:58 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/24 19:45:54 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int			cmd_cd(char **arg)
 		}
 		free(path);
 	}
-	if (!quotes_handler(arg, 1))
-		return (0);
 	remove_quots(arg + 1);
 	i = chdir(arg[1]);
 	if (i != 0)
