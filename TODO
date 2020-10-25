@@ -1,0 +1,4 @@
+- cd ~/.....
+- ~/.... ejecutar
+- $? no parece funcionar, ¿es realmente errno?
+- cambiar el absolute path de /ls a /bin/ls y demás

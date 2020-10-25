@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 17:02:21 by mmonroy-          #+#    #+#             */
-/*   Updated: 2020/10/24 19:44:37 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 11:08:53 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		is_absolute_path(char **strdir)
 	while (path[++i])
 	{
 		temp = ft_strjoin(path[i], *strdir + 1);
-		if  (stat(temp, &sb) == 0)
+		if (stat(temp, &sb) == 0)
 		{
 			free(*strdir);
 			*strdir = temp;

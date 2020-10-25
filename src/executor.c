@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 11:14:31 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/24 19:19:20 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 11:05:05 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	redirect_input(t_command_table *t, int *i, int *fd)
 {
-	if (!(t->input_files[i[1]][0]))
+	if (!(t->input_files[i[1]][0]) && (i[1] == 0))
 		fd[2] = dup(fd[0]);
-	else
+	else if (i[1] == 0)
 		fd[2] = open(t->input_files[i[1]][0], O_RDONLY);
 	dup2(fd[2], 0);
 	close(fd[2]);
@@ -24,16 +24,19 @@ static void	redirect_input(t_command_table *t, int *i, int *fd)
 
 static void	redirect_output(t_command_table *t, int *i, int *fd, int *fd_pipe)
 {
-	if (!(t->output_files[i[1]][0])
+	int		last;
+
+	last = t->simple_commands_num - 1;
+	if ((i[1] == last) && !(t->output_files[i[1]][0])
 		&& !(t->append_files[i[1]][0]))
 		fd[3] = dup(fd[1]);
-	else if ((t->append_files[i[1]][0]))
+	else if ((i[1] == last) && (t->append_files[i[1]][0]))
 		fd[3] = open(t->append_files[i[1]][0], O_CREAT | O_WRONLY | O_APPEND,
 			S_IWUSR | S_IRUSR);
-	else if ((t->output_files[i[1]][0]))
+	else if ((i[1] == last) && (t->output_files[i[1]][0]))
 		fd[3] = open(t->output_files[i[1]][0], O_CREAT | O_WRONLY | O_TRUNC,
 			S_IWUSR | S_IRUSR);
-	if (i[1] != (t->simple_commands_num - 1))
+	else if (i[1] < last)
 	{
 		pipe(fd_pipe);
 		fd[3] = fd_pipe[1];
