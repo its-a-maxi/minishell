@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/25 10:33:08 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 11:25:58 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		is_start_exec_path(char **strdir)
 		return (0);
 	if (ft_strlen(*strdir) <= 1)
 		return (0);
+	if (**strdir == '/')
+		return (1);
 	if (is_absolute_path(strdir))
 		return (1);
 	if (*(*strdir) == '.')
