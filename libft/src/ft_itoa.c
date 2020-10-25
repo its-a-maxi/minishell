@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 18:26:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/23 17:52:16 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 16:06:52 by mmonroy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include <stdio.h>
 static void	ft_add_char(char **strdir, char c)
 {
 	int		size;
@@ -40,6 +39,7 @@ static void	ft_putnbr(char **result, int n)
 char		*ft_itoa(int n)
 {
 	char	*result;
+
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	result = ft_calloc(1, sizeof(char));
