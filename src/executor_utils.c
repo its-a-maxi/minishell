@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/24 20:12:31 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 10:33:08 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	launch_exec(char **arr)
 
 	if ((ret = fork()) < 0)
 		fork_error();
-	else if (ret == 0)
+	signal(SIGINT, child_signal_handler);
+	if (ret == 0)
 	{
 		if ((execve(arr[0], arr, g_env) < 0))
 		{

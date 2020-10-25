@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:09:03 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/24 19:19:41 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 10:34:01 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ typedef struct	s_command_table
 ** General Env variables
 */
 char			**g_env;
+/*
+** main.c
+*/
+void			show_prompt(void);
 /*
 ** parser_error.c
 */
@@ -177,5 +181,9 @@ void			export_no_arg(char **temp);
 ** absolute_path.c
 */
 int				is_absolute_path(char **strdir);
-
+/*
+** signal_handler.c
+*/
+void			signal_handler(int sig);
+void			child_signal_handler(int sig);
 #endif

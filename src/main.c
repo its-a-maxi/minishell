@@ -6,7 +6,7 @@
 /*   By: aleon-ca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 08:47:57 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/24 20:22:13 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/25 10:28:24 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@ void		show_prompt(void)
 	prompt = "\U0001F44C";
 	write(1, prompt, 5);
 	write(1, " ", 1);
-}
-
-/*
-** "control + c" signal doesn't exit the shell, but rather,
-** it should exit the current child process or simply clean stdin
-** before reading.
-*/
-
-void		signal_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(1, "\n", 1);
-		show_prompt();
-	}
 }
 
 static int	is_all_spaces(char *str)
