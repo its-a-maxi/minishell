@@ -6,7 +6,7 @@
 /*   By: mmonroy- <mmonroy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 11:30:19 by aleon-ca          #+#    #+#             */
-/*   Updated: 2020/10/25 11:25:58 by aleon-ca         ###   ########.fr       */
+/*   Updated: 2020/10/26 10:24:45 by aleon-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		is_start_exec_path(char **strdir)
 {
-	if (!*strdir)
-		return (0);
-	if (ft_strlen(*strdir) <= 1)
+	char	*temp[2];
+
+	if (!*strdir || (ft_strlen(*strdir) <= 1))
 		return (0);
 	if (**strdir == '/')
 		return (1);
@@ -24,15 +24,20 @@ int		is_start_exec_path(char **strdir)
 		return (1);
 	if (*(*strdir) == '.')
 	{
-		if ((*(*strdir + 1) == '.') && (*(*strdir + 2) == '/'))
+		if (((*(*strdir + 1) == '.') && (*(*strdir + 2) == '/'))
+			|| (*(*strdir + 1) == '/'))
 			return (1);
-		else if (*(*strdir + 1) == '/')
-			return (1);
-		else
-			return (0);
+		return (0);
 	}
 	else if ((*(*strdir) == '~') && (*(*strdir + 1) == '/'))
+	{
+		temp[0] = env_selector("HOME");
+		temp[1] = ft_strjoin(temp[0], *strdir + 1);
+		free(temp[0]);
+		free(*strdir);
+		*strdir = temp[1];
 		return (1);
+	}
 	return (0);
 }
 
