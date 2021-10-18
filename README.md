@@ -15,8 +15,6 @@
 <!-- ABOUT THE PROJECT -->
 ## ℹ️ About The Project
 
-![](show.gif)
-
 _42 Project_
 
 We were asked to make our own shell, replicating basic functionalities.
