@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h1>Task Manager in React</h1>
+  <h1>Minishell</h1>
 </div>
 
 <!-- ABOUT THE PROJECT -->
@@ -29,9 +29,9 @@ A really basic task manager page without data persistance, quick project made to
 <!-- GETTING STARTED -->
 ## 🏃 Quick Start
 
-### Prerequisites
+### Important
 
-* Project has only been tested on macOS systems
+* Project has only been tested and runned on macOS systems
 
 ### Installation
 
@@ -54,11 +54,6 @@ A really basic task manager page without data persistance, quick project made to
 * Run minishell
 ```sh
   ./minishell
-```
-
-* In case you need to recompile
-```sh
-  make
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
