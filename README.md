@@ -9,6 +9,7 @@
 <br />
 <div align="center">
   <h1>Minishell</h1>
+  <img src="show.gif" />
 </div>
 
 <!-- ABOUT THE PROJECT -->
