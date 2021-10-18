@@ -18,7 +18,8 @@
 
 _42 Project_
 
-We were asked to make our own shell, replicating basic functionalities, evirithing was coded in C, respecting [Norminette](https://cdn.intra.42.fr/pdf/pdf/1608/norme.en.pdf) code convention.
+We were asked to make our own shell, replicating basic functionalities.
+Everything was coded in C, respecting [Norminette](https://cdn.intra.42.fr/pdf/pdf/1608/norme.en.pdf) code convention.
 
 ### Subject
 
