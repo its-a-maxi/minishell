@@ -18,7 +18,7 @@
 
 _42 Project_
 
-We were asked to make our own shell, replicating basic functionalitys, evirithing coded was coded in C, respecting Norminette code convention
+We were asked to make our own shell, replicating basic functionalities, evirithing was coded in C, respecting Norminette code convention.
 
 ### Subject
 
