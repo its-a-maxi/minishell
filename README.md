@@ -22,9 +22,17 @@ _42 Project_ We were asked to make our own shell, replicating basic functionalit
 
 * [React.js](https://reactjs.org/)
 
+### Architecture
+- [ ] tokenize: builds the Command Table (simple commands, IO files) from command line input. Handles input syntax errors.
+- [ ] executor: redirects IO and creates pipes if needed. Forks if launching an executable. Handles built-in commands errors.
+
+### Bash Peculiarities
+- We don't have a MULTIOS option enabled by default, as is the case in [zsh.](https://thoughtbot.com/blog/input-output-redirection-in-the-shell#zsh-users-take-note)
+
 ### Allowed Functions
+
 <details>
-  <summary>### Allowed Functions</summary>
+  <summary>Expand</summary>
   
 - **malloc**
 - **free**
