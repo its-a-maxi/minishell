@@ -18,13 +18,13 @@
 
 _42 Project_ We were asked to make our own shell, replicating basic functionalitys, evirithing coded was coded in C, respecting Norminette code convention
 
-### SUBJECT
+### Subject
 
 * [React.js](https://reactjs.org/)
 
 ### Allowed Functions
 <details>
-  <summary>Click to expand!</summary>
+  <summary>### Allowed Functions</summary>
   
 - **malloc**
 - **free**
