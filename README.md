@@ -1,3 +1,114 @@
+<div id="top"></div>
+<!--
+*** Amazing README template from othneildrew
+*** https://github.com/othneildrew/Best-README-Template
+-->
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h1>Task Manager in React</h1>
+</div>
+
+<!-- ABOUT THE PROJECT -->
+## ℹ️ About The Project
+
+![](show.gif)
+
+A really basic task manager page without data persistance, quick project made to start getting acquainted with react.
+
+### Built With
+
+* [React.js](https://reactjs.org/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## 🏃 Quick Start
+
+### Prerequisites
+
+* Project has only been tested on macOS systems
+
+### Installation
+
+* Clone the repo
+  ```sh
+  git clone https://github.com/its-a-maxi/minishell.git
+  ```
+  
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- USAGE EXAMPLES -->
+## ⌨️ Usage
+
+* Run make
+```sh
+  make
+```
+
+* Run minishell
+```sh
+  ./minishell
+```
+
+* In case you need to recompile
+```sh
+  make
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## 📫 Contact
+
+Maximo Monroy - monroy.vds@gmail.com
+Alejandro León - https://github.com/ElHuaco
+
+Project Link: [https://github.com/its-a-maxi/task-manager-react.git](https://github.com/its-a-maxi/task-manager-react.git)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## 🥇 Acknowledgments
+
+* There is a [github repository](https://github.com/Swoorup/mysh) that obeys the order of proceedings pretty nicely. 
+* Please make sure to do a `lexer` -> `parser` -> `expander` -> `executor` to make your life easier. [Here](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) is a solid start.
+* Make sure that you understand the [shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
+* [Making your own shell](https://www.geeksforgeeks.org/making-linux-shell-c/)
+* [Subject](https://cdn.intra.42.fr/pdf/pdf/10992/en.subject.pdf)
+* [A reference.](https://github.com/pankratdodo/minishell-42)
+* [Another one.](https://github.com/R4meau/minishell)
+* [Use of ****envp** in main](https://www.quora.com/What-is-the-3rd-parameter-in-the-main-function-char-envp#:~:text=The%20non%2Dportable%2Dbut%2D,As%20always%2C%20I%20recommend%20experimenting.)
+* [Pipe and redirection algorithm](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) for A|B|C|D > outfile < infile
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
+
 ![alt text](https://github.com/ElHuaco/minishell/blob/master/show.gif)
 -  `make`
 -  `./minishell`
