@@ -63,6 +63,7 @@ A really basic task manager page without data persistance, quick project made to
 ## 📫 Contact
 
 Maximo Monroy - monroy.vds@gmail.com
+
 Alejandro León - https://github.com/ElHuaco
 
 Project Link: [https://github.com/its-a-maxi/task-manager-react.git](https://github.com/its-a-maxi/task-manager-react.git)
