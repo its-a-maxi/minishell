@@ -46,7 +46,7 @@ A really basic task manager page without data persistance, quick project made to
 <!-- USAGE EXAMPLES -->
 ## ⌨️ Usage
 
-* Run make
+* Compile
 ```sh
   make
 ```
