@@ -66,7 +66,7 @@ Maximo Monroy - monroy.vds@gmail.com
 
 Alejandro León - https://github.com/ElHuaco
 
-Project Link: [https://github.com/its-a-maxi/task-manager-react.git](https://github.com/its-a-maxi/task-manager-react.git)
+Project Link: [https://github.com/its-a-maxi/minishell](https://github.com/its-a-maxi/minishell)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
